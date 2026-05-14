@@ -30,7 +30,9 @@
     font-family: 'Inter', -apple-system, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.55;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
     overflow-x: hidden;
     position: relative;
   }
@@ -247,7 +249,14 @@
   }
   /* Variante crema sutil para alternar */
   .sec-cream {
-    background: #EAE9E2;
+    background: #E2DFD3;
+  }
+
+  /* Section open - sin card, sobre el fondo */
+  .section-open {
+    padding: 36px 14px 30px;
+    margin-bottom: 12px;
+    position: relative;
   }
   .section::before {
     content: '';
@@ -362,6 +371,82 @@
     color: var(--text-muted);
     line-height: 1.5;
     font-weight: 500;
+  }
+
+  /* EDITORIAL CARDS - número grande verde + título + texto */
+  .editorial-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .editorial-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: transform 0.18s, box-shadow 0.18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .editorial-card::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -20%;
+    width: 50%;
+    height: 80%;
+    background: radial-gradient(ellipse, rgba(168,179,115,0.08), transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .editorial-card:active { transform: translateY(1px); }
+  .editorial-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 0.9;
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 30px;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+  }
+  .editorial-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(122,132,80,0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .editorial-body {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .editorial-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .editorial-text-lead {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 4px;
+  }
+  .editorial-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    font-weight: 400;
   }
 
   /* ENCAJE */
@@ -707,22 +792,38 @@
   /* CLAVE / antes de empezar */
   .clave-list { display: flex; flex-direction: column; margin-top: 14px; }
   .clave-item {
-    padding: 14px 2px 14px;
+    padding: 14px 2px;
     border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
   }
   .clave-item:last-child { border-bottom: none; }
+  .clave-icon {
+    width: 34px;
+    height: 34px;
+    background: rgba(122,132,80,0.1);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .clave-content { flex: 1; min-width: 0; }
   .clave-title {
     font-size: 14px;
     font-weight: 700;
     color: var(--text);
     line-height: 1.35;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
   .clave-text {
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.5;
-    font-weight: 500;
+    font-weight: 400;
   }
   .clave-price {
     margin-top: 10px;
@@ -890,14 +991,10 @@
       <div class="hero-eyebrow">Mauro Morón · ISSA Certified Coach</div>
       <div>
         <h1 class="hero-title">Entrena con <em>método</em></h1>
-        <div class="hero-divider"></div>
         <div class="hero-sub">CRITERIO. ESTRUCTURA. RESULTADOS.</div>
         <p class="hero-sub-detail">Entrenamiento y nutrición integrados. 100% online.</p>
         <button class="hero-cta" id="heroScrollCta" type="button">Conoce el método <span style="font-size:14px">↓</span></button>
       </div>
-    </div>
-    <div class="scroll-hint">
-      <div class="scroll-hint-line"></div>
     </div>
   </header>
 
@@ -910,39 +1007,39 @@
       <p class="sec-lead">Entender el porqué, no solo seguir órdenes.</p>
       <p class="sec-lead-soft">Cada decisión técnica se justifica. Cada ajuste responde a tu contexto.</p>
     </div>
-    <div class="proc-list">
-      <div class="proc-card">
-        <div class="proc-strip">
-          <span class="proc-strip-num">01</span>
-          <span class="proc-strip-title">Qué haces</span>
+    <div class="editorial-list">
+      <div class="editorial-card">
+        <div class="editorial-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
         </div>
-        <div class="proc-body">
-          <p class="proc-text">Entrenamiento, movilidad y nutrición integrados en un solo proceso.</p>
-        </div>
-      </div>
-      <div class="proc-card">
-        <div class="proc-strip">
-          <span class="proc-strip-num">02</span>
-          <span class="proc-strip-title">Por qué</span>
-        </div>
-        <div class="proc-body">
-          <p class="proc-text">El cuerpo no responde a rutinas sueltas. Responde a estímulo coherente sostenido.</p>
+        <div class="editorial-body">
+          <h3 class="editorial-title">Qué haces</h3>
+          <p class="editorial-text">Entrenamiento, movilidad y nutrición integrados en un solo proceso.</p>
         </div>
       </div>
-      <div class="proc-card">
-        <div class="proc-strip">
-          <span class="proc-strip-num">03</span>
-          <span class="proc-strip-title">Cómo</span>
+      <div class="editorial-card">
+        <div class="editorial-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <div class="proc-body">
-          <p class="proc-text">Programa personalizado, seguimiento semanal real, ajuste basado en datos.</p>
+        <div class="editorial-body">
+          <h3 class="editorial-title">Por qué</h3>
+          <p class="editorial-text">El cuerpo no responde a rutinas sueltas. Responde a estímulo coherente sostenido.</p>
+        </div>
+      </div>
+      <div class="editorial-card">
+        <div class="editorial-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg>
+        </div>
+        <div class="editorial-body">
+          <h3 class="editorial-title">Cómo</h3>
+          <p class="editorial-text">Programa personalizado, seguimiento semanal real, ajuste basado en datos.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ENCAJE -->
-  <section class="section sec-encaje sec-cream reveal">
+  <section class="section-open sec-encaje reveal">
     <div class="sec-head">
       <div class="sec-num">02 · Encaje</div>
       <h2 class="sec-title">Es para ti si…</h2>
@@ -1001,42 +1098,42 @@
   </section>
 
   <!-- MÉTODO -->
-  <section class="section sec-metodo sec-cream reveal">
+  <section class="section-open sec-metodo reveal">
     <div class="sec-head">
       <div class="sec-num">04 · Método</div>
       <h2 class="sec-title">Cómo trabajamos</h2>
       <div class="sec-divider"></div>
       <p class="sec-lead-soft">Tres pilares que definen cada semana de tu proceso.</p>
     </div>
-    <div class="proc-list">
-      <div class="proc-card">
-        <div class="proc-strip">
-          <span class="proc-strip-num">A</span>
-          <span class="proc-strip-title">Estructura</span>
+    <div class="editorial-list">
+      <div class="editorial-card">
+        <div class="editorial-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </div>
-        <div class="proc-body">
-          <p class="proc-lead">Programa con criterio técnico</p>
-          <p class="proc-text">Diseñado a partir de tu nivel, objetivos y disponibilidad. Cada ejercicio tiene una razón.</p>
-        </div>
-      </div>
-      <div class="proc-card">
-        <div class="proc-strip">
-          <span class="proc-strip-num">B</span>
-          <span class="proc-strip-title">Personalización</span>
-        </div>
-        <div class="proc-body">
-          <p class="proc-lead">Diseñado para ti</p>
-          <p class="proc-text">Tu agenda, tu equipo disponible, tu historial. El plan se adapta, no al revés.</p>
+        <div class="editorial-body">
+          <h3 class="editorial-title">Estructura</h3>
+          <p class="editorial-text-lead">Programa con criterio técnico</p>
+          <p class="editorial-text">Diseñado a partir de tu nivel, objetivos y disponibilidad. Cada ejercicio tiene una razón.</p>
         </div>
       </div>
-      <div class="proc-card">
-        <div class="proc-strip">
-          <span class="proc-strip-num">C</span>
-          <span class="proc-strip-title">Seguimiento</span>
+      <div class="editorial-card">
+        <div class="editorial-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <div class="proc-body">
-          <p class="proc-lead">Acompañamiento real</p>
-          <p class="proc-text">Revisión semanal con criterio. Ajustes basados en datos. Comunicación directa por WhatsApp.</p>
+        <div class="editorial-body">
+          <h3 class="editorial-title">Personalización</h3>
+          <p class="editorial-text-lead">Diseñado para ti</p>
+          <p class="editorial-text">Tu agenda, tu equipo disponible, tu historial. El plan se adapta, no al revés.</p>
+        </div>
+      </div>
+      <div class="editorial-card">
+        <div class="editorial-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="editorial-body">
+          <h3 class="editorial-title">Seguimiento</h3>
+          <p class="editorial-text-lead">Acompañamiento real</p>
+          <p class="editorial-text">Revisión semanal con criterio. Ajustes basados en datos. Comunicación directa por WhatsApp.</p>
         </div>
       </div>
     </div>
@@ -1112,7 +1209,7 @@
   <section class="reveal" style="margin-bottom: 14px;">
     <div class="sec-head" style="padding: 0 4px;">
       <div class="sec-num">06 · Sobre mí</div>
-      <h2 class="sec-title">Mauro Morón</h2>
+      <h2 class="sec-title">El criterio detrás</h2>
       <div class="sec-divider"></div>
     </div>
     <div class="sobre-card">
@@ -1142,7 +1239,7 @@
   </section>
 
   <!-- CLAVE -->
-  <section class="section sec-clave reveal">
+  <section class="section-open sec-clave reveal">
     <div class="sec-head">
       <div class="sec-num">07 · Antes de empezar</div>
       <h2 class="sec-title">Lo que debes saber</h2>
@@ -1150,27 +1247,52 @@
     </div>
     <div class="clave-list">
       <div class="clave-item">
-        <h3 class="clave-title">Es 100% online</h3>
-        <p class="clave-text">Toda la operación pasa por tu teléfono: app, mensajes, registros y seguimiento.</p>
+        <div class="clave-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="clave-content">
+          <h3 class="clave-title">Es 100% online</h3>
+          <p class="clave-text">Toda la operación pasa por tu teléfono: app, mensajes, registros y seguimiento.</p>
+        </div>
       </div>
       <div class="clave-item">
-        <h3 class="clave-title">Se ajusta a tu agenda</h3>
-        <p class="clave-text">Estructuramos el plan según tu disponibilidad, agenda y contexto real.</p>
+        <div class="clave-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="clave-content">
+          <h3 class="clave-title">Se ajusta a tu agenda</h3>
+          <p class="clave-text">Estructuramos el plan según tu disponibilidad, agenda y contexto real.</p>
+        </div>
       </div>
       <div class="clave-item">
-        <h3 class="clave-title">No necesitas experiencia previa</h3>
-        <p class="clave-text">Empezamos desde donde estás. La primera fase es de adaptación y aprendizaje técnico.</p>
+        <div class="clave-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </div>
+        <div class="clave-content">
+          <h3 class="clave-title">No necesitas experiencia previa</h3>
+          <p class="clave-text">Empezamos desde donde estás. La primera fase es de adaptación y aprendizaje técnico.</p>
+        </div>
       </div>
       <div class="clave-item">
-        <h3 class="clave-title">Acompañamiento real del coach</h3>
-        <p class="clave-text">Presencia constante, seguimiento de la data registrada en la app, transmisión de conocimiento y canal abierto en todo momento.</p>
+        <div class="clave-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div class="clave-content">
+          <h3 class="clave-title">Acompañamiento real del coach</h3>
+          <p class="clave-text">Presencia constante, seguimiento de la data registrada en la app, transmisión de conocimiento y canal abierto en todo momento.</p>
+        </div>
       </div>
       <div class="clave-item">
-        <h3 class="clave-title">Funciona como suscripción mensual</h3>
-        <p class="clave-text">Inversión mensual durante el período que consideres.</p>
-        <div class="clave-price">
-          <span class="clave-price-num">$200.000 COP</span>
-          <span class="clave-price-suffix">~$55 USD · mensual</span>
+        <div class="clave-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="clave-content">
+          <h3 class="clave-title">Funciona como suscripción mensual</h3>
+          <p class="clave-text">Inversión mensual durante el período que consideres.</p>
+          <div class="clave-price">
+            <span class="clave-price-num">$200.000 COP</span>
+            <span class="clave-price-suffix">~$55 USD · mensual</span>
+          </div>
         </div>
       </div>
     </div>
