@@ -26,7 +26,8 @@
     --sans:'Manrope', -apple-system, sans-serif;
   }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+  html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; scrollbar-width:none; -ms-overflow-style:none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar { display:none; width:0; height:0; }
   body { font-family:var(--sans); background:var(--bg); color:var(--ink); font-size:15px; font-weight:400; line-height:1.55; letter-spacing:-0.01em; overflow-x:hidden; position:relative; min-height:100vh; }
 
   /* MANCHAS DEGRADADAS DE FONDO (4 blobs orgánicos visibles pero sutiles) */
@@ -42,12 +43,9 @@
 
   .wrap { max-width:480px; margin:0 auto; padding:0 14px; position:relative; z-index:1; }
 
-  .progress-top { position:fixed; top:0; left:0; height:2px; width:0%; background:linear-gradient(90deg, var(--accent-deep), var(--accent-light)); z-index:300; transition:width .12s linear; }
-
-  /* TOP nav glass minimal */
-  .topbar { position:sticky; top:10px; z-index:50; margin:10px 14px 0; padding:11px 18px; display:flex; align-items:center; justify-content:flex-start; background:var(--glass-bg); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border:1px solid var(--glass-bd); border-radius:999px; box-shadow:var(--glass-shadow); font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); }
-  .topbar-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); display:inline-block; margin-right:8px; animation:pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.8);} }
+  .progress-top { position:fixed; top:0; right:6px; width:4px; height:100vh; background:rgba(0,0,0,0.06); border-radius:999px; z-index:300; }
+  .progress-bar { width:100%; height:0%; background:linear-gradient(180deg, var(--accent-deep), var(--accent), var(--accent-light)); transition:height .12s linear; position:relative; border-radius:999px; box-shadow:0 0 14px rgba(122,132,80,0.55); }
+  .progress-bar::after { content:''; position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 14px rgba(168,179,115,1), 0 0 28px rgba(168,179,115,0.5); border:1.5px solid #FFF; }
 
   /* BOTONES glass premium */
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:var(--sans); font-size:14px; font-weight:700; letter-spacing:-0.005em; text-decoration:none; cursor:pointer; transition:transform .18s, box-shadow .25s; border:none; padding:15px 26px; border-radius:999px; }
@@ -74,6 +72,14 @@
   .hero-actions { display:flex; align-items:center; gap:10px; flex-wrap:wrap; opacity:0; animation:fadeUp 800ms 700ms ease forwards; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
 
+
+  /* scroll cue (texto + flecha, simple) */
+  .scroll-cue { background:none; border:none; padding:0; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); margin-top:6px; opacity:0; animation:fadeUp 800ms 700ms ease forwards; }
+  .scroll-cue-text { font-size:11.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent-deep); display:inline-flex; align-items:center; gap:9px; }
+  .scroll-cue-text::before { content:""; width:18px; height:1px; background:var(--accent); display:inline-block; }
+  .scroll-cue-arrow { font-size:14px; font-weight:700; color:var(--accent-deep); line-height:1; animation:arrowBounce 1.8s ease-in-out infinite; }
+  @keyframes arrowBounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
+
   /* CHAPTERS — minimal, espacios reducidos */
   .chapter { padding:18px 18px 22px; position:relative; }
   .chapter-label { display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:10px; }
@@ -89,7 +95,7 @@
   .proc-title { font-family:var(--disp); font-size:24px; color:var(--ink); line-height:1; margin-bottom:5px; letter-spacing:0.005em; }
   .proc-text { font-size:13px; color:var(--gray); line-height:1.5; font-weight:500; }
   .proc-note { margin-top:14px; padding:16px 18px; border-radius:18px; background:rgba(10,10,10,0.92); color:#FFF; border:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 30px rgba(0,0,0,0.20); position:relative; overflow:hidden; }
-  .proc-note::before { content:''; position:absolute; top:-30%; right:-15%; width:55%; height:120%; background:radial-gradient(ellipse, rgba(168,179,115,0.22), transparent 64%); filter:blur(24px); pointer-events:none; }
+  .proc-note::before { content:''; position:absolute; top:-20%; right:-20%; width:80%; height:130%; background:radial-gradient(ellipse at top right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(28px); pointer-events:none; }
   .proc-note > * { position:relative; }
   .proc-note-t { font-size:13px; line-height:1.55; color:rgba(255,255,255,0.88); font-weight:500; }
   .proc-note-t strong { color:#FFF; font-weight:700; }
@@ -103,8 +109,8 @@
 
   /* chapter dark (ritmo claro-oscuro) */
   .chapter-dark { background:var(--ink); color:#FFF; border-radius:26px; padding:30px 22px 28px; margin:14px -4px 12px; position:relative; overflow:hidden; box-shadow:0 18px 44px rgba(0,0,0,0.18); }
-  .chapter-dark::before { content:''; position:absolute; bottom:-40%; right:-28%; width:80%; height:170%; background:var(--accent-deep); opacity:0.30; transform:rotate(-14deg); pointer-events:none; }
-  .chapter-dark::after { content:''; position:absolute; top:-30%; left:-20%; width:55%; height:110%; background:radial-gradient(ellipse, rgba(168,179,115,0.28), transparent 64%); filter:blur(34px); pointer-events:none; }
+  .chapter-dark::before { content:''; position:absolute; bottom:-20%; right:-20%; width:80%; height:120%; background:radial-gradient(ellipse at bottom right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(30px); pointer-events:none; }
+  .chapter-dark::after { content:''; position:absolute; top:-20%; left:-20%; width:65%; height:120%; background:radial-gradient(ellipse at top left, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(32px); pointer-events:none; }
   .chapter-dark > * { position:relative; z-index:1; }
   .chapter-dark .chapter-label { color:var(--accent-light); }
   .chapter-dark .chapter-title { color:#FFF; }
@@ -118,7 +124,8 @@
   /* app vertical (sin tabs) */
   .app-section { margin-top:18px; }
   .app-section + .app-section { margin-top:14px; }
-  .app-sublabel { display:inline-block; font-size:10px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:10px; padding:5px 11px; border:1px solid rgba(122,132,80,0.32); border-radius:999px; background:rgba(168,179,115,0.10); }
+  .app-sublabel { font-size:10.5px; font-weight:800; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:12px; display:flex; align-items:center; gap:9px; }
+  .app-sublabel::before { content:""; width:18px; height:1px; background:var(--accent); display:inline-block; }
   .app-stage { position:relative; padding:22px 0 18px; display:flex; align-items:center; justify-content:center; min-height:340px; }
   .app-stage-bg { position:absolute; inset:0; background:linear-gradient(135deg, rgba(168,179,115,0.12), rgba(232,229,215,0.50)); border-radius:24px; border:1px solid var(--glass-bd); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); box-shadow:0 8px 24px rgba(0,0,0,0.06); z-index:0; }
   .app-stage .phone { position:relative; z-index:1; width:182px; height:328px; border-radius:32px; overflow:hidden; box-shadow:0 24px 50px rgba(0,0,0,0.28), 0 4px 16px rgba(0,0,0,0.16); border:3px solid var(--ink); }
@@ -154,7 +161,7 @@
   .coach-bio p { font-size:13.5px; line-height:1.6; color:var(--ink-2); font-weight:500; }
   .coach-bio p + p { margin-top:8px; }
   .creds { padding:20px 22px 22px; background:rgba(10,10,10,0.92); color:#FFF; position:relative; overflow:hidden; }
-  .creds::before { content:''; position:absolute; top:-30%; right:-15%; width:55%; height:120%; background:radial-gradient(ellipse, rgba(168,179,115,0.22), transparent 64%); filter:blur(28px); pointer-events:none; }
+  .creds::before { content:''; position:absolute; top:-20%; right:-20%; width:80%; height:130%; background:radial-gradient(ellipse at top right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(30px); pointer-events:none; }
   .creds > * { position:relative; }
   .creds-head { font-size:9.5px; font-weight:800; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent-light); margin-bottom:8px; }
   .creds-issa { font-family:var(--disp); font-size:22px; color:#FFF; line-height:1.05; margin-bottom:6px; letter-spacing:0.005em; }
@@ -166,7 +173,7 @@
   /* PRICE glass + mancha diagonal */
   .price { margin-top:12px; border-radius:22px; background:var(--glass-bg); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border:1px solid var(--glass-bd); overflow:hidden; box-shadow:var(--glass-shadow); }
   .price-head { background:var(--ink); color:#FFF; padding:22px 22px 20px; position:relative; overflow:hidden; }
-  .price-head::before { content:''; position:absolute; top:-40%; right:-30%; width:90%; height:200%; background:var(--accent-deep); opacity:0.32; transform:rotate(-16deg); pointer-events:none; }
+  .price-head::before { content:''; position:absolute; top:-20%; right:-20%; width:80%; height:130%; background:radial-gradient(ellipse at top right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(30px); pointer-events:none; }
   .price-head > * { position:relative; }
   .price-amount { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
   .price-num { font-family:var(--disp); font-size:48px; color:#FFF; line-height:0.88; letter-spacing:0.005em; }
@@ -197,7 +204,7 @@
 
   /* CTA FINAL */
   .cta-final { margin:20px 14px 16px; border-radius:26px; padding:42px 26px 36px; background:var(--ink); color:#FFF; position:relative; overflow:hidden; box-shadow:0 18px 44px rgba(0,0,0,0.20); }
-  .cta-final::before { content:''; position:absolute; bottom:-40%; right:-30%; width:90%; height:180%; background:var(--accent-deep); opacity:0.32; transform:rotate(-14deg); pointer-events:none; }
+  .cta-final::before { content:''; position:absolute; bottom:-20%; right:-20%; width:80%; height:130%; background:radial-gradient(ellipse at bottom right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(30px); pointer-events:none; }
   .cta-final::after { content:''; position:absolute; top:-40%; left:-25%; width:60%; height:120%; background:radial-gradient(ellipse, rgba(168,179,115,0.30), transparent 65%); filter:blur(40px); pointer-events:none; }
   .cta-final > * { position:relative; }
   .cta-title { font-family:var(--disp); font-size:54px; line-height:0.92; color:#FFF; margin-bottom:14px; letter-spacing:0.005em; max-width:340px; }
@@ -209,7 +216,7 @@
   .footer-brand { font-family:var(--disp); font-size:22px; color:var(--ink); margin-bottom:5px; letter-spacing:0.01em; }
 
   /* STICKY CTA */
-  .sticky-cta { position:fixed; bottom:14px; left:14px; right:14px; z-index:100; transform:translateY(160%); transition:transform .4s cubic-bezier(.16,1,.3,1); max-width:452px; margin:0 auto; }
+  .sticky-cta { position:fixed; bottom:calc(24px + env(safe-area-inset-bottom, 0px)); left:14px; right:14px; z-index:100; transform:translateY(160%); transition:transform .4s cubic-bezier(.16,1,.3,1); max-width:452px; margin:0 auto; }
   .sticky-cta.visible { transform:translateY(0); }
   .sticky-cta a { display:flex; align-items:center; justify-content:center; gap:9px; background:rgba(255,255,255,0.78); color:var(--ink); backdrop-filter:blur(28px) saturate(200%); -webkit-backdrop-filter:blur(28px) saturate(200%); border:1px solid rgba(255,255,255,0.85); padding:15px 22px; font-family:var(--sans); font-size:14px; font-weight:700; letter-spacing:-0.005em; text-decoration:none; border-radius:999px; box-shadow:0 6px 20px rgba(0,0,0,0.10), 0 18px 38px rgba(0,0,0,0.14); }
 
@@ -228,15 +235,12 @@
 </style>
 </head>
 <body>
-<div class="progress-top" id="progressTop"></div>
+<div class="progress-top"><div class="progress-bar" id="progressTop"></div></div>
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 <div class="blob blob-3"></div>
 <div class="blob blob-4"></div>
 
-<header class="topbar">
-  <div><span class="topbar-dot"></span>Entrena con Método</div>
-</header>
 
 <div class="wrap">
 
@@ -247,10 +251,10 @@
     <p class="hero-cred"><strong>Mauro Morón</strong> — ISSA <em>International Sports Sciences Association</em> Certified Fitness and Nutrition Coach.</p>
     <p class="hero-mantra"><em>Movilidad — Fuerza — Composición corporal.</em></p>
     <p class="hero-mantra-sub"><b>Decisiones basadas en datos.</b> Entrena con estructura. Nutrición con criterio.</p>
-    <div class="hero-actions">
-      <a class="btn btn-ink" href="https://calendar.app.google/TT1nAKeL27qspmE29" target="_blank" rel="noopener">Agenda tu entrevista <span>&rarr;</span></a>
-      <button class="btn btn-glass" id="heroScrollCta" type="button">Ver el método</button>
-    </div>
+    <button class="scroll-cue" id="heroScrollCta" type="button">
+      <span class="scroll-cue-text">Conoce el método</span>
+      <span class="scroll-cue-arrow">&darr;</span>
+    </button>
   </section>
 
   <!-- 01 RESULTADOS (HOOK: lo que el cliente quiere ver primero) -->
@@ -270,7 +274,6 @@
   <section class="chapter chapter-dark reveal">
     <div class="chapter-label">02 · El método</div>
     <h2 class="chapter-title">Coaching de <em>criterio.</em></h2>
-    <p class="chapter-lead">Tres pilares por semana.</p>
     <div class="pillars stagger">
       <div class="pillar"><div class="pillar-name">Estructura.</div><p class="pillar-text">Cada ejercicio tiene una razón, según tu nivel y objetivos.</p></div>
       <div class="pillar"><div class="pillar-name">Personalización.</div><p class="pillar-text">Tu agenda, tu equipo, tu historial. El plan se adapta a ti.</p></div>
@@ -366,8 +369,7 @@
           <span class="price-num price-num-alt">$55</span>
           <span class="price-per">USD</span>
         </div>
-        <div class="price-usd">Mensual · facturación recurrente</div>
-        <p class="price-anchor">Una sola inversión por el sistema completo. Sin upsells.</p>
+        <div class="price-usd">Pago mensual recurrente</div>
       </div>
       <div class="price-body">
         <div class="price-incl">Qué incluye</div>
@@ -393,7 +395,7 @@
       <details class="faq-item"><summary>&iquest;Necesito experiencia previa? <span class="faq-marker">+</span></summary><div class="faq-a">No. Empezamos desde donde estás; la primera fase es adaptación y aprendizaje técnico.</div></details>
       <details class="faq-item"><summary>&iquest;Sin gimnasio o sin tiempo? <span class="faq-marker">+</span></summary><div class="faq-a">El plan se estructura según tu equipo y tu agenda real. Funciona en casa o gimnasio.</div></details>
       <details class="faq-item"><summary>&iquest;Cómo recibo el plan? <span class="faq-marker">+</span></summary><div class="faq-a">Todo pasa por la app (rutinas, videos, registro) y WhatsApp para revisión semanal. 100% online.</div></details>
-      <details class="faq-item"><summary>&iquest;Y si no veo resultados? <span class="faq-marker">+</span></summary><div class="faq-a">El resultado depende de tu adherencia. Si en cuatro semanas la adherencia es real y no hay respuesta, recalibramos sin costo.</div></details>
+      <details class="faq-item"><summary>&iquest;Y si no veo resultados? <span class="faq-marker">+</span></summary><div class="faq-a">El resultado depende de tu adherencia al proceso. Si en cuatro semanas no ves respuesta, anticipamos y recalibramos el plan, sin pasos extras.</div></details>
       <details class="faq-item"><summary>&iquest;Lo combino con otro deporte? <span class="faq-marker">+</span></summary><div class="faq-a">Sí. El programa considera tu carga deportiva para que las sesiones sumen, no compitan.</div></details>
       <details class="faq-item"><summary>&iquest;Hay permanencia? <span class="faq-marker">+</span></summary><div class="faq-a">No. Suscripción mensual; cancelas cuando quieras.</div></details>
     </div>
@@ -435,7 +437,7 @@
   const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.02, rootMargin:'0px 0px 5% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   const sticky=document.getElementById('stickyCta'), ctaFinal=document.querySelector('.cta-final'), prog=document.getElementById('progressTop');
-  window.addEventListener('scroll',()=>{ const sc=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight, pct=dh>0?sc/dh:0; prog.style.width=(pct*100)+'%'; const near=ctaFinal.getBoundingClientRect().top<window.innerHeight*1.2; if(pct>0.30&&!near)sticky.classList.add('visible'); else sticky.classList.remove('visible'); },{passive:true});
+  window.addEventListener('scroll',()=>{ const sc=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight, pct=dh>0?sc/dh:0; prog.style.height=(pct*100)+'%'; const near=ctaFinal.getBoundingClientRect().top<window.innerHeight*1.2; if(pct>0.05&&!near)sticky.classList.add('visible'); else sticky.classList.remove('visible'); },{passive:true});
 </script>
 </body>
 </html>
