@@ -72,20 +72,30 @@
   .btn-light { background:#FFF; color:var(--ink); box-shadow:0 6px 22px rgba(0,0,0,0.16); }
   .btn-light:hover { background:var(--accent-light); }
 
-  /* HERO sin pills delatoras */
-  .hero { padding:32px 18px 6px; position:relative; overflow:hidden; }
-  .hero-diag { position:absolute; top:-8%; right:-32%; width:74%; height:62%; background:var(--ink); transform:rotate(-12deg) skewY(-2deg); border-radius:0 0 80px 0; pointer-events:none; z-index:0; opacity:0.94; box-shadow:0 18px 50px rgba(0,0,0,0.22); animation:diagIn 850ms cubic-bezier(0.16,1,0.3,1) both; }
-  @keyframes diagIn { from { opacity:0; transform:rotate(-12deg) skewY(-2deg) translate(70px,-70px); } to { opacity:0.94; transform:rotate(-12deg) skewY(-2deg) translate(0,0); } }
-  .hero-diag::before { content:''; position:absolute; bottom:-20%; right:-10%; width:80%; height:120%; background:radial-gradient(ellipse at bottom right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(28px); pointer-events:none; }
-  .hero-diag::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at top right, rgba(168,179,115,0.22), transparent 60%); }
+  /* HERO — full-bleed, video de fondo atenuado, llamado por URL (ver HERO_VIDEO_URL en el script) */
+  .hero { position:relative; overflow:hidden; padding:96px 18px 28px; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; background:var(--ink); animation:heroIn 850ms cubic-bezier(0.16,1,0.3,1) both; }
+  @keyframes heroIn { from { opacity:0; } to { opacity:1; } }
   .hero > * { position:relative; z-index:1; }
-  .hero-eyebrow { display:inline-block; font-size:12.5px; font-weight:600; letter-spacing:0; color:var(--gray); margin-bottom:14px; opacity:0; animation:fadeUp 560ms 40ms cubic-bezier(0.16,1,0.3,1) forwards; }
-  .hero-title { font-family:var(--disp); font-size:clamp(58px, 20vw, 78px); line-height:0.86; letter-spacing:0.005em; color:var(--ink); margin-bottom:18px; opacity:0; animation:fadeUp 560ms 100ms cubic-bezier(0.16,1,0.3,1) forwards; }
-  .hero-title em { background:linear-gradient(105deg, var(--accent-deep) 20%, var(--accent-light) 50%, var(--accent-deep) 80%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; animation:shimmer 7s ease-in-out infinite; }
-  @keyframes shimmer { 0%,100% { background-position:0% 0; } 50% { background-position:100% 0; } }
-  .hero-cred { font-size:12.5px; line-height:1.5; color:var(--gray); margin-bottom:18px; max-width:380px; font-weight:500; opacity:0; animation:fadeUp 560ms 250ms cubic-bezier(0.16,1,0.3,1) forwards; }
-  .hero-cred strong { color:var(--ink); font-weight:700; }
-  .hero-card { margin-bottom:26px; max-width:400px; padding:16px 18px 15px; border-radius:18px; background:rgba(10,10,10,0.92); border:1px solid rgba(255,255,255,0.1); box-shadow:0 8px 30px rgba(0,0,0,0.20); opacity:0; animation:fadeUp 560ms 450ms cubic-bezier(0.16,1,0.3,1) forwards; position:relative; overflow:hidden; }
+  .hero-inner { position:relative; z-index:1; width:100%; max-width:1080px; margin:0 auto; }
+
+  /* NAV superior sobre el video */
+  .hero-nav { position:absolute; top:0; left:0; right:0; z-index:3; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 18px; max-width:1116px; margin:0 auto; opacity:0; animation:fadeUp 560ms 150ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-brand { font-family:var(--disp); font-size:21px; letter-spacing:0.05em; color:#FFF; line-height:1; text-transform:uppercase; }
+  .hero-brand span { color:var(--accent-light); }
+  .btn-nav { flex-shrink:0; display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; letter-spacing:-0.005em; color:#FFF; text-decoration:none; padding:10px 17px; border-radius:999px; background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.28); backdrop-filter:blur(16px) saturate(160%); -webkit-backdrop-filter:blur(16px) saturate(160%); transition:background .25s, color .25s; }
+  .btn-nav:hover { background:#FFF; color:var(--ink); }
+  .btn-nav:focus-visible { outline:3px solid var(--accent-light); outline-offset:3px; }
+  /* Fallback: si aún no hay video, el fondo mantiene el look oscuro con brillo oliva */
+  .hero-media { position:absolute; inset:0; z-index:0; background:radial-gradient(ellipse at 85% 12%, rgba(168,179,115,0.42), rgba(168,179,115,0.14) 40%, transparent 65%), radial-gradient(ellipse at 10% 100%, rgba(122,132,80,0.30), transparent 60%), var(--ink); }
+  .hero-media video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 900ms ease; }
+  .hero-media video.playing { opacity:1; }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,10,0.38) 0%, rgba(10,10,10,0.22) 35%, rgba(10,10,10,0.55) 68%, rgba(10,10,10,0.84) 100%); }
+  .hero-eyebrow { display:inline-block; font-size:12.5px; font-weight:600; letter-spacing:0; color:rgba(255,255,255,0.72); margin-bottom:14px; opacity:0; animation:fadeUp 560ms 40ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-title { font-family:var(--disp); font-size:clamp(58px, 20vw, 78px); line-height:0.86; letter-spacing:0.005em; color:#FFF; margin-bottom:18px; text-shadow:0 2px 24px rgba(0,0,0,0.35); opacity:0; animation:fadeUp 560ms 100ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-title em { font-style:italic; color:#FFF; }
+  .hero-cred { font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.75); margin-bottom:18px; max-width:380px; font-weight:500; opacity:0; animation:fadeUp 560ms 250ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-cred strong { color:#FFF; font-weight:700; }
+  .hero-card { margin-bottom:22px; max-width:400px; padding:16px 18px 15px; border-radius:18px; background:rgba(10,10,10,0.55); backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%); border:1px solid rgba(255,255,255,0.14); box-shadow:0 8px 30px rgba(0,0,0,0.20); opacity:0; animation:fadeUp 560ms 450ms cubic-bezier(0.16,1,0.3,1) forwards; position:relative; overflow:hidden; }
   .hero-card::before { content:''; position:absolute; top:-20%; right:-20%; width:80%; height:130%; background:radial-gradient(ellipse at top right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(28px); pointer-events:none; }
   .hero-card::after { content:''; position:absolute; top:-10%; bottom:-10%; left:-70%; width:45%; background:linear-gradient(100deg, transparent, rgba(255,255,255,0.22), transparent); transform:skewX(-18deg); animation:cardShine 1.9s cubic-bezier(0.4,0,0.2,1) 1.15s both; pointer-events:none; }
   @keyframes cardShine { from { left:-70%; } to { left:135%; } }
@@ -102,12 +112,18 @@
   @keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
 
 
+  /* CTA principal del hero */
+  .hero-actions { opacity:0; animation:fadeUp 560ms 850ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero-actions .btn { width:100%; max-width:400px; }
+  .hero .cta-note { color:rgba(255,255,255,0.65); }
+  .hero .cta-note::before { background:var(--accent-light); box-shadow:0 0 0 3px rgba(168,179,115,0.22); }
+
   /* scroll cue (texto + flecha, simple) */
-  .scroll-cue { background:none; border:none; padding:6px 0; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); opacity:0; animation:fadeUp 560ms 1000ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .scroll-cue { background:none; border:none; padding:6px 0; margin-top:6px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); opacity:0; animation:fadeUp 560ms 1000ms cubic-bezier(0.16,1,0.3,1) forwards; }
   .cta-note { display:flex; align-items:center; gap:7px; font-size:11.5px; font-weight:600; color:var(--gray); letter-spacing:0.01em; margin-top:12px; opacity:0; animation:fadeUp 560ms 850ms cubic-bezier(0.16,1,0.3,1) forwards; }
   .cta-note::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; box-shadow:0 0 0 3px rgba(122,132,80,0.18); }
-  .scroll-cue-text { font-size:13px; font-weight:700; letter-spacing:0; color:var(--ink); }
-  .scroll-cue-arrow { font-size:14px; font-weight:700; color:var(--accent-deep); line-height:1; animation:arrowBounce 1.8s ease-in-out infinite; }
+  .scroll-cue-text { font-size:13px; font-weight:700; letter-spacing:0; color:#FFF; }
+  .scroll-cue-arrow { font-size:14px; font-weight:700; color:var(--accent-light); line-height:1; animation:arrowBounce 1.8s ease-in-out infinite; }
   @keyframes arrowBounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
 
   /* CHAPTERS — minimal, espacios reducidos */
@@ -278,6 +294,25 @@
     .fit:hover { transform:translateX(4px); box-shadow:0 6px 18px rgba(0,0,0,0.06); }
   }
 
+  /* DESKTOP — proporciones de landing, no de app */
+  @media (min-width:768px) {
+    .hero { padding:120px 44px 48px; }
+    .hero-nav { padding:22px 44px; }
+    .hero-brand { font-size:24px; }
+    .btn-nav { font-size:13.5px; padding:12px 22px; }
+    .hero-eyebrow { font-size:14px; }
+    .hero-title { font-size:clamp(84px, 9.5vw, 138px); line-height:0.88; max-width:900px; }
+    .hero-title br { display:none; }
+    .hero-cred { font-size:14px; max-width:470px; }
+    .hero-card { max-width:470px; }
+    .hero-card-item { font-size:22px; }
+    .hero-actions .btn { width:auto; min-width:340px; font-size:15px; padding:17px 34px; }
+    .wrap { max-width:620px; }
+    .cta-final { max-width:620px; }
+    .chapter-title { font-size:52px; }
+    .sticky-cta { max-width:520px; }
+  }
+
   /* REVEAL — más rápido y temprano */
   .reveal { opacity:0; transform:translateY(10px); transition:opacity .55s cubic-bezier(0.16,1,0.3,1), transform .55s cubic-bezier(0.16,1,0.3,1); }
   .reveal.in { opacity:1; transform:translateY(0); }
@@ -289,7 +324,7 @@
   .reveal.in .stagger > *:nth-child(4) { transition-delay:180ms; }
   .reveal.in .stagger > *:nth-child(5) { transition-delay:230ms; }
   .reveal.in .stagger > *:nth-child(6) { transition-delay:280ms; }
-  @media (prefers-reduced-motion: reduce){ .reveal, .reveal .stagger > * { opacity:1!important; transform:none!important; transition:none!important; } .blob { animation:none; } .hero-title em { animation:none; } .price-scarcity::before { animation:none; } .hero-eyebrow, .hero-title, .hero-cred, .hero-card, .hero-card-item, .hero-card-sub, .scroll-cue { opacity:1!important; animation:none!important; } .hero-diag { animation:none; } .hero-card::after { display:none; } }
+  @media (prefers-reduced-motion: reduce){ .reveal, .reveal .stagger > * { opacity:1!important; transform:none!important; transition:none!important; } .blob { animation:none; } .hero-title em { animation:none; } .price-scarcity::before { animation:none; } .hero-eyebrow, .hero-title, .hero-cred, .hero-card, .hero-card-item, .hero-card-sub, .hero-actions, .scroll-cue { opacity:1!important; animation:none!important; } .hero { animation:none; } .hero-media video { display:none; } .hero-card::after { display:none; } }
 </style>
 </head>
 <body>
@@ -300,13 +335,20 @@
 <div class="blob blob-4" aria-hidden="true"></div>
 
 
-<div class="wrap">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-diag" aria-hidden="true"></div>
+<!-- HERO full-bleed con video de fondo. El video NO vive incrustado en el código: se llama por URL.
+     Para activarlo, revisa HERO_VIDEO_URL al final del archivo (en el <script>). -->
+<section class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <video id="heroVideo" muted loop playsinline autoplay preload="metadata" tabindex="-1"></video>
+    <div class="hero-overlay"></div>
+  </div>
+  <header class="hero-nav">
+    <div class="hero-brand">Mauro Morón<span>.</span></div>
+    <a class="btn-nav" href="https://calendar.app.google/TT1nAKeL27qspmE29" target="_blank" rel="noopener">Agenda tu entrevista</a>
+  </header>
+  <div class="hero-inner">
     <p class="hero-eyebrow">Coaching 1:1 · 100% online</p>
-    <h1 class="hero-title">Entrena<br>con <em>método.</em></h1>
+    <h1 class="hero-title">Entrena <br>con <em>método.</em></h1>
     <p class="hero-cred"><strong>Mauro Morón</strong> — ISSA <em>International Sports Sciences Association</em> Certified Fitness and Nutrition Coach.</p>
     <div class="hero-card">
       <div class="hero-card-row">
@@ -316,11 +358,18 @@
       </div>
       <p class="hero-card-sub"><b>Decisiones basadas en datos.</b> Entrena con estructura. Nutrición con criterio.</p>
     </div>
+    <div class="hero-actions">
+      <a class="btn btn-light" href="https://calendar.app.google/TT1nAKeL27qspmE29" target="_blank" rel="noopener">Agenda tu entrevista sin costo <span>&rarr;</span></a>
+      <p class="cta-note">Sin compromiso · Te respondo personalmente</p>
+    </div>
     <button class="scroll-cue" id="heroScrollCta" type="button">
       <span class="scroll-cue-text">Conoce el método</span>
       <span class="scroll-cue-arrow">&darr;</span>
     </button>
-  </section>
+  </div>
+</section>
+
+<div class="wrap">
 
   <!-- 01 RESULTADOS (HOOK: lo que el cliente quiere ver primero) -->
   <section class="chapter reveal" id="metodo-section">
@@ -488,6 +537,31 @@
 
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 <script>
+  // ============================================================
+  // VIDEO DEL HERO — dos opciones:
+  // A) La más fácil: nombra tu video "hero.mp4" y súbelo a GitHub en la
+  //    MISMA carpeta que este index.html. No toques nada más: ya está citado abajo.
+  // B) Hosting externo (CDN, mejor rendimiento): sube el video a Cloudinary
+  //    y reemplaza "hero.mp4" por la URL completa, ej:
+  //    "https://res.cloudinary.com/tu-cuenta/video/upload/q_auto/hero.mp4"
+  // Si el archivo/URL no existe todavía, el hero muestra el fondo oscuro elegante.
+  // ============================================================
+  const HERO_VIDEO_URL = "hero.mp4";
+  // Opcional: imagen (frame del video) que se ve mientras carga:
+  const HERO_VIDEO_POSTER = "";
+
+  (function(){
+    const v = document.getElementById('heroVideo');
+    if (!v || !HERO_VIDEO_URL) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (HERO_VIDEO_POSTER) v.poster = HERO_VIDEO_POSTER;
+    v.muted = true;
+    v.src = HERO_VIDEO_URL;
+    v.addEventListener('playing', () => v.classList.add('playing'), { once:true });
+    const tryPlay = () => v.play().catch(()=>{});
+    if (v.readyState >= 2) tryPlay(); else v.addEventListener('canplay', tryPlay, { once:true });
+  })();
+
   (function(){
     let lenis = null;
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && typeof Lenis !== 'undefined') {
