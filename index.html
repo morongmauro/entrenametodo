@@ -33,6 +33,7 @@
     --accent-deep:#5E663C;
     --accent-light:#A8B373;
     --glass-bg:rgba(255,255,255,0.62);
+    --card-bg:rgba(255,255,255,0.80);   /* tarjetas sin blur: algo mas opacas para compensar */
     --glass-bd:rgba(255,255,255,0.7);
     --glass-shadow:0 8px 32px rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,0.7) inset;
     /* Manchas del fondo — mismas que el Meal Tracker (src/theme.js -> BG_STAINS):
@@ -76,9 +77,8 @@
   /* Las manchas van pintadas en el propio fondo de la hoja: sin capa que se
      reposicione con el scroll (eso hacía temblar/saltar el scroll en móvil). */
 
-  .progress-top { position:fixed; top:0; right:6px; width:4px; height:100vh; background:rgba(0,0,0,0.06); border-radius:999px; z-index:300; }
-  .progress-bar { width:100%; height:0%; background:linear-gradient(180deg, var(--accent-deep), var(--accent), var(--accent-light)); transition:height .12s linear; position:relative; border-radius:999px; box-shadow:0 0 14px rgba(122,132,80,0.55); }
-  .progress-bar::after { content:''; position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); width:10px; height:10px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 14px rgba(168,179,115,1), 0 0 28px rgba(168,179,115,0.5); border:1.5px solid #FFF; }
+  .progress-top { position:fixed; top:0; right:6px; width:6px; height:100vh; background:rgba(0,0,0,0.07); border-radius:999px; z-index:300; overflow:hidden; }
+  .progress-bar { width:100%; height:100%; background:rgba(0,0,0,0.30); border-radius:999px; transform:scaleY(0); transform-origin:top center; will-change:transform; }
 
   /* BOTONES glass premium */
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; font-family:var(--sans); font-size:14px; font-weight:700; letter-spacing:-0.005em; text-decoration:none; cursor:pointer; transition:transform .22s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; border:none; padding:15px 26px; border-radius:999px; }
@@ -86,7 +86,7 @@
   .btn:focus-visible, .scroll-cue:focus-visible, .sticky-cta a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
   .btn-ink { background:var(--ink); color:#FFF; box-shadow:0 6px 18px rgba(0,0,0,0.18), 0 1px 0 rgba(255,255,255,0.06) inset; }
   .btn-ink:hover { box-shadow:0 10px 28px rgba(0,0,0,0.24); }
-  .btn-glass { background:var(--glass-bg); color:var(--ink); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border:1px solid var(--glass-bd); box-shadow:var(--glass-shadow); }
+  .btn-glass { background:var(--card-bg); color:var(--ink); border:1px solid var(--glass-bd); box-shadow:var(--glass-shadow); }
   .btn-glass:hover { background:rgba(255,255,255,0.8); }
   .btn-light { background:#FFF; color:var(--ink); box-shadow:0 6px 22px rgba(0,0,0,0.16); }
   .btn-light:hover { background:var(--accent-light); }
@@ -94,6 +94,8 @@
   /* HERO — full-bleed, video de fondo atenuado, llamado por URL (ver HERO_VIDEO_URL en el script) */
   .hero { position:relative; overflow:hidden; padding:96px 18px 70px; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; background:#A09686; }
   .hero > * { position:relative; z-index:1; }
+  .hero-inner { animation:heroIn 200ms cubic-bezier(0.16,1,0.3,1) both; }
+  @keyframes heroIn { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:none; } }
   .hero-inner { position:relative; z-index:1; width:100%; max-width:1080px; margin:0 auto; }
 
   /* Fallback: si aún no hay video, el fondo mantiene el look oscuro con brillo oliva */
@@ -129,12 +131,13 @@
   .hero .cta-note::before { background:var(--accent-light); box-shadow:0 0 0 3px rgba(168,179,115,0.22); }
 
   /* scroll cue (texto + flecha, simple) */
-  .scroll-cue { background:none; border:none; padding:12px 0 6px; margin-top:10px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); }
+  .scroll-cue { background:none; border:none; padding:14px 0 8px; margin-top:12px; cursor:pointer; display:inline-flex; align-items:center; gap:13px; font-family:var(--sans); }
   .cta-note { display:flex; align-items:center; gap:7px; font-size:11.5px; font-weight:600; color:var(--gray); letter-spacing:0.01em; margin-top:12px; }
   .cta-note::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; box-shadow:0 0 0 3px rgba(122,132,80,0.18); }
-  .scroll-cue-text { font-size:16px; font-weight:700; letter-spacing:0; color:#FFF; text-shadow:0 1px 12px rgba(0,0,0,0.45); }
-  .scroll-cue-arrow { font-size:19px; font-weight:700; color:var(--accent-light); line-height:1; animation:arrowBounce 1.8s ease-in-out infinite; }
-  @keyframes arrowBounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px); } }
+  .scroll-cue-text { font-size:17px; font-weight:700; letter-spacing:0; color:#FFF; text-shadow:0 1px 12px rgba(0,0,0,0.5); }
+  .scroll-cue-circle { flex-shrink:0; width:38px; height:38px; border-radius:50%; border:2px solid rgba(255,255,255,0.65); background:rgba(255,255,255,0.12); color:#FFF; display:flex; align-items:center; justify-content:center; animation:cueBounce 1.9s cubic-bezier(0.45,0,0.55,1) infinite; }
+  .scroll-cue-circle svg { width:19px; height:19px; }
+  @keyframes cueBounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(7px); } }
 
   /* CHAPTERS — minimal, espacios reducidos */
   .chapter { padding:12px 18px 14px; position:relative; }
@@ -146,7 +149,7 @@
 
   /* RESULTADOS — proc glass (CAP 1 NUEVO HOOKEADOR) */
   .procs { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
-  .proc { padding:18px 20px; border-radius:18px; background:var(--glass-bg); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border:1px solid var(--glass-bd); display:grid; grid-template-columns:46px 1fr; gap:14px; align-items:center; box-shadow:0 4px 14px rgba(0,0,0,0.04); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
+  .proc { padding:18px 20px; border-radius:18px; background:var(--card-bg); border:1px solid var(--glass-bd); display:grid; grid-template-columns:46px 1fr; gap:14px; align-items:center; box-shadow:0 4px 14px rgba(0,0,0,0.04); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
   .proc:active { transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,0,0,0.08); }
   .proc-num { font-family:var(--disp); font-size:38px; line-height:0.85; color:var(--accent); letter-spacing:0; transition:transform .55s cubic-bezier(0.34,1.56,0.64,1); transform:scale(0.7); display:inline-block; transform-origin:left center; }
   .reveal.in .proc-num { transform:scale(1); }
@@ -160,7 +163,7 @@
 
   /* PILARES — glass cards */
   .pillars { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
-  .pillar { padding:16px 18px; border-radius:18px; background:var(--glass-bg); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border:1px solid var(--glass-bd); box-shadow:0 3px 12px rgba(0,0,0,0.03); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
+  .pillar { padding:16px 18px; border-radius:18px; background:var(--card-bg); border:1px solid var(--glass-bd); box-shadow:0 3px 12px rgba(0,0,0,0.03); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
   .pillar:active { transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,0.08); }
   .pillar-name { font-family:var(--disp); font-size:22px; color:var(--ink); line-height:1; margin-bottom:5px; letter-spacing:0.005em; }
   .pillar-text { font-size:13px; color:var(--gray); line-height:1.5; font-weight:500; }
@@ -176,7 +179,7 @@
   .chapter-dark .chapter-title em { color:#FFF; }
   .chapter-dark .chapter-lead { color:rgba(255,255,255,0.72); }
   .chapter-dark .chapter-lead strong { color:#FFF; }
-  .chapter-dark .pillar { background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.85); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); box-shadow:0 6px 18px rgba(0,0,0,0.18); }
+  .chapter-dark .pillar { background:rgba(255,255,255,0.94); border:1px solid rgba(255,255,255,0.85); box-shadow:0 6px 18px rgba(0,0,0,0.18); }
   .chapter-dark .pillar-name { color:var(--ink); }
   .chapter-dark .pillar-text { color:var(--gray); }
 
@@ -204,20 +207,20 @@
 
   /* HUMAN list glass */
   .humans { display:flex; flex-direction:column; gap:7px; margin-top:14px; }
-  .human { padding:13px 16px 13px 18px; border-radius:16px; background:var(--glass-bg); backdrop-filter:blur(14px) saturate(180%); -webkit-backdrop-filter:blur(14px) saturate(180%); border:1px solid var(--glass-bd); display:grid; grid-template-columns:78px 1fr; gap:14px; align-items:center; box-shadow:0 3px 10px rgba(0,0,0,0.03); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
+  .human { padding:13px 16px 13px 18px; border-radius:16px; background:var(--card-bg); border:1px solid var(--glass-bd); display:grid; grid-template-columns:78px 1fr; gap:14px; align-items:center; box-shadow:0 3px 10px rgba(0,0,0,0.03); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
   .human-tag { font-size:11px; font-weight:600; letter-spacing:0; color:var(--gray); }
   .human-title { font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:2px; letter-spacing:-0.005em; }
   .human-text { font-size:12.5px; color:var(--gray); line-height:1.5; font-weight:500; }
 
   /* ENCAJE — pills glass */
   .fits { display:flex; flex-direction:column; gap:7px; margin-top:12px; }
-  .fit { padding:13px 18px; border-radius:16px; display:flex; gap:14px; align-items:center; background:var(--glass-bg); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border:1px solid var(--glass-bd); box-shadow:0 3px 12px rgba(0,0,0,0.03); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
+  .fit { padding:13px 18px; border-radius:16px; display:flex; gap:14px; align-items:center; background:var(--card-bg); border:1px solid var(--glass-bd); box-shadow:0 3px 12px rgba(0,0,0,0.03); transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s; }
   .fit:active { transform:translateX(4px); box-shadow:0 6px 18px rgba(0,0,0,0.06); }
   .fit-i { font-family:var(--disp); font-size:20px; color:var(--accent-deep); line-height:1; min-width:24px; }
   .fit-text { font-size:13px; line-height:1.45; color:var(--ink); font-weight:500; }
 
   /* COACH glass */
-  .coach { margin-top:12px; border-radius:22px; background:var(--glass-bg); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border:1px solid var(--glass-bd); overflow:hidden; box-shadow:var(--glass-shadow); }
+  .coach { margin-top:12px; border-radius:22px; background:var(--card-bg); border:1px solid var(--glass-bd); overflow:hidden; box-shadow:var(--glass-shadow); }
   .coach-top { display:grid; grid-template-columns:116px 1fr; gap:0; align-items:stretch; }
   .coach-photo { overflow:hidden; }
   .coach-photo img { width:100%; height:100%; object-fit:cover; object-position:center 18%; filter:saturate(0.85) contrast(1.05); display:block; }
@@ -237,7 +240,7 @@
   .creds-list li::before { content:'·'; color:var(--accent-light); font-weight:800; font-size:18px; line-height:0.5; }
 
   /* PRICE glass + mancha diagonal */
-  .price { margin-top:12px; border-radius:22px; background:var(--glass-bg); backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%); border:1px solid var(--glass-bd); overflow:hidden; box-shadow:var(--glass-shadow); }
+  .price { margin-top:12px; border-radius:22px; background:var(--card-bg); border:1px solid var(--glass-bd); overflow:hidden; box-shadow:var(--glass-shadow); }
   .price-head { background:var(--ink); color:#FFF; padding:22px 22px 20px; position:relative; overflow:hidden; }
   .price-head::before { content:''; position:absolute; top:-20%; right:-20%; width:80%; height:130%; background:radial-gradient(ellipse at top right, rgba(168,179,115,0.85), rgba(168,179,115,0.32) 35%, transparent 65%); filter:blur(30px); pointer-events:none; }
   .price-head > * { position:relative; }
@@ -262,7 +265,7 @@
   @keyframes pulseDot { 0%,100% { box-shadow:0 0 0 3px rgba(122,132,80,0.18); } 50% { box-shadow:0 0 0 6px rgba(122,132,80,0.08); } }
 
   /* FAQ glass */
-  .faq { margin-top:12px; border-radius:18px; overflow:hidden; background:var(--glass-bg); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border:1px solid var(--glass-bd); box-shadow:0 4px 12px rgba(0,0,0,0.04); }
+  .faq { margin-top:12px; border-radius:18px; overflow:hidden; background:var(--card-bg); border:1px solid var(--glass-bd); box-shadow:0 4px 12px rgba(0,0,0,0.04); }
   .faq-item { border-bottom:1px solid rgba(0,0,0,0.06); }
   .faq-item:last-child { border-bottom:none; }
   .faq-item summary { list-style:none; cursor:pointer; padding:15px 18px; display:flex; align-items:flex-start; justify-content:space-between; gap:14px; font-size:14px; font-weight:700; color:var(--ink); letter-spacing:-0.005em; }
@@ -298,8 +301,8 @@
   .wa-ico { flex-shrink:0; }
   /* Iconos de línea sin fondo — mismo lenguaje visual que el onboarding del Meal Tracker */
   .ico { width:18px; height:18px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round; }
-  .pillar-name, .human-title, .app-sublabel, .lead-ico-row { display:flex; align-items:center; gap:8px; }
-  .pillar-name .ico, .human-title .ico { color:var(--accent); }
+  .pillar-name, .human-title, .app-sublabel, .lead-ico-row, .proc-title { display:flex; align-items:center; gap:8px; }
+  .pillar-name .ico, .human-title .ico, .proc-title .ico { color:var(--accent); }
   .chapter-dark .pillar-name .ico { color:var(--accent-deep); }
   .app-sublabel .ico { width:15px; height:15px; }
   .fit-i { display:flex; align-items:center; justify-content:center; color:var(--accent-deep); }
@@ -351,7 +354,7 @@
   .reveal.in .stagger > *:nth-child(4) { transition-delay:180ms; }
   .reveal.in .stagger > *:nth-child(5) { transition-delay:230ms; }
   .reveal.in .stagger > *:nth-child(6) { transition-delay:280ms; }
-  @media (prefers-reduced-motion: reduce){ .reveal, .reveal .stagger > * { opacity:1!important; transform:none!important; transition:none!important; } .blob { animation:none; } .hero-title em { animation:none; } .price-scarcity::before { animation:none; } .app-row .phone-duo, .app-row .app-note { opacity:1!important; transform:none!important; transition:none!important; } .hero-media video { opacity:1; } .hero-video-anim { display:none; } .hero-card::after { display:none; } }
+  @media (prefers-reduced-motion: reduce){ .reveal, .reveal .stagger > * { opacity:1!important; transform:none!important; transition:none!important; } .blob { animation:none; } .hero-title em { animation:none; } .price-scarcity::before { animation:none; } .scroll-cue-circle { animation:none; } .hero-inner { animation:none; } .app-row .phone-duo, .app-row .app-note { opacity:1!important; transform:none!important; transition:none!important; } .hero-media video { opacity:1; } .hero-video-anim { display:none; } .hero-card::after { display:none; } }
 </style>
 </head>
 <body>
@@ -370,7 +373,7 @@
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Coaching 100% online</p>
+    <p class="hero-eyebrow">Coaching online</p>
     <h1 class="hero-title">Entrena <br>con <em>método.</em></h1>
     <p class="hero-cred"><strong>Mauro Morón</strong> — ISSA <em>International Sports Sciences Association</em> Certified Fitness and Nutrition Coach.</p>
     <div class="hero-card">
@@ -386,8 +389,10 @@
       <p class="cta-note">Te respondo personalmente</p>
     </div>
     <button class="scroll-cue" id="heroScrollCta" type="button">
-      <span class="scroll-cue-text">Conoce el método</span>
-      <span class="scroll-cue-arrow">&darr;</span>
+      <span class="scroll-cue-text">Desliza para ver el método</span>
+      <span class="scroll-cue-circle" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </span>
     </button>
   </div>
 </section>
@@ -401,9 +406,9 @@
     <h2 class="chapter-title">El progreso llega en <em>capas.</em></h2>
     <p class="chapter-lead">Los cambios reales ocurren en orden. Esta es la secuencia.</p>
     <div class="procs stagger">
-      <div class="proc"><div class="proc-num">01</div><div><div class="proc-title">Movimiento.</div><p class="proc-text">Mejoras cómo te mueves y controlas tu cuerpo.</p></div></div>
-      <div class="proc"><div class="proc-num">02</div><div><div class="proc-title">Rendimiento.</div><p class="proc-text">Subes consistencia y respuesta del entrenamiento.</p></div></div>
-      <div class="proc"><div class="proc-num">03</div><div><div class="proc-title">Composición.</div><p class="proc-text">Los cambios físicos llegan cuando el proceso se sostiene.</p></div></div>
+      <div class="proc"><div class="proc-num">01</div><div><div class="proc-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20"/><path d="m15 5-3-3-3 3"/><path d="m15 19-3 3-3-3"/><path d="M2 12h20"/><path d="m5 9-3 3 3 3"/><path d="m19 9 3 3-3 3"/></svg>Movimiento.</div><p class="proc-text">Mejoras cómo te mueves y controlas tu cuerpo.</p></div></div>
+      <div class="proc"><div class="proc-num">02</div><div><div class="proc-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Rendimiento.</div><p class="proc-text">Subes consistencia y respuesta del entrenamiento.</p></div></div>
+      <div class="proc"><div class="proc-num">03</div><div><div class="proc-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg>Composición.</div><p class="proc-text">Los cambios físicos llegan cuando el proceso se sostiene.</p></div></div>
     </div>
     <div class="proc-note"><p class="proc-note-t"><strong>El progreso es proporcional a tu consistencia.</strong> El método se ajusta a lo que tienes, no a un ideal.</p></div>
   </section>
@@ -439,7 +444,7 @@
     <div class="humans stagger">
       <div class="human"><div class="human-tag">WhatsApp</div><div><div class="human-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Directo conmigo.</div><p class="human-text">Canal directo para dudas y revisión semanal.</p></div></div>
       <div class="human"><div class="human-tag">Comunidad</div><div><div class="human-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Chat grupal privado.</div><p class="human-text">Con otros clientes activos del programa.</p></div></div>
-      <div class="human"><div class="human-tag">Recursos</div><div><div class="human-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Centro de material.</div><p class="human-text">Guías, videos y referencias del método.</p></div></div>
+      <div class="human"><div class="human-tag">Recursos</div><div><div class="human-title"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Material de aprendizaje.</div><p class="human-text">Guías, videos y referencias del método.</p></div></div>
     </div>
   </section>
 
@@ -614,6 +619,23 @@
     const load = () => { v.src = HERO_VIDEO_CANDIDATES[i]; tryPlay(); };
     v.addEventListener('error', () => { i++; if (i < HERO_VIDEO_CANDIDATES.length) load(); });
     v.addEventListener('canplay', tryPlay);
+    // El navegador pausa el video al salir de pantalla y no lo reanuda solo:
+    // se reanuda al volver a verse (y se pausa fuera, para no gastar batería).
+    let visible = true;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => es.forEach(e => {
+        visible = e.isIntersecting;
+        if (visible) tryPlay(); else v.pause();
+      }), { threshold: 0.01 }).observe(v);
+    }
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) tryPlay(); });
+    // Guarda: si el navegador bloquea la reproducción, play() puede volver a
+    // emitir 'pause'. Se limitan los reintentos para no entrar en bucle.
+    let reintentos = 0;
+    v.addEventListener('pause', () => {
+      if (visible && !document.hidden && !v.ended && reintentos < 3) { reintentos++; tryPlay(); }
+    });
+    v.addEventListener('playing', () => { reintentos = 0; });
     load();
   })();
 
@@ -631,7 +653,10 @@
   const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.10, rootMargin:'0px 0px -5% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   const sticky=document.getElementById('stickyCta'), ctaFinal=document.querySelector('.cta-final'), prog=document.getElementById('progressTop');
-  window.addEventListener('scroll',()=>{ const sc=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight, pct=dh>0?sc/dh:0; prog.style.height=(pct*100)+'%'; const near=ctaFinal.getBoundingClientRect().top<window.innerHeight*1.2; if(sc>window.innerHeight*0.6&&!near)sticky.classList.add('visible'); else sticky.classList.remove('visible'); },{passive:true});
+  let ticking=false;
+  const onScroll=()=>{ const sc=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight, pct=dh>0?sc/dh:0; prog.style.transform='scaleY('+pct+')'; const near=ctaFinal.getBoundingClientRect().top<window.innerHeight*1.2; if(sc>window.innerHeight*0.6&&!near)sticky.classList.add('visible'); else sticky.classList.remove('visible'); };
+  window.addEventListener('scroll',()=>{ if(ticking) return; ticking=true; requestAnimationFrame(()=>{ onScroll(); ticking=false; }); },{passive:true});
+  onScroll();
 </script>
 </body>
 </html>
