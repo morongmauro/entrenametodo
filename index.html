@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Entrena con Método · Coaching online · Mauro Morón</title>
-<meta name="description" content="Coaching online: entrenamiento y nutrición personalizados con revisión semanal basada en datos. ISSA Certified Fitness & Nutrition Coach. Escríbeme por WhatsApp.">
+<meta name="description" content="Coaching online: entrenamiento y nutrición personalizados con revisión semanal basada en datos. ISSA Certified Fitness & Nutrition Coach. Escríbeme por Instagram.">
 <meta name="theme-color" content="#A9A7A4">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0A0A'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='%23A8B373' font-family='Arial, sans-serif' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
@@ -326,7 +326,11 @@
   .chapter-title, .cta-title { text-wrap:balance; }
   .chapter-dark, .cta-final, .price-head, .proc-note, .creds, .hero-card { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .btn span { transition:transform .25s cubic-bezier(0.16,1,0.3,1); }
-  .wa-ico { flex-shrink:0; }
+  .ig-ico { flex-shrink:0; }
+  /* aviso de "mensaje copiado": Instagram no admite texto prellenado, así que
+     al pulsar se copia la plantilla y la persona solo pega */
+  .ig-toast { position:fixed; left:50%; bottom:calc(104px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 14px); z-index:400; width:max-content; max-width:min(420px, calc(100vw - 28px)); padding:12px 16px; border-radius:14px; background:rgba(10,10,10,0.94); color:#FFF; font-size:12.5px; font-weight:600; line-height:1.45; text-align:center; box-shadow:0 12px 34px rgba(0,0,0,0.30); opacity:0; pointer-events:none; transition:opacity .28s ease, transform .28s cubic-bezier(0.16,1,0.3,1); }
+  .ig-toast.visible { opacity:1; transform:translate(-50%, 0); }
   /* Iconos de línea sin fondo — mismo lenguaje visual que el onboarding del Meal Tracker */
   .ico { width:18px; height:18px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round; }
   .pillar-name, .human-title, .app-sublabel, .lead-ico-row, .proc-title { display:flex; align-items:center; gap:8px; }
@@ -414,7 +418,7 @@
       <p class="hero-card-sub"><b>Decisiones basadas en datos.</b> Entrena con estructura. Nutrición con criterio.</p>
     </div>
     <div class="hero-actions">
-      <a class="btn btn-light" data-wa href="https://wa.me/@mauromoronm" target="_blank" rel="noopener"><svg class="wa-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2.02c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22.02l5.25-1.38a9.9 9.9 0 0 0 4.78 1.22h.01c5.46 0 9.91-4.45 9.91-9.91a9.85 9.85 0 0 0-2.9-7.01 9.84 9.84 0 0 0-7.01-2.92zm0 18.14h-.01a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.24-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.04s.88 2.35 1 2.51c.12.16 1.72 2.62 4.16 3.67.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.46-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.11-.22-.17-.47-.29z"/></svg>Escríbeme por WhatsApp</a>
+      <a class="btn btn-light" data-ig href="https://ig.me/m/mauromoronm" target="_blank" rel="noopener"><svg class="ig-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
       <p class="cta-note">Te respondo personalmente</p>
     </div>
     <button class="scroll-cue" id="heroScrollCta" type="button">
@@ -553,7 +557,7 @@
         </ul>
         <p class="price-equiv"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px;color:var(--accent);"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Modalidad de pago adaptada a tu país.</p>
         <p class="price-scarcity">Trabajo con un grupo comprometido para darte seguimiento real.</p>
-        <a class="btn btn-ink" data-wa style="width:100%;" href="https://wa.me/@mauromoronm" target="_blank" rel="noopener"><svg class="wa-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2.02c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22.02l5.25-1.38a9.9 9.9 0 0 0 4.78 1.22h.01c5.46 0 9.91-4.45 9.91-9.91a9.85 9.85 0 0 0-2.9-7.01 9.84 9.84 0 0 0-7.01-2.92zm0 18.14h-.01a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.24-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.04s.88 2.35 1 2.51c.12.16 1.72 2.62 4.16 3.67.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.46-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.11-.22-.17-.47-.29z"/></svg>Escríbeme por WhatsApp</a>
+        <a class="btn btn-ink" data-ig style="width:100%;" href="https://ig.me/m/mauromoronm" target="_blank" rel="noopener"><svg class="ig-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
         <div class="price-foot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sin permanencia · Cancela cuando quieras</div>
       </div>
     </div>
@@ -568,7 +572,7 @@
       <details class="faq-item"><summary>&iquest;Sin gimnasio o sin tiempo? <span class="faq-marker">+</span></summary><div class="faq-a">El plan se estructura según tu equipo y tu agenda real. Funciona en casa o gimnasio.</div></details>
       <details class="faq-item"><summary>&iquest;Cómo recibo el plan? <span class="faq-marker">+</span></summary><div class="faq-a">Todo pasa por la app (rutinas, videos, registro) y WhatsApp para revisión semanal. 100% online.</div></details>
       <details class="faq-item"><summary>&iquest;En qué se diferencia de un plan genérico? <span class="faq-marker">+</span></summary><div class="faq-a">Un PDF no te observa. Aquí cada semana reviso tu data real — adherencia, cargas, medidas — y ajusto el plan según tu respuesta. Pagas criterio aplicado a tu caso, no una plantilla.</div></details>
-      <details class="faq-item"><summary>&iquest;Cómo empiezo? <span class="faq-marker">+</span></summary><div class="faq-a">Me escribes por WhatsApp — el botón abre el chat con el mensaje listo. Revisamos tu contexto, historial y objetivos, resuelvo tus dudas y definimos la base de tu plan.</div></details>
+      <details class="faq-item"><summary>&iquest;Cómo empiezo? <span class="faq-marker">+</span></summary><div class="faq-a">Me escribes por Instagram — el botón abre el chat y te copia el mensaje para que solo lo pegues. Revisamos tu contexto, historial y objetivos, resuelvo tus dudas y definimos la base de tu plan.</div></details>
       <details class="faq-item"><summary>&iquest;Lo combino con otro deporte? <span class="faq-marker">+</span></summary><div class="faq-a">Sí. El programa considera tu carga deportiva para que las sesiones sumen, no compitan.</div></details>
       <details class="faq-item"><summary>&iquest;Hay permanencia? <span class="faq-marker">+</span></summary><div class="faq-a">No. Suscripción mensual; cancelas cuando quieras.</div></details>
     </div>
@@ -579,8 +583,8 @@
 <!-- CTA FINAL -->
 <section class="cta-final reveal">
   <h2 class="cta-title">Empieza tu <em>proceso.</em></h2>
-  <p class="cta-sub">Escríbeme por WhatsApp. Me cuentas tu contexto y tus objetivos, aclaramos tus dudas y definimos el primer paso concreto de tu plan.</p>
-  <a class="btn btn-light" data-wa href="https://wa.me/@mauromoronm" target="_blank" rel="noopener"><svg class="wa-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2.02c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22.02l5.25-1.38a9.9 9.9 0 0 0 4.78 1.22h.01c5.46 0 9.91-4.45 9.91-9.91a9.85 9.85 0 0 0-2.9-7.01 9.84 9.84 0 0 0-7.01-2.92zm0 18.14h-.01a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.24-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.04s.88 2.35 1 2.51c.12.16 1.72 2.62 4.16 3.67.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.46-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.11-.22-.17-.47-.29z"/></svg>Escríbeme por WhatsApp</a>
+  <p class="cta-sub">Escríbeme por Instagram. Me cuentas tu contexto y tus objetivos, aclaramos tus dudas y definimos el primer paso concreto de tu plan.</p>
+  <a class="btn btn-light" data-ig href="https://ig.me/m/mauromoronm" target="_blank" rel="noopener"><svg class="ig-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
   <p class="cta-note">Te respondo personalmente</p>
 </section>
 
@@ -590,7 +594,7 @@
 </footer>
 </main>
 
-<div class="sticky-cta" id="stickyCta"><a data-wa href="https://wa.me/@mauromoronm" target="_blank" rel="noopener"><svg class="wa-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2.02c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.33 4.96L2 22.02l5.25-1.38a9.9 9.9 0 0 0 4.78 1.22h.01c5.46 0 9.91-4.45 9.91-9.91a9.85 9.85 0 0 0-2.9-7.01 9.84 9.84 0 0 0-7.01-2.92zm0 18.14h-.01a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.55-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.24-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.04s.88 2.35 1 2.51c.12.16 1.72 2.62 4.16 3.67.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.46-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.11-.22-.17-.47-.29z"/></svg>Escríbeme por WhatsApp</a></div>
+<div class="sticky-cta" id="stickyCta"><a data-ig href="https://ig.me/m/mauromoronm" target="_blank" rel="noopener"><svg class="ig-ico" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a></div>
 
 <script>
   // ============================================================
@@ -602,32 +606,82 @@
   // Si ningún nombre existe, el hero muestra el fondo oscuro elegante.
   // ============================================================
   // ============================================================
-  // WHATSAPP — ÚNICO lugar para cambiar el contacto.
-  // Pon tu número con indicativo de país, sin "+", sin espacios ni guiones.
-  // Ej. Colombia: 57 + 3001234567  ->  "573001234567"
-  // Funciona con WhatsApp normal: NO hace falta WhatsApp Business.
-  // El enlace wa.me abre el chat contigo con el mensaje ya escrito;
-  // la persona solo pulsa "enviar" y te llega a tu WhatsApp de siempre.
   // ============================================================
-  // Acepta CUALQUIERA de las dos formas — pon solo una:
-  //   · username de WhatsApp, con arroba:   "@mauromoronm"   (tu número no queda en la página)
-  //   · número con indicativo, sin + ni espacios: "573001234567"
-  const WHATSAPP_CONTACTO = "@mauromoronm";
-  const WHATSAPP_MENSAJE  = "Hola Mauro! Escribo porque vi tu página de Entrena con Método, me interesa el coaching online. Mi nombre es: ";
+  // CONTACTO — ÚNICO lugar para cambiar a dónde escriben.
+  //
+  // El contacto es SOLO por INSTAGRAM, a propósito: por WhatsApp llega un
+  // número suelto, sin foto ni contexto de quién es la persona; en
+  // Instagram se ve el perfil antes de responder.
+  // ============================================================
+  // Tu usuario de Instagram, SIN la arroba.
+  const INSTAGRAM_USUARIO = "mauromoronm";
 
-  // Si algún día el mensaje predefinido no funcionara con el username,
-  // pon esto en false y el botón abre el chat vacío (el enlace sigue sirviendo).
-  const WHATSAPP_CON_MENSAJE = true;
+  // Instagram NO permite abrir el chat con el mensaje ya escrito (eso solo
+  // lo admite WhatsApp). Para no perder la plantilla, al pulsar se copia al
+  // portapapeles y la persona solo pega. Ponlo en false para no copiar nada.
+  const INSTAGRAM_COPIAR_PLANTILLA = true;
 
+  // El mensaje que se copia al portapapeles al pulsar el botón.
+  const MENSAJE_PLANTILLA = "Hola Mauro! Escribo porque vi tu página de Entrena con Método, me interesa el coaching online. Mi nombre es: ";
+
+  // ─── Instagram: enlaza los botones y copia la plantilla al pulsar ───────
   (function(){
-    const c = (WHATSAPP_CONTACTO || "").trim();
-    let destino = null;
-    if (/^@[A-Za-z0-9._]{3,30}$/.test(c)) destino = c;                    // username
-    else if (/^\d{8,15}$/.test(c.replace(/\D/g, ""))) destino = c.replace(/\D/g, "");  // número
-    if (!destino) return;                                                  // valor inválido: no se tocan los href
-    const url = "https://wa.me/" + destino
-      + (WHATSAPP_CON_MENSAJE ? "?text=" + encodeURIComponent(WHATSAPP_MENSAJE) : "");
-    document.querySelectorAll('a[data-wa]').forEach(a => { a.href = url; });
+    const u = (INSTAGRAM_USUARIO || "").trim().replace(/^@/, "");
+    if (!/^[A-Za-z0-9._]{1,30}$/.test(u)) return;   // usuario inválido: no se tocan los href
+    const enlaces = document.querySelectorAll('a[data-ig]');
+    enlaces.forEach(a => { a.href = "https://ig.me/m/" + u; });
+    if (!INSTAGRAM_COPIAR_PLANTILLA || !MENSAJE_PLANTILLA) return;
+
+    let temporizador = null;
+    const avisar = (txt) => {
+      let el = document.getElementById('igToast');
+      if (!el) {
+        el = document.createElement('div');
+        el.id = 'igToast';
+        el.className = 'ig-toast';
+        el.setAttribute('role', 'status');
+        document.body.appendChild(el);
+      }
+      el.textContent = txt;
+      requestAnimationFrame(() => el.classList.add('visible'));
+      clearTimeout(temporizador);
+      // Generoso a propósito: el DM abre la app de Instagram encima y el
+      // aviso tiene que seguir ahí cuando la persona vuelva al navegador.
+      temporizador = setTimeout(() => el.classList.remove('visible'), 9000);
+    };
+
+    const copiar = async (texto) => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(texto);
+          return true;
+        }
+      } catch (e) { /* permiso denegado: se prueba la reserva */ }
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = texto;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, texto.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch (e) { return false; }
+    };
+
+    enlaces.forEach(a => {
+      // NO se bloquea la navegación: el DM se abre igual aunque el copiado
+      // falle (portapapeles bloqueado, sin HTTPS, navegador viejo).
+      a.addEventListener('click', () => {
+        copiar(MENSAJE_PLANTILLA).then(ok => {
+          avisar(ok
+            ? 'Mensaje copiado. Pégalo en el chat de Instagram y envíalo.'
+            : 'Se abre tu Instagram. Cuéntame que vienes de la página.');
+        });
+      });
+    });
   })();
 
   // El primero de la lista es el que se intenta primero: deja de primero el
