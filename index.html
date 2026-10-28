@@ -43,12 +43,17 @@
   img { display:block; max-width:100%; }
   a { color:inherit; }
   .env { max-width:1120px; margin:0 auto; padding:0 20px; }
-  section { padding:56px 0; }
+  section { padding:34px 0; }
   .eyebrow { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--verde-osc); }
   h1, h2 { font-weight:900; letter-spacing:-.035em; line-height:1.03; }
-  h2 { font-size:clamp(32px, 8.6vw, 54px); margin-top:8px; }
+  h2 { font-size:clamp(30px, 8.2vw, 52px); margin-top:6px; }
   h1 em, h2 em { font-style:normal; color:var(--verde); }
-  .lead { font-size:clamp(16px, 4.3vw, 19px); color:var(--gris); line-height:1.5; margin-top:12px; font-weight:500; max-width:600px; }
+  /* Cada título con un color de la app: azul, verde, naranja y amarillo. */
+  em.c-azul { color:var(--azul); } em.c-verde { color:var(--verde); } em.c-naranja { color:var(--naranja); }
+  em.c-amarillo { color:var(--ink); background:linear-gradient(180deg, transparent 58%, rgba(242,201,76,.75) 58%, rgba(242,201,76,.75) 92%, transparent 92%); padding:0 .06em; }
+  em.c-todos { background:linear-gradient(90deg, #3C7BD6, #46965A 40%, #EE8434 75%, #E0B23A); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .eyebrow.azul { color:#2F6CC4; } .eyebrow.naranja { color:#C95F17; } .eyebrow.amarillo { color:#A07A12; }
+  .lead { font-size:clamp(15.5px, 4.2vw, 19px); color:var(--gris); line-height:1.45; margin-top:8px; font-weight:500; max-width:600px; }
   .boton { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:0 24px; border-radius:999px; background:var(--ink); color:#fff; font-weight:750; font-size:16.5px; text-decoration:none; box-shadow:0 10px 24px rgba(0,0,0,.16); -webkit-tap-highlight-color:transparent; }
   .boton:active { transform:scale(.98); }
   .boton.claro { background:#fff; color:var(--ink); box-shadow:var(--sombra); }
@@ -63,69 +68,72 @@
   .barra .boton { min-height:38px; padding:0 16px; font-size:14px; box-shadow:none; }
 
   /* Portada: lo primero es por qué te conviene el método */
-  .portada { padding:26px 0 8px; }
+  .portada { padding:18px 0 4px; }
   .portada h1 { font-size:clamp(44px, 12.5vw, 84px); margin-top:12px; }
   .portada .lead { font-size:clamp(17px, 4.6vw, 20px); }
-  .ctas { display:grid; gap:10px; margin-top:22px; }
+  .ctas { display:grid; gap:8px; margin-top:16px; }
+  .ctas .boton.claro { min-height:46px; font-size:15px; }
   .respondo { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gris); font-weight:600; margin-top:12px; }
   .respondo i { width:8px; height:8px; border-radius:99px; background:var(--verde); box-shadow:0 0 0 4px rgba(70,150,90,.16); }
-  .foto-portada { position:relative; margin-top:26px; border-radius:28px; overflow:hidden; aspect-ratio:4/3.2; box-shadow:var(--sombra); }
+  .foto-portada { position:relative; margin-top:16px; border-radius:26px; overflow:hidden; aspect-ratio:16/10; box-shadow:var(--sombra); }
   .foto-portada img { width:100%; height:100%; object-fit:cover; object-position:62% 50%; }
   .foto-portada::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.55)); }
   .capas-chips { position:absolute; left:14px; right:14px; bottom:14px; z-index:1; display:flex; gap:8px; flex-wrap:wrap; }
   .capas-chips span { font-size:13px; font-weight:800; color:#fff; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.18); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.28); }
 
   /* Beneficios */
-  .beneficios { display:grid; gap:12px; margin-top:24px; }
-  .beneficio { background:#fff; border-radius:24px; padding:20px; box-shadow:var(--sombra); }
-  .beneficio .ico { width:44px; height:44px; border-radius:14px; display:grid; place-items:center; margin-bottom:12px; }
+  .beneficios { display:grid; gap:8px; margin-top:16px; }
+  .beneficio { background:#fff; border-radius:20px; padding:14px 16px; box-shadow:var(--sombra); display:grid; grid-template-columns:auto 1fr; column-gap:14px; align-items:start; }
+  .beneficio .ico { grid-row:span 2; }
+  .beneficio .ico { width:42px; height:42px; border-radius:13px; display:grid; place-items:center; }
   .beneficio .ico svg { width:22px; height:22px; }
-  .beneficio b { font-size:18.5px; font-weight:850; letter-spacing:-.01em; display:block; }
-  .beneficio p { font-size:15px; color:var(--gris); margin-top:5px; line-height:1.5; }
+  .beneficio b { font-size:17px; font-weight:850; letter-spacing:-.01em; display:block; }
+  .beneficio p { font-size:14.5px; color:var(--gris); margin-top:2px; line-height:1.45; }
 
-  .capas { display:grid; gap:10px; margin-top:24px; counter-reset:capa; }
-  .capa { display:flex; gap:14px; align-items:flex-start; background:#fff; border-radius:22px; padding:18px; box-shadow:var(--sombra); }
+  .capas { display:grid; gap:8px; margin-top:14px; }
+  .capa { display:flex; gap:12px; align-items:flex-start; background:#fff; border-radius:20px; padding:14px 16px; box-shadow:var(--sombra); }
   .capa .n { font-size:30px; font-weight:900; letter-spacing:-.04em; color:#D9D3C6; line-height:1; min-width:40px; }
   .capa b { font-size:17px; font-weight:850; display:block; }
   .capa p { font-size:14.5px; color:var(--gris); margin-top:3px; line-height:1.45; }
-  .nota { margin-top:12px; background:var(--ink); color:#fff; border-radius:22px; padding:18px 20px; font-size:15px; line-height:1.5; font-weight:600; }
+  .nota { margin-top:8px; background:var(--ink); color:#fff; border-radius:22px; padding:18px 20px; font-size:15px; line-height:1.5; font-weight:600; }
 
-  .encajas { list-style:none; display:grid; gap:10px; margin-top:22px; }
-  .encajas li { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,.75); border-radius:18px; padding:14px 16px; font-size:15.5px; line-height:1.45; color:#3A3A3F; }
+  .encajas { list-style:none; display:grid; gap:8px; margin-top:14px; }
+  .encajas li { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,.75); border-radius:16px; padding:12px 14px; font-size:15.5px; line-height:1.45; color:#3A3A3F; }
   .encajas b { color:var(--ink); }
   .check { width:24px; height:24px; border-radius:999px; flex:none; display:grid; place-items:center; background:rgba(70,150,90,.15); color:var(--verde); margin-top:-1px; }
   .check svg { width:13px; height:13px; }
 
   /* La app (segundo punto) */
-  .app-intro { margin-top:22px; display:grid; gap:10px; }
+  .app-intro { margin-top:14px; display:grid; gap:8px; }
   .app-intro div { display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:#3A3A3F; line-height:1.45; }
-  .pantallas { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding:26px 20px 8px; margin:0 -20px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  .pantallas { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:18px 20px 6px; margin:0 -20px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
   .pantallas::-webkit-scrollbar { display:none; }
-  .pantalla { flex:0 0 78%; max-width:320px; scroll-snap-align:center; margin:0; }
+  .pantalla { flex:0 0 66%; max-width:300px; scroll-snap-align:center; margin:0; }
   .telefono { position:relative; aspect-ratio:390/844; border-radius:38px; overflow:hidden; background:#0A0A0A; border:6px solid #0A0A0A; box-shadow:0 22px 46px rgba(0,0,0,.22), 0 4px 12px rgba(0,0,0,.12); }
   .telefono::before { content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); width:70px; height:20px; border-radius:20px; background:#0A0A0A; z-index:2; }
   .telefono img { width:100%; height:100%; object-fit:cover; object-position:top; border-radius:32px; }
-  .pantalla figcaption { margin-top:14px; font-size:14.5px; line-height:1.5; color:var(--gris); }
+  .pantalla figcaption { margin-top:10px; font-size:14.5px; line-height:1.5; color:var(--gris); }
   .pantalla figcaption b { display:block; color:var(--ink); font-size:16.5px; font-weight:800; margin-bottom:2px; }
   .tag { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; padding:5px 10px; border-radius:999px; margin-bottom:8px; }
-  .desliza { text-align:center; font-size:13px; font-weight:700; color:var(--gris2); margin-top:12px; }
-  .humanos { display:grid; gap:10px; margin-top:20px; }
-  .humano { display:flex; gap:14px; align-items:center; background:#fff; border-radius:20px; padding:16px; box-shadow:var(--sombra); }
+  .desliza { text-align:center; font-size:13px; font-weight:700; color:var(--gris2); margin-top:6px; }
+  .humanos { display:grid; gap:8px; margin-top:14px; }
+  .humano { display:flex; gap:12px; align-items:center; background:#fff; border-radius:18px; padding:12px 14px; box-shadow:var(--sombra); }
   .humano .ico { width:42px; height:42px; border-radius:13px; display:grid; place-items:center; flex:none; background:#F1EFE8; }
   .humano .ico svg { width:20px; height:20px; }
   .humano b { display:block; font-size:16px; font-weight:800; }
   .humano span { font-size:14px; color:var(--gris); }
 
   /* Recetas */
-  .mosaico { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:22px; }
+  .mosaico { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; margin-top:14px; }
   .mosaico figure { position:relative; overflow:hidden; border-radius:20px; margin:0; background:#EFE9DF; }
   .mosaico img { width:100%; aspect-ratio:1/1; object-fit:cover; }
-  .mosaico figcaption { position:absolute; left:8px; right:8px; bottom:8px; background:rgba(255,255,255,.92); border-radius:13px; padding:7px 9px; font-size:12.5px; font-weight:750; line-height:1.25; }
-  .mosaico figcaption small { display:block; color:var(--gris); font-weight:600; font-size:11.5px; margin-top:1px; }
+  .mosaico figcaption { position:absolute; left:5px; right:5px; bottom:5px; background:rgba(255,255,255,.92); border-radius:10px; padding:5px 7px; font-size:11px; font-weight:750; line-height:1.2; }
+  .mosaico figcaption small { display:none; }
+  .mosaico figure:nth-child(n+7) { display:none; }   /* en el celular, 6: dos filas parejas */
 
   /* El coach: discreto */
-  .coach { display:flex; gap:16px; align-items:flex-start; background:#fff; border-radius:26px; padding:20px; box-shadow:var(--sombra); margin-top:22px; }
-  .coach img { width:72px; height:72px; border-radius:999px; object-fit:cover; flex:none; }
+  .coach { display:flex; gap:14px; align-items:flex-start; background:#fff; border-radius:22px; padding:16px; box-shadow:var(--sombra); margin-top:14px; }
+  .coach img { width:60px; height:60px; border-radius:999px; object-fit:cover; flex:none; }
   .coach b { font-size:18px; font-weight:850; display:block; }
   .coach .rol { font-size:13px; font-weight:700; color:var(--verde-osc); margin-top:1px; }
   .coach p { font-size:14.5px; color:var(--gris); line-height:1.5; margin-top:8px; }
@@ -134,28 +142,28 @@
   .creds span { font-size:12px; font-weight:700; padding:6px 10px; border-radius:999px; background:#F1EFE8; color:#4A4A4F; }
 
   /* Precio */
-  .precio { background:#fff; border-radius:30px; box-shadow:0 2px 4px rgba(20,20,30,.04), 0 24px 56px rgba(20,30,60,.10); overflow:hidden; margin-top:22px; }
-  .precio .top { padding:24px 22px 18px; }
+  .precio { background:#fff; border-radius:26px; box-shadow:0 2px 4px rgba(20,20,30,.04), 0 24px 56px rgba(20,30,60,.10); overflow:hidden; margin-top:14px; }
+  .precio .top { padding:18px 20px 14px; }
   .precio .monto { font-size:clamp(40px, 11vw, 54px); font-weight:900; letter-spacing:-.04em; white-space:nowrap; }
   .precio .monto small { font-size:16px; font-weight:700; color:var(--gris); letter-spacing:0; }
   .precio .usd { font-size:15px; color:var(--gris); font-weight:600; margin-top:2px; }
-  .precio ul { list-style:none; padding:0 22px; display:grid; gap:12px; }
+  .precio ul { list-style:none; padding:0 20px; display:grid; gap:9px; }
   .precio li { display:flex; gap:12px; font-size:15px; line-height:1.45; color:#3A3A3F; }
-  .precio .abajo { padding:22px; display:grid; gap:12px; }
+  .precio .abajo { padding:18px 20px 20px; display:grid; gap:10px; }
   .chico { text-align:center; font-size:13px; color:var(--gris2); font-weight:600; }
 
   /* Preguntas */
-  .preguntas { margin-top:22px; background:#fff; border-radius:26px; box-shadow:var(--sombra); overflow:hidden; }
+  .preguntas { margin-top:14px; background:#fff; border-radius:26px; box-shadow:var(--sombra); overflow:hidden; }
   .preguntas details { border-top:1px solid #F0EEE8; }
   .preguntas details:first-child { border-top:0; }
-  .preguntas summary { list-style:none; cursor:pointer; padding:18px 20px; display:flex; justify-content:space-between; gap:14px; font-size:16px; font-weight:750; -webkit-tap-highlight-color:transparent; }
+  .preguntas summary { list-style:none; cursor:pointer; padding:15px 18px; display:flex; justify-content:space-between; gap:14px; font-size:16px; font-weight:750; -webkit-tap-highlight-color:transparent; }
   .preguntas summary::-webkit-details-marker { display:none; }
   .preguntas summary::after { content:'+'; color:var(--gris2); font-weight:600; font-size:20px; line-height:1; transition:transform .2s; }
   .preguntas details[open] summary::after { transform:rotate(45deg); }
-  .preguntas details p { padding:0 20px 18px; font-size:15px; color:var(--gris); line-height:1.55; }
+  .preguntas details p { padding:0 18px 15px; font-size:15px; color:var(--gris); line-height:1.55; }
 
   /* Cierre */
-  .final { text-align:center; padding-bottom:40px; }
+  .final { text-align:center; padding-bottom:24px; }
   .final h2 { font-size:clamp(40px, 11vw, 72px); }
   .final .lead { margin-left:auto; margin-right:auto; }
   .pie { text-align:center; padding:10px 0 calc(110px + env(safe-area-inset-bottom, 0px)); font-size:13px; color:var(--gris2); font-weight:600; }
@@ -169,7 +177,7 @@
   .ig-toast.visible { opacity:1; transform:translate(-50%, 0); }
 
   @media (min-width:860px) {
-    section { padding:90px 0; }
+    section { padding:60px 0; }
     .portada { padding:60px 0 20px; }
     .portada .env { display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
     .foto-portada { margin-top:0; aspect-ratio:4/4.4; }
@@ -183,6 +191,12 @@
     .desliza { display:none; }
     .humanos { grid-template-columns:repeat(3, 1fr); }
     .mosaico { grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px; }
+    .mosaico figcaption { font-size:12.5px; padding:7px 9px; left:8px; right:8px; bottom:8px; }
+    .mosaico figure:nth-child(n+7) { display:block; }
+    .mosaico figcaption small { display:block; color:var(--gris); font-weight:600; font-size:11.5px; margin-top:1px; }
+    .ctas { grid-template-columns:auto auto; }
+    .beneficio { display:block; padding:20px; }
+    .beneficio .ico { margin-bottom:12px; }
     .coach { max-width:760px; padding:26px; }
     .coach img { width:96px; height:96px; }
     .precio, .preguntas { max-width:560px; }
@@ -204,7 +218,7 @@
 <section class="portada"><div class="env">
   <div>
     <div class="eyebrow">Coaching online · entrenamiento y nutrición</div>
-    <h1>Entrena con <em>método.</em></h1>
+    <h1>Entrena con <em class="c-verde">método.</em></h1>
     <p class="lead">Decisiones basadas en datos. Entrena con estructura. Nutrición con criterio. Un plan a tu medida, revisado cada semana, para que el progreso se sostenga.</p>
     <div class="ctas">
       <a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Escríbeme por Instagram</a>
@@ -219,8 +233,8 @@
 </div></section>
 
 <section id="metodo"><div class="env">
-  <div class="eyebrow">01 · Por qué funciona</div>
-  <h2>Coaching de <em>criterio.</em></h2>
+  <div class="eyebrow azul">01 · Por qué funciona</div>
+  <h2>Coaching de <em class="c-azul">criterio.</em></h2>
   <p class="lead">No es una plantilla. Cada semana se mira lo que hiciste y el plan se ajusta a tu respuesta.</p>
   <div class="beneficios">
     <div class="beneficio"><div class="ico" style="background:rgba(60,123,214,.12);color:var(--azul)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></div><b>Estructura.</b><p>Cada ejercicio tiene una razón, según tu nivel y objetivos.</p></div>
@@ -228,7 +242,7 @@
     <div class="beneficio"><div class="ico" style="background:rgba(238,132,52,.13);color:var(--naranja)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><b>Seguimiento.</b><p>Revisión semanal con ajustes según tu data, no a percepción.</p></div>
   </div>
 
-  <h2 style="margin-top:46px;font-size:clamp(28px, 7.4vw, 44px)">El progreso llega <em>en capas.</em></h2>
+  <h2 style="margin-top:30px;font-size:clamp(26px, 7vw, 44px)">El progreso llega <em class="c-naranja">en capas.</em></h2>
   <p class="lead">Los cambios reales ocurren en orden. Esta es la secuencia.</p>
   <div class="capas">
     <div class="capa"><div class="n">01</div><div><b>Movimiento</b><p>Mejoras cómo te mueves y controlas tu cuerpo.</p></div></div>
@@ -237,7 +251,7 @@
   </div>
   <div class="nota">El progreso es proporcional a tu consistencia. El método se ajusta a lo que tienes, no a un ideal.</div>
 
-  <h2 style="margin-top:46px;font-size:clamp(28px, 7.4vw, 44px)">Encajas si <em>te identificas.</em></h2>
+  <h2 style="margin-top:30px;font-size:clamp(26px, 7vw, 44px)">Encajas si <em class="c-amarillo">te identificas.</em></h2>
   <ul class="encajas">
     <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Entrenas pero te estancaste.</b> Avanzas sin dirección clara.</span></li>
     <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Quieres entender el porqué,</b> no seguir órdenes.</span></li>
@@ -249,7 +263,7 @@
 <!-- 2 · La app -->
 <section style="padding-top:20px"><div class="env">
   <div class="eyebrow">02 · Las herramientas</div>
-  <h2>Todo en tu <em>teléfono.</em></h2>
+  <h2>Todo en tu <em class="c-verde">teléfono.</em></h2>
   <p class="lead">App + acompañamiento humano cercano.</p>
   <div class="app-intro">
     <div><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Se acabaron los PDF y los Excel.</b> Todo vive en una app que mide.</span></div>
@@ -287,8 +301,8 @@
 
 <!-- 3 · Quién está detrás (discreto) -->
 <section style="padding-top:20px"><div class="env">
-  <div class="eyebrow">03 · El coach</div>
-  <h2>El criterio <em>detrás.</em></h2>
+  <div class="eyebrow naranja">03 · El coach</div>
+  <h2>El criterio <em class="c-naranja">detrás.</em></h2>
   <div class="coach">
     <img src="img/coach.jpg" alt="Mauro Morón" loading="lazy">
     <div>
@@ -303,8 +317,8 @@
 
 <!-- 4 · La inversión -->
 <section style="padding-top:20px"><div class="env">
-  <div class="eyebrow">04 · La inversión</div>
-  <h2>Un plan, <em>todo incluido.</em></h2>
+  <div class="eyebrow azul">04 · La inversión</div>
+  <h2>Un plan, <em class="c-azul">todo incluido.</em></h2>
   <div class="precio">
     <div class="top">
       <div class="monto">$200.000 <small>COP / mes</small></div>
@@ -326,8 +340,8 @@
 
 <!-- 5 · Preguntas -->
 <section style="padding-top:20px"><div class="env">
-  <div class="eyebrow">05 · Preguntas</div>
-  <h2>Antes de <em>empezar.</em></h2>
+  <div class="eyebrow amarillo">05 · Preguntas</div>
+  <h2>Antes de <em class="c-amarillo">empezar.</em></h2>
   <div class="preguntas">
     <details><summary>¿Necesito experiencia previa?</summary><p>No. Empezamos desde donde estás; la primera fase es adaptación y aprendizaje técnico.</p></details>
     <details><summary>¿Sin gimnasio o sin tiempo?</summary><p>El plan se estructura según tu equipo y tu agenda real. Funciona en casa o gimnasio.</p></details>
@@ -340,7 +354,7 @@
 </div></section>
 
 <section class="final" id="cierre"><div class="env">
-  <h2>Empieza tu <em>proceso.</em></h2>
+  <h2>Empieza tu <em class="c-todos">proceso.</em></h2>
   <p class="lead">Escríbeme por Instagram. Me cuentas tu contexto y tus objetivos, aclaramos tus dudas y definimos el primer paso concreto de tu plan.</p>
   <div style="margin-top:24px"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Escríbeme por Instagram</a></div>
   <div class="respondo" style="justify-content:center"><i></i>Te respondo personalmente</div>
