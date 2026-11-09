@@ -22,348 +22,671 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,700..900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/v2/dash.webp" fetchpriority="high">
+<script>document.documentElement.classList.add('js');</script>
 <style>
-  /* Pensada primero para el celular (de ahí entra la gente); en pantallas
-     grandes solo se ensancha. Letra y colores de la app (Figtree, crema,
-     azul entreno, verde comida, naranja aprendizaje). */
+  /* Página de venta de Entrena con Método.
+     Misma marca que la app: Figtree, grafito, crema, el punto amarillo del
+     logo y un color por sección (azul, gris, verde, naranja). Las pantallas
+     son capturas de la app real. Pensada primero para el celular. */
   :root {
-    --ink:#1F1F1F; --gris:#5F5F64; --gris2:#9A9AA0; --crema:#F4F1EB;
-    --azul:#3C7BD6; --verde:#46965A; --verde-osc:#2F7F45; --naranja:#EE8434;
-    --sombra:0 1px 2px rgba(40,40,30,.04), 0 10px 28px rgba(60,60,40,.08);
-    --fondo:
-      radial-gradient(60% 22% at 100% 0%, rgba(126,188,168,.45), transparent 70%),
-      radial-gradient(55% 20% at -6% 8%, rgba(238,168,138,.40), transparent 70%),
-      radial-gradient(50% 18% at 45% 4%, rgba(246,218,156,.30), transparent 70%),
-      radial-gradient(60% 20% at 100% 42%, rgba(126,188,168,.26), transparent 70%),
-      radial-gradient(55% 20% at 0% 62%, rgba(238,168,138,.24), transparent 72%),
-      radial-gradient(60% 20% at 70% 94%, rgba(246,218,156,.26), transparent 72%);
+    --ink:#1F1F1F; --crema:#F3F1EB; --crema2:#EBE6DC; --blanco:#FFFFFF;
+    --gris:#6B6B6B; --gris2:#9A9A9A; --ama:#F2C94C;
+    --azul:#3C7BD6; --azul-t:#1E58A6; --azul-f:#E2EBF7;
+    --ent:#5F6670; --ent-t:#454B54; --ent-f:#E4E5E7;
+    --verde:#46965A; --verde-t:#2A6A3A; --verde-f:#E0EDE2;
+    --nar:#EE8434; --nar-t:#A24F0E; --nar-f:#FAE8D8;
+    --linea:rgba(31,31,31,.12);
+    --sombra:0 1px 2px rgba(40,40,30,.04), 0 6px 16px rgba(60,60,40,.06);
+    --sombra-tel:0 36px 60px -28px rgba(31,31,31,.42), 0 14px 26px -14px rgba(31,31,31,.28);
+    --suave:cubic-bezier(.2,.7,.2,1);
+    color-scheme: only light;
   }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-  body { font-family:'Figtree', system-ui, -apple-system, sans-serif; color:var(--ink); background:var(--crema); background-image:var(--fondo); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  img { display:block; max-width:100%; }
-  a { color:inherit; }
-  .env { max-width:1120px; margin:0 auto; padding:0 20px; }
-  section { padding:34px 0; }
-  .eyebrow { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--verde-osc); }
-  h1, h2 { font-weight:900; letter-spacing:-.035em; line-height:1.03; }
-  h2 { font-size:clamp(30px, 8.2vw, 52px); margin-top:6px; }
-  h1 em, h2 em { font-style:normal; color:var(--verde); }
-  /* Cada título con un color de la app: azul, verde, naranja y amarillo. */
-  em.c-azul { color:var(--azul); } em.c-verde { color:var(--verde); } em.c-naranja { color:var(--naranja); }
-  em.c-amarillo { color:var(--ink); background:linear-gradient(180deg, transparent 58%, rgba(242,201,76,.75) 58%, rgba(242,201,76,.75) 92%, transparent 92%); padding:0 .06em; }
-  em.c-todos { background:linear-gradient(90deg, #3C7BD6, #46965A 40%, #EE8434 75%, #E0B23A); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .eyebrow.azul { color:#2F6CC4; } .eyebrow.naranja { color:#C95F17; } .eyebrow.amarillo { color:#A07A12; }
-  .lead { font-size:clamp(15.5px, 4.2vw, 19px); color:var(--gris); line-height:1.45; margin-top:8px; font-weight:500; max-width:600px; }
-  .boton { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:0 24px; border-radius:999px; background:var(--ink); color:#fff; font-weight:750; font-size:16.5px; text-decoration:none; box-shadow:0 10px 24px rgba(0,0,0,.16); -webkit-tap-highlight-color:transparent; }
-  .boton:active { transform:scale(.98); }
-  .boton.claro { background:#fff; color:var(--ink); box-shadow:var(--sombra); }
+  *, *::before, *::after { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:76px; }
+  body { margin:0; background:var(--crema); color:var(--ink); font-family:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size:17px; line-height:1.5; font-weight:500; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+  img, svg { display:block; max-width:100%; height:auto; }
+  a { color:inherit; text-decoration:none; }
+  h1, h2, h3, p, ul, ol, dl, dd, figure { margin:0; padding:0; }
+  ul, ol { list-style:none; }
+  .w { width:100%; max-width:1180px; margin:0 auto; padding:0 22px; }
+  .salto { position:absolute; left:-999px; top:8px; background:var(--ink); color:#fff; padding:10px 14px; border-radius:10px; z-index:100; }
+  .salto:focus { left:8px; }
+  :focus-visible { outline:2.5px solid var(--azul); outline-offset:3px; border-radius:6px; }
+
+  /* ── Letra ─────────────────────────────────────────────────────────── */
+  h1, h2, h3 { font-weight:800; letter-spacing:-.04em; line-height:.98; text-wrap:balance; }
+  h1 { font-size:clamp(47px, 13.4vw, 112px); line-height:.93; letter-spacing:-.048em; }
+  h2 { font-size:clamp(34px, 8.6vw, 68px); }
+  h3 { font-size:clamp(30px, 7.4vw, 54px); }
+  h1 em, h2 em, h3 em { font-style:normal; display:block; }
+  h2 em { color:#8A8A88; }
+  .lead { font-size:clamp(17px, 4.5vw, 21px); line-height:1.45; color:var(--gris); max-width:33em; text-wrap:pretty; }
+  .sobre { display:flex; align-items:center; gap:9px; font-size:14px; font-weight:700; letter-spacing:-.005em; color:var(--gris); }
+  .sobre::before { content:''; width:8px; height:8px; border-radius:99px; background:var(--ama); flex:none; }
+  .punto { color:var(--ama); font-style:normal; }
+  .num { font-variant-numeric:tabular-nums; }
+
+  /* ── Botones ───────────────────────────────────────────────────────── */
+  .boton { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:56px; padding:0 26px; border-radius:999px;
+    background:var(--ink); color:#fff; font-weight:700; font-size:16.5px; letter-spacing:-.01em; white-space:nowrap;
+    transition:transform .25s var(--suave), box-shadow .25s var(--suave), background .2s; box-shadow:0 10px 22px -12px rgba(31,31,31,.55); }
+  .boton:hover { transform:translateY(-2px); box-shadow:0 16px 28px -14px rgba(31,31,31,.6); }
+  .boton:active { transform:translateY(0) scale(.985); }
+  .boton .ig-ico { width:20px; height:20px; flex:none; }
+  .boton.chico { min-height:42px; padding:0 18px; font-size:14.5px; box-shadow:none; }
+  .boton.linea { background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px rgba(31,31,31,.2); }
+  .boton.linea:hover { box-shadow:inset 0 0 0 1.5px var(--ink); }
+  .boton.ama { background:var(--ama); color:var(--ink); box-shadow:0 14px 30px -14px rgba(242,201,76,.7); }
   .boton.ancho { width:100%; }
-  .ig-ico { width:19px; height:19px; flex:none; }
+  .flecha { width:17px; height:17px; flex:none; transition:transform .25s var(--suave); }
+  .boton:hover .flecha { transform:translateY(2px); }
 
-  /* Barra de arriba */
-  .barra { position:sticky; top:0; z-index:20; background:rgba(244,241,235,.8); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom:1px solid rgba(31,31,31,.06); padding-top:env(safe-area-inset-top, 0px); }
-  .barra .env { display:flex; align-items:center; justify-content:space-between; height:56px; }
-  .marca { font-weight:900; letter-spacing:-.02em; font-size:16.5px; text-decoration:none; }
-  .marca span { color:var(--verde); }
-  .barra .boton { min-height:38px; padding:0 16px; font-size:14px; box-shadow:none; }
+  /* ── Barra de arriba ───────────────────────────────────────────────── */
+  .nav { position:sticky; top:0; z-index:40; background:rgba(243,241,235,.82); -webkit-backdrop-filter:blur(18px) saturate(1.3); backdrop-filter:blur(18px) saturate(1.3); }
+  .nav-in { display:flex; align-items:center; justify-content:space-between; gap:16px; height:64px; }
+  .marca { display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; letter-spacing:-.02em; }
+  .marca img { width:32px; height:32px; border-radius:9px; box-shadow:var(--sombra); }
+  .marca i { font-weight:800; }
+  .nav-l { display:none; gap:30px; font-size:15px; font-weight:600; color:var(--gris); }
+  .nav-l a { transition:color .2s; } .nav-l a:hover { color:var(--ink); }
 
-  /* Portada: lo primero es por qué te conviene el método */
-  .portada { padding:18px 0 4px; }
-  .portada h1 { font-size:clamp(44px, 12.5vw, 84px); margin-top:12px; }
-  .portada .lead { font-size:clamp(17px, 4.6vw, 20px); }
-  .ctas { display:grid; gap:8px; margin-top:16px; }
-  .ctas .boton.claro { min-height:46px; font-size:15px; }
-  .respondo { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gris); font-weight:600; margin-top:12px; }
-  .respondo i { width:8px; height:8px; border-radius:99px; background:var(--verde); box-shadow:0 0 0 4px rgba(70,150,90,.16); }
-  .foto-portada { position:relative; margin-top:16px; border-radius:26px; overflow:hidden; aspect-ratio:16/10; box-shadow:var(--sombra); }
-  .foto-portada img { width:100%; height:100%; object-fit:cover; object-position:62% 50%; }
-  .foto-portada::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.55)); }
-  .capas-chips { position:absolute; left:14px; right:14px; bottom:14px; z-index:1; display:flex; gap:8px; flex-wrap:wrap; }
-  .capas-chips span { font-size:13px; font-weight:800; color:#fff; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.18); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.28); }
+  /* ── Portada ───────────────────────────────────────────────────────── */
+  .portada { padding:26px 0 44px; overflow:hidden; }
+  .portada h1 { margin-top:18px; }
+  .portada h1 .antes { color:#8A8A88; display:block; }
+  .portada h1 i { letter-spacing:-.055em; padding-right:.03em; }
+  .portada .lead { margin-top:22px; }
+  .ctas { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+  .ctas .boton { flex:1 1 auto; }
+  .nota { margin-top:16px; font-size:14px; font-weight:600; color:var(--gris); display:flex; align-items:center; gap:8px; }
+  .nota::before { content:''; width:8px; height:8px; border-radius:99px; background:var(--verde); box-shadow:0 0 0 4px rgba(70,150,90,.18); flex:none; }
 
-  /* Beneficios */
-  .beneficios { display:grid; gap:8px; margin-top:16px; }
-  .beneficio { background:#fff; border-radius:20px; padding:14px 16px; box-shadow:var(--sombra); display:grid; grid-template-columns:auto 1fr; column-gap:14px; align-items:start; }
-  .beneficio .ico { grid-row:span 2; }
-  .beneficio .ico { width:42px; height:42px; border-radius:13px; display:grid; place-items:center; }
-  .beneficio .ico svg { width:22px; height:22px; }
-  .beneficio b { font-size:17px; font-weight:850; letter-spacing:-.01em; display:block; }
-  .beneficio p { font-size:14.5px; color:var(--gris); margin-top:2px; line-height:1.45; }
+  .escena { position:relative; margin:44px auto 0; width:min(100%, 430px); display:grid; place-items:center; padding:26px 0 0; }
+  .blob { position:absolute; left:50%; top:54%; width:104%; max-width:none; aspect-ratio:1; transform:translate(-50%,-50%) rotate(12deg); z-index:0; }
+  .blob path { fill:var(--c, var(--azul)); }
+  .tel { position:relative; z-index:1; width:clamp(226px, 62vw, 286px); padding:8px; border-radius:44px; background:#1B1B1D; box-shadow:var(--sombra-tel); }
+  .tel img { width:100%; height:auto; border-radius:36px; background:var(--crema); }
+  .flota { position:absolute; z-index:2; border-radius:20px; box-shadow:0 22px 40px -18px rgba(31,31,31,.45), 0 4px 10px -4px rgba(31,31,31,.18); }
+  .f-comida { width:54%; left:-3%; bottom:9%; border-radius:18px 18px 18px 6px; }
+  .f-descanso { width:50%; right:-4%; top:47.5%; border-radius:999px; }
 
-  .capas { display:grid; gap:8px; margin-top:14px; }
-  .capa { display:flex; gap:12px; align-items:flex-start; background:#fff; border-radius:20px; padding:14px 16px; box-shadow:var(--sombra); }
-  .capa .n { font-size:30px; font-weight:900; letter-spacing:-.04em; color:#D9D3C6; line-height:1; min-width:40px; }
-  .capa b { font-size:17px; font-weight:850; display:block; }
-  .capa p { font-size:14.5px; color:var(--gris); margin-top:3px; line-height:1.45; }
-  .nota { margin-top:8px; background:var(--ink); color:#fff; border-radius:22px; padding:18px 20px; font-size:15px; line-height:1.5; font-weight:600; }
+  /* ── Lo que incluye, en una línea ──────────────────────────────────── */
+  .datos { margin-top:20px; }
+  .datos dl { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--linea); }
+  .datos div { padding:20px 0 20px; border-bottom:1px solid var(--linea); }
+  .datos div:nth-child(odd) { padding-right:16px; border-right:1px solid var(--linea); }
+  .datos div:nth-child(even) { padding-left:16px; }
+  .datos dt { font-size:clamp(21px, 5.6vw, 30px); font-weight:800; letter-spacing:-.035em; line-height:1.05; }
+  .datos dd { margin-top:8px; font-size:14.5px; line-height:1.38; color:var(--gris); }
 
-  .encajas { list-style:none; display:grid; gap:8px; margin-top:14px; }
-  .encajas li { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,.75); border-radius:16px; padding:12px 14px; font-size:15.5px; line-height:1.45; color:#3A3A3F; }
-  .encajas b { color:var(--ink); }
-  .check { width:24px; height:24px; border-radius:999px; flex:none; display:grid; place-items:center; background:rgba(70,150,90,.15); color:var(--verde); margin-top:-1px; }
-  .check svg { width:13px; height:13px; }
+  /* ── Secciones ─────────────────────────────────────────────────────── */
+  .sec { padding:88px 0 0; }
+  .sec h2 { margin-top:16px; }
+  .sec .lead { margin-top:20px; }
 
-  /* La app (segundo punto) */
-  .app-intro { margin-top:14px; display:grid; gap:8px; }
-  .app-intro div { display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:#3A3A3F; line-height:1.45; }
-  .pantallas { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:18px 20px 6px; margin:0 -20px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
-  .pantallas::-webkit-scrollbar { display:none; }
-  .pantalla { flex:0 0 66%; max-width:300px; scroll-snap-align:center; margin:0; }
-  .telefono { position:relative; aspect-ratio:390/844; border-radius:38px; overflow:hidden; background:#0A0A0A; border:6px solid #0A0A0A; box-shadow:0 22px 46px rgba(0,0,0,.22), 0 4px 12px rgba(0,0,0,.12); }
-  .telefono::before { content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); width:70px; height:20px; border-radius:20px; background:#0A0A0A; z-index:2; }
-  .telefono img { width:100%; height:100%; object-fit:cover; object-position:top; border-radius:32px; }
-  .pantalla figcaption { margin-top:10px; font-size:14.5px; line-height:1.5; color:var(--gris); }
-  .pantalla figcaption b { display:block; color:var(--ink); font-size:16.5px; font-weight:800; margin-bottom:2px; }
-  .tag { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; padding:5px 10px; border-radius:999px; margin-bottom:8px; }
-  .desliza { text-align:center; font-size:13px; font-weight:700; color:var(--gris2); margin-top:6px; }
-  .humanos { display:grid; gap:8px; margin-top:14px; }
-  .humano { display:flex; gap:12px; align-items:center; background:#fff; border-radius:18px; padding:12px 14px; box-shadow:var(--sombra); }
-  .humano .ico { width:42px; height:42px; border-radius:13px; display:grid; place-items:center; flex:none; background:#F1EFE8; }
-  .humano .ico svg { width:20px; height:20px; }
-  .humano b { display:block; font-size:16px; font-weight:800; }
-  .humano span { font-size:14px; color:var(--gris); }
+  /* Bloque grafito: la voz del coach va en amarillo, como en el Dash */
+  .oscuro { margin:88px 10px 0; border-radius:34px; background:var(--ink); color:#fff; padding:64px 0 28px; position:relative; overflow:hidden; }
+  .oscuro .sobre { color:rgba(255,255,255,.62); }
+  .oscuro h2 { margin-top:16px; }
+  .oscuro h2 em { color:var(--ama); }
+  .oscuro .lead { margin-top:20px; color:rgba(255,255,255,.7); }
+  .versus { margin-top:40px; }
+  .vs-cab { display:none; }
+  .vs-f { padding:20px 0; border-top:1px solid rgba(255,255,255,.14); }
+  .vs-f p:first-child { font-size:15px; color:rgba(255,255,255,.5); text-decoration:line-through; text-decoration-color:rgba(255,255,255,.28); text-decoration-thickness:1px; }
+  .vs-f p:last-child { margin-top:8px; font-size:19px; font-weight:700; letter-spacing:-.02em; line-height:1.25; padding-left:20px; position:relative; }
+  .vs-f p:last-child::before { content:''; position:absolute; left:0; top:.5em; width:8px; height:8px; border-radius:99px; background:var(--ama); }
 
-  /* Recetas */
-  .mosaico { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; margin-top:14px; }
-  .mosaico figure { position:relative; overflow:hidden; border-radius:20px; margin:0; background:#EFE9DF; }
-  .mosaico img { width:100%; aspect-ratio:1/1; object-fit:cover; }
-  .mosaico figcaption { position:absolute; left:5px; right:5px; bottom:5px; background:rgba(255,255,255,.92); border-radius:10px; padding:5px 7px; font-size:11px; font-weight:750; line-height:1.2; }
-  .mosaico figcaption small { display:none; }
-  .mosaico figure:nth-child(n+7) { display:none; }   /* en el celular, 6: dos filas parejas */
+  /* Cómo trabajamos */
+  .pasos { margin-top:36px; border-top:1px solid var(--linea); counter-reset:paso; }
+  .pasos li { display:grid; grid-template-columns:64px 1fr; gap:4px 0; padding:22px 0; border-bottom:1px solid var(--linea); counter-increment:paso; }
+  .pasos li::before { content:counter(paso); font-size:46px; font-weight:800; letter-spacing:-.05em; line-height:.9; color:var(--crema2); -webkit-text-stroke:1.5px var(--ink); grid-row:span 2; }
+  .pasos b { font-size:21px; font-weight:800; letter-spacing:-.03em; line-height:1.15; }
+  .pasos span { color:var(--gris); font-size:16px; line-height:1.45; }
 
-  /* El coach: discreto */
-  .coach { display:flex; gap:14px; align-items:flex-start; background:#fff; border-radius:22px; padding:16px; box-shadow:var(--sombra); margin-top:14px; }
-  .coach img { width:60px; height:60px; border-radius:999px; object-fit:cover; flex:none; }
-  .coach b { font-size:18px; font-weight:850; display:block; }
-  .coach .rol { font-size:13px; font-weight:700; color:var(--verde-osc); margin-top:1px; }
-  .coach p { font-size:14.5px; color:var(--gris); line-height:1.5; margin-top:8px; }
-  .coach .frase { color:var(--ink); font-weight:750; }
-  .creds { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
-  .creds span { font-size:12px; font-weight:700; padding:6px 10px; border-radius:999px; background:#F1EFE8; color:#4A4A4F; }
+  .capas { margin-top:56px; padding:28px 22px 26px; border-radius:28px; background:var(--blanco); box-shadow:var(--sombra); }
+  .capas h3 { font-size:clamp(24px, 6.2vw, 34px); letter-spacing:-.035em; line-height:1.04; }
+  .capas h3 em { color:#8A8A88; }
+  .capas ol { margin-top:26px; position:relative; display:grid; gap:20px; }
+  .capas ol::before { content:''; position:absolute; left:5px; top:8px; bottom:8px; width:2px; background:var(--crema2); }
+  .capas li { position:relative; padding-left:30px; }
+  .capas li::before { content:''; position:absolute; left:0; top:5px; width:12px; height:12px; border-radius:99px; background:var(--ama); box-shadow:0 0 0 4px var(--blanco); }
+  .capas b { display:block; font-size:18px; font-weight:800; letter-spacing:-.025em; }
+  .capas li span { color:var(--gris); font-size:15.5px; line-height:1.4; }
+  .capas .pie { margin-top:24px; padding-top:18px; border-top:1px solid var(--linea); font-size:15px; color:var(--gris); }
 
-  /* Precio */
-  .precio { background:#fff; border-radius:26px; box-shadow:0 2px 4px rgba(20,20,30,.04), 0 24px 56px rgba(20,30,60,.10); overflow:hidden; margin-top:14px; }
-  .precio .top { padding:18px 20px 14px; }
-  .precio .monto { font-size:clamp(40px, 11vw, 54px); font-weight:900; letter-spacing:-.04em; white-space:nowrap; }
-  .precio .monto small { font-size:16px; font-weight:700; color:var(--gris); letter-spacing:0; }
-  .precio .usd { font-size:15px; color:var(--gris); font-weight:600; margin-top:2px; }
-  .precio ul { list-style:none; padding:0 20px; display:grid; gap:9px; }
-  .precio li { display:flex; gap:12px; font-size:15px; line-height:1.45; color:#3A3A3F; }
-  .precio .abajo { padding:18px 20px 20px; display:grid; gap:10px; }
-  .chico { text-align:center; font-size:13px; color:var(--gris2); font-weight:600; }
+  /* ── La app: un capítulo por sección, con su color ─────────────────── */
+  .cap { margin:12px 10px 0; border-radius:34px; background:var(--f); padding:52px 0 0; overflow:hidden; position:relative; }
+  .cap.ent { --c:var(--ent); --t:var(--ent-t); --f:var(--ent-f); }
+  .cap.verde { --c:var(--verde); --t:var(--verde-t); --f:var(--verde-f); }
+  .cap.azul { --c:var(--azul); --t:var(--azul-t); --f:var(--azul-f); }
+  .cap.nar { --c:var(--nar); --t:var(--nar-t); --f:var(--nar-f); }
+  .cap .sobre { color:var(--t); }
+  .cap .sobre::before { background:var(--c); }
+  .cap h3 { margin-top:14px; }
+  .cap h3 em { color:var(--t); }
+  .cap .txt { margin-top:18px; color:rgba(31,31,31,.72); font-size:17px; max-width:30em; }
+  .pts { margin-top:22px; border-top:1px solid rgba(31,31,31,.12); }
+  .pts li { padding:14px 0 14px 26px; border-bottom:1px solid rgba(31,31,31,.12); position:relative; font-size:16.5px; line-height:1.4; font-weight:600; letter-spacing:-.01em; }
+  .pts li::before { content:''; position:absolute; left:2px; top:1.32em; width:12px; height:7px; border-left:2.5px solid var(--c); border-bottom:2.5px solid var(--c); transform:translateY(-70%) rotate(-45deg); }
+  .cap-v { position:relative; height:480px; margin-top:44px; }
+  .cap-v .blob { top:62%; width:96%; left:50%; }
+  .cap-v .tel { position:absolute; left:50%; top:0; transform:translateX(-50%); width:248px; }
+  .cap-v.dos .tel.a { left:7%; transform:none; z-index:2; width:226px; }
+  .cap-v.dos .tel.b { left:auto; right:-7%; transform:none; top:64px; width:206px; }
 
-  /* Preguntas */
-  .preguntas { margin-top:14px; background:#fff; border-radius:26px; box-shadow:var(--sombra); overflow:hidden; }
-  .preguntas details { border-top:1px solid #F0EEE8; }
-  .preguntas details:first-child { border-top:0; }
-  .preguntas summary { list-style:none; cursor:pointer; padding:15px 18px; display:flex; justify-content:space-between; gap:14px; font-size:16px; font-weight:750; -webkit-tap-highlight-color:transparent; }
-  .preguntas summary::-webkit-details-marker { display:none; }
-  .preguntas summary::after { content:'+'; color:var(--gris2); font-weight:600; font-size:20px; line-height:1; transition:transform .2s; }
-  .preguntas details[open] summary::after { transform:rotate(45deg); }
-  .preguntas details p { padding:0 18px 15px; font-size:15px; color:var(--gris); line-height:1.55; }
+  .platos-zona { margin-top:8px; padding:30px 0 34px; background:rgba(255,255,255,.5); border-top:1px solid rgba(31,31,31,.08); }
+  .platos-zona > p { font-size:14.5px; font-weight:700; color:var(--verde-t); padding:0 22px; }
+  .carril { margin-top:16px; overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .platos { display:flex; gap:14px; width:max-content; animation:corre 64s linear infinite; }
+  .carril:hover .platos { animation-play-state:paused; }
+  @keyframes corre { to { transform:translateX(calc(-50% - 7px)); } }
+  .plato { width:172px; flex:none; }
+  .plato img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:22px; box-shadow:var(--sombra); }
+  .plato figcaption { margin-top:10px; font-size:14.5px; font-weight:700; letter-spacing:-.015em; line-height:1.2; }
+  .plato figcaption span { display:block; margin-top:3px; font-weight:600; font-size:13px; color:var(--gris); }
 
-  /* Cierre */
-  .final { text-align:center; padding-bottom:24px; }
-  .final h2 { font-size:clamp(40px, 11vw, 72px); }
-  .final .lead { margin-left:auto; margin-right:auto; }
-  .pie { text-align:center; padding:10px 0 calc(110px + env(safe-area-inset-bottom, 0px)); font-size:13px; color:var(--gris2); font-weight:600; }
+  .indice { margin:40px 0 52px; background:var(--blanco); border-radius:26px; box-shadow:var(--sombra); padding:8px 20px; }
+  .indice li { display:grid; grid-template-columns:34px 1fr auto; align-items:baseline; gap:6px; padding:15px 0; border-bottom:1px solid var(--linea); }
+  .indice li:last-child { border-bottom:0; }
+  .indice i { font-style:normal; font-size:13px; font-weight:800; color:var(--gris2); }
+  .indice b { font-size:16.5px; font-weight:700; letter-spacing:-.02em; line-height:1.2; }
+  .indice span { font-size:12.5px; font-weight:700; color:var(--gris); white-space:nowrap; display:flex; align-items:center; gap:6px; }
+  .indice span::before { content:''; width:7px; height:7px; border-radius:9px; background:var(--k, var(--ent)); }
+  .indice .n { --k:var(--verde); } .indice .b { --k:var(--azul); }
+  .indice .mas { display:block; padding:15px 0 16px; font-size:14.5px; font-weight:700; color:var(--nar-t); }
+
+  /* ── El coach ──────────────────────────────────────────────────────── */
+  .banda { position:relative; margin:0 10px; border-radius:34px; overflow:hidden; aspect-ratio:4/5; background:#2a2a2c; }
+  .banda img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:66% 50%; }
+  .banda::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,20,22,.08) 30%, rgba(20,20,22,.82)); }
+  .banda blockquote { position:absolute; left:0; right:0; bottom:0; z-index:1; margin:0; padding:0 24px 28px; color:#fff; }
+  .banda blockquote p { font-size:clamp(28px, 7.4vw, 56px); font-weight:800; letter-spacing:-.04em; line-height:1; max-width:13em; text-wrap:balance; }
+  .banda blockquote p em { font-style:normal; color:var(--ama); display:block; }
+  .banda cite { display:flex; align-items:center; gap:12px; margin-top:20px; font-style:normal; font-size:14.5px; font-weight:600; color:rgba(255,255,255,.82); line-height:1.3; }
+  .banda cite img { position:static; width:44px; height:44px; border-radius:99px; object-fit:cover; box-shadow:0 0 0 2px rgba(255,255,255,.7); }
+  .banda cite b { display:block; color:#fff; font-weight:800; }
+
+  .coach { display:grid; gap:44px; margin-top:56px; }
+  .coach .bio { margin-top:20px; color:var(--gris); font-size:17px; max-width:32em; }
+  .titulos { margin-top:22px; font-size:14.5px; line-height:1.55; color:var(--gris); }
+  .titulos b { display:block; color:var(--ink); font-weight:800; font-size:15.5px; margin-bottom:4px; }
+  .semana { background:var(--blanco); border-radius:28px; box-shadow:var(--sombra); padding:26px 22px 10px; }
+  .semana h3 { font-size:22px; letter-spacing:-.03em; line-height:1.1; }
+  .semana ul { margin-top:14px; }
+  .semana li { display:grid; grid-template-columns:34px 1fr; padding:15px 0; border-top:1px solid var(--linea); font-size:16.5px; font-weight:600; letter-spacing:-.01em; line-height:1.35; }
+  .semana li i { font-style:normal; font-size:13px; font-weight:800; color:var(--gris2); padding-top:2px; }
+  .semana li span { display:block; font-weight:500; color:var(--gris); font-size:15px; margin-top:2px; letter-spacing:0; }
+
+  /* ── Para quién ────────────────────────────────────────────────────── */
+  .quien { display:grid; gap:12px; margin-top:34px; }
+  .quien > div { border-radius:28px; padding:26px 22px 12px; }
+  .quien .si { background:var(--ink); color:#fff; }
+  .quien .no { background:transparent; box-shadow:inset 0 0 0 1.5px var(--linea); }
+  .quien h3 { font-size:22px; letter-spacing:-.03em; }
+  .quien ul { margin-top:12px; }
+  .quien li { padding:14px 0 14px 28px; border-top:1px solid rgba(255,255,255,.14); position:relative; font-size:16.5px; font-weight:600; line-height:1.35; letter-spacing:-.01em; }
+  .quien .no li { border-top-color:var(--linea); color:var(--gris); }
+  .quien .si li::before { content:''; position:absolute; left:2px; top:1.36em; width:12px; height:7px; border-left:2.5px solid var(--ama); border-bottom:2.5px solid var(--ama); transform:translateY(-70%) rotate(-45deg); }
+  .quien .no li::before { content:''; position:absolute; left:2px; top:1.42em; width:12px; height:2.5px; background:var(--gris2); border-radius:2px; }
+
+  /* ── Precio ────────────────────────────────────────────────────────── */
+  .plan { margin-top:34px; background:var(--blanco); border-radius:32px; box-shadow:var(--sombra); padding:30px 22px 24px; display:grid; gap:26px; }
+  .precio { font-size:clamp(58px, 17vw, 96px); font-weight:800; letter-spacing:-.055em; line-height:.9; }
+  .precio small { display:block; margin-top:12px; font-size:16px; font-weight:700; letter-spacing:-.01em; color:var(--gris); line-height:1.3; }
+  .plan .pts { margin-top:0; }
+  .plan .pts li::before { border-color:var(--verde); }
+  .plan .pts b { font-weight:800; }
+  .plan .pts li { font-weight:500; }
+  .letra-chica { margin-top:14px; text-align:center; font-size:13.5px; color:var(--gris); }
+
+  /* ── Preguntas ─────────────────────────────────────────────────────── */
+  .faq { margin-top:30px; border-top:1px solid var(--linea); }
+  .faq details { border-bottom:1px solid var(--linea); }
+  .faq summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:18px; padding:20px 0; font-size:18.5px; font-weight:700; letter-spacing:-.025em; line-height:1.2; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:''; flex:none; width:14px; height:14px; background:
+    linear-gradient(var(--ink),var(--ink)) center/100% 2px no-repeat, linear-gradient(var(--ink),var(--ink)) center/2px 100% no-repeat; transition:transform .3s var(--suave); }
+  .faq details[open] summary::after { transform:rotate(45deg); }
+  .faq p { padding:0 30px 22px 0; color:var(--gris); font-size:16.5px; max-width:38em; }
+
+  /* ── Cierre ────────────────────────────────────────────────────────── */
+  .cierre { margin:88px 10px 0; border-radius:34px; background:var(--ink); color:#fff; padding:104px 0 64px; position:relative; overflow:hidden; }
+  .cierre .blob { width:150px; left:auto; right:-52px; top:-52px; transform:rotate(12deg); }
+  .cierre .blob path { fill:var(--ama); }
+  .cierre .w { position:relative; }
+  .cierre h2 { font-size:clamp(46px, 13vw, 104px); letter-spacing:-.05em; line-height:.92; }
+  .cierre .lead { margin-top:22px; color:rgba(255,255,255,.72); }
+  .cierre .boton { margin-top:30px; }
+  .cierre .nota { color:rgba(255,255,255,.72); }
+  .pie-pag { padding-top:30px; padding-bottom:120px; font-size:13.5px; color:var(--gris); display:flex; flex-wrap:wrap; gap:6px 18px; justify-content:space-between; }
 
   /* Botón fijo abajo en el celular (sale tras la portada, se va en el cierre) */
-  .fijo { position:fixed; left:0; right:0; bottom:0; z-index:30; padding:10px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background:linear-gradient(180deg, rgba(244,241,235,0), rgba(244,241,235,.92) 35%); transform:translateY(110%); transition:transform .3s cubic-bezier(.16,1,.3,1); }
-  .fijo.visible { transform:none; }
+  .fijo { position:fixed; left:0; right:0; bottom:0; z-index:50; padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background:linear-gradient(180deg, rgba(243,241,235,0), rgba(243,241,235,.94) 38%); transform:translateY(110%); transition:transform .35s var(--suave); pointer-events:none; }
+  .fijo.visible { transform:none; pointer-events:auto; }
   .fijo .boton { width:100%; }
-
-  .ig-toast { position:fixed; left:50%; bottom:calc(96px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 14px); z-index:400; width:max-content; max-width:min(420px, calc(100vw - 28px)); padding:12px 16px; border-radius:14px; background:rgba(10,10,10,0.94); color:#FFF; font-size:13px; font-weight:600; line-height:1.45; text-align:center; box-shadow:0 12px 34px rgba(0,0,0,0.30); opacity:0; pointer-events:none; transition:opacity .28s ease, transform .28s cubic-bezier(0.16,1,0.3,1); }
+  .ig-toast { position:fixed; left:50%; bottom:calc(86px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 12px); z-index:60; width:max-content; max-width:min(92vw, 420px);
+    background:var(--ink); color:#fff; padding:13px 18px; border-radius:16px; font-size:14.5px; font-weight:600; line-height:1.35; text-align:center;
+    opacity:0; pointer-events:none; transition:opacity .25s, transform .25s var(--suave); box-shadow:0 18px 40px -16px rgba(0,0,0,.5); }
   .ig-toast.visible { opacity:1; transform:translate(-50%, 0); }
 
-  @media (min-width:860px) {
-    section { padding:60px 0; }
-    .portada { padding:60px 0 20px; }
-    .portada .env { display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
-    .foto-portada { margin-top:0; aspect-ratio:4/4.4; }
-    .ctas { grid-auto-flow:column; justify-content:start; }
-    .beneficios { grid-template-columns:repeat(3, 1fr); }
-    .capas { grid-template-columns:repeat(3, 1fr); }
-    .capa { flex-direction:column; }
-    .encajas { grid-template-columns:1fr 1fr; }
-    .pantallas { display:grid; grid-template-columns:repeat(4, 1fr); overflow:visible; margin:0; padding:30px 0 0; gap:22px; }
-    .pantalla { max-width:none; }
-    .desliza { display:none; }
-    .humanos { grid-template-columns:repeat(3, 1fr); }
-    .mosaico { grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px; }
-    .mosaico figcaption { font-size:12.5px; padding:7px 9px; left:8px; right:8px; bottom:8px; }
-    .mosaico figure:nth-child(n+7) { display:block; }
-    .mosaico figcaption small { display:block; color:var(--gris); font-weight:600; font-size:11.5px; margin-top:1px; }
-    .ctas { grid-template-columns:auto auto; }
-    .beneficio { display:block; padding:20px; }
-    .beneficio .ico { margin-bottom:12px; }
-    .coach { max-width:760px; padding:26px; }
-    .coach img { width:96px; height:96px; }
-    .precio, .preguntas { max-width:560px; }
-    .preguntas { max-width:760px; }
-    .fijo { display:none; }
-    .pie { padding-bottom:40px; }
+  /* Lo que entra al bajar (solo si hay JavaScript) */
+  .js .rev { opacity:0; transform:translateY(18px); transition:opacity .8s var(--suave), transform .8s var(--suave); }
+  .js .rev.v { opacity:1; transform:none; }
+  .js .escena .tel { opacity:0; transform:translateY(26px); animation:sube .9s var(--suave) .15s forwards; }
+  .js .escena .blob { opacity:0; animation:blob 1.1s var(--suave) forwards; }
+  .js .escena .flota { opacity:0; animation:flota .7s var(--suave) forwards; }
+  .js .escena .f-descanso { animation-delay:.75s; } .js .escena .f-comida { animation-delay:.95s; }
+  @keyframes sube { to { opacity:1; transform:none; } }
+  @keyframes blob { from { opacity:0; transform:translate(-50%,-50%) rotate(-4deg) scale(.86); } to { opacity:1; transform:translate(-50%,-50%) rotate(12deg) scale(1); } }
+  @keyframes flota { from { opacity:0; transform:translateY(14px) scale(.96); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .js .rev, .js .escena .tel, .js .escena .blob, .js .escena .flota { opacity:1 !important; transform:none; animation:none !important; transition:none; }
+    .js .escena .blob { transform:translate(-50%,-50%) rotate(12deg); }
+    .platos { animation:none; } .carril { overflow-x:auto; }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .fijo { transition:none; } }
+
+  /* ── Pantallas medianas ────────────────────────────────────────────── */
+  @media (min-width:640px) {
+    .w { padding:0 34px; }
+    .ctas .boton { flex:0 0 auto; }
+    .datos dl { grid-template-columns:repeat(4, 1fr); }
+    .datos div, .datos div:nth-child(odd), .datos div:nth-child(even) { padding:24px 20px 26px; border-right:1px solid var(--linea); }
+    .datos div:first-child { padding-left:0; } .datos div:last-child { border-right:0; padding-right:0; }
+    .oscuro, .cap, .cierre, .banda { margin-left:18px; margin-right:18px; }
+    .platos-zona > p { padding:0 34px; }
+    .plato { width:210px; }
+    .quien { grid-template-columns:1.15fr 1fr; }
+    .banda { aspect-ratio:16/10; }
+    .cap-v { height:540px; }
+    .cap-v .tel { width:276px; }
+    .cap-v.dos { max-width:560px; margin-left:auto; margin-right:auto; }
+    .cap-v.dos .tel.a { left:8%; width:258px; } .cap-v.dos .tel.b { right:4%; width:236px; }
+  }
+
+  /* ── Escritorio ────────────────────────────────────────────────────── */
+  @media (min-width:980px) {
+    body { font-size:18px; }
+    .w { padding:0 48px; }
+    .nav-in { height:76px; } .nav-l { display:flex; }
+    .fijo, .ig-toast { bottom:28px; } .fijo { display:none; }
+    .pie-pag { padding-bottom:44px; }
+
+    .portada { padding:40px 0 50px; }
+    .portada > .w { display:grid; grid-template-columns:1.12fr .88fr; gap:40px; align-items:center; }
+    .portada .lead { margin-top:28px; }
+    .ctas { margin-top:36px; }
+    .escena { margin:0 0 0 auto; width:100%; max-width:500px; padding:40px 0 30px; }
+    .tel { width:310px; padding:9px; border-radius:50px; } .tel img { border-radius:41px; }
+    .f-comida { width:52%; left:-12%; bottom:11%; } .f-descanso { width:46%; right:-9%; top:48%; }
+    .datos { margin-top:34px; }
+    .datos dt { font-size:30px; }
+
+    .sec { padding-top:140px; }
+    .oscuro, .cierre { margin-top:140px; padding:104px 0 60px; }
+    .cierre { padding-bottom:104px; }
+    .oscuro .cab { display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:end; }
+    .oscuro .lead { margin-top:0; padding-bottom:8px; }
+    .versus { margin-top:64px; }
+    .vs-cab { display:grid; grid-template-columns:.8fr 1.2fr; gap:60px; padding-bottom:14px; font-size:14px; font-weight:700; color:rgba(255,255,255,.55); }
+    .vs-cab span:last-child { color:var(--ama); }
+    .vs-f { display:grid; grid-template-columns:.8fr 1.2fr; gap:60px; align-items:baseline; padding:26px 0; }
+    .vs-f p:first-child { font-size:18px; }
+    .vs-f p:last-child { margin-top:0; font-size:25px; padding-left:26px; }
+
+    .como-cab { display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:end; }
+    .como-cab .lead { margin-top:0; padding-bottom:8px; }
+    .pasos { margin-top:56px; display:grid; grid-template-columns:repeat(4, 1fr); border-top:0; }
+    .pasos li { display:block; padding:26px 28px 6px 0; border-bottom:0; border-top:1.5px solid var(--ink); margin-right:0; }
+    .pasos li + li { padding-left:0; }
+    .pasos li::before { display:block; font-size:76px; margin-bottom:22px; }
+    .pasos b { display:block; font-size:24px; } .pasos span { display:block; margin-top:10px; font-size:16.5px; }
+    .capas { margin-top:88px; padding:44px 48px 40px; border-radius:34px; display:grid; grid-template-columns:.8fr 1.2fr; gap:20px 60px; align-items:start; }
+    .capas h3 { font-size:38px; }
+    .capas ol { margin-top:6px; grid-template-columns:repeat(3, 1fr); gap:28px; }
+    .capas ol::before { left:8px; right:8px; top:5px; bottom:auto; width:auto; height:2px; }
+    .capas li { padding:30px 0 0; } .capas li::before { top:0; }
+    .capas .pie { grid-column:2; margin-top:8px; }
+
+    .app-cab { display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:end; padding-bottom:44px; }
+    .app-cab .lead { margin-top:0; padding-bottom:8px; }
+    .cap { margin:18px 18px 0; padding:0; }
+    .cap > .w { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; min-height:680px; }
+    .cap.inv .cap-t { order:2; }
+    .cap-t { padding:84px 0; }
+    .cap .txt { font-size:19px; }
+    .pts li { font-size:18px; padding:16px 0 16px 30px; }
+    .cap-v { height:680px; margin-top:0; align-self:end; }
+    .cap-v .blob { top:60%; width:88%; }
+    .cap-v .tel { top:76px; width:318px; }
+    .cap-v.dos { max-width:none; margin-left:0; margin-right:0; }
+    .cap-v.dos .tel.a { left:5%; width:292px; top:60px; } .cap-v.dos .tel.b { right:2%; width:262px; top:150px; }
+    .platos-zona { padding:38px 0 44px; } .platos-zona > p { padding:0 48px; max-width:1180px; margin:0 auto; }
+    .plato { width:236px; }
+    .indice { margin:0; padding:10px 30px; border-radius:30px; }
+    .indice li { padding:18px 0; grid-template-columns:44px 1fr auto; } .indice b { font-size:19px; }
+    .cap.nar > .w { align-items:center; min-height:0; } .cap.nar .cap-lado { padding:84px 0; }
+
+    .banda { margin:0 18px; aspect-ratio:21/9; }
+    .banda blockquote { padding:0 60px 54px; }
+    .banda::after { background:linear-gradient(90deg, rgba(20,20,22,.78) 0%, rgba(20,20,22,.3) 55%, rgba(20,20,22,0) 80%), linear-gradient(180deg, rgba(20,20,22,0) 50%, rgba(20,20,22,.5)); }
+    .coach { grid-template-columns:1.05fr .95fr; gap:72px; margin-top:96px; align-items:start; }
+    .semana { padding:34px 34px 14px; border-radius:32px; } .semana h3 { font-size:26px; }
+    .quien { gap:18px; margin-top:52px; } .quien > div { padding:38px 38px 18px; border-radius:32px; } .quien h3 { font-size:26px; }
+    .quien li { font-size:18px; padding:16px 0 16px 32px; }
+
+    .plan { grid-template-columns:.9fr 1.1fr; gap:60px; padding:56px 56px 52px; border-radius:38px; margin-top:52px; align-items:center; }
+    .precio { font-size:104px; }
+    .faq-g { display:grid; grid-template-columns:.8fr 1.2fr; gap:60px; align-items:start; }
+    .faq { margin-top:16px; } .faq summary { font-size:21px; padding:24px 0; }
+    .cierre .blob { width:380px; right:-110px; top:-130px; }
+    .cierre h2 { font-size:128px; }
+  }
 </style>
 </head>
 <body>
+<a class="salto" href="#contenido">Saltar al contenido</a>
 
-<header class="barra"><div class="env">
-  <a class="marca" href="#">Entrena con <span>Método</span></a>
-  <a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener">Escríbeme</a>
+<header class="nav"><div class="w nav-in">
+  <a class="marca" href="#" aria-label="Entrena con Método, inicio"><img src="img/icono.svg" alt="" width="32" height="32"><span>Entrena con <i>Método</i><b class="punto">.</b></span></a>
+  <nav class="nav-l" aria-label="Secciones"><a href="#como">Cómo funciona</a><a href="#app">La app</a><a href="#coach">Tu coach</a><a href="#precio">Precio</a></nav>
+  <a class="boton chico" data-ig href="https://ig.me/m/mauromoronm" rel="noopener">Escríbeme</a>
 </div></header>
 
-<!-- 1 · Por qué te conviene: el método -->
-<section class="portada"><div class="env">
+<main id="contenido">
+
+<!-- ═══ Portada ═══ -->
+<section class="portada"><div class="w">
   <div>
-    <div class="eyebrow">Coaching online · entrenamiento y nutrición</div>
-    <h1>Entrena con <em class="c-verde">método.</em></h1>
-    <p class="lead">Decisiones basadas en datos. Entrena con estructura. Nutrición con criterio. Un plan a tu medida, revisado cada semana, para que el progreso se sostenga.</p>
+    <p class="sobre">Coaching online de entrenamiento y nutrición</p>
+    <h1><span class="antes">Deja de adivinar.</span> Entrena con <i>método</i><b class="punto">.</b></h1>
+    <p class="lead">Un plan de entrenamiento y alimentación hecho para ti, una app que te dice qué toca hoy y un coach que revisa tu semana y lo ajusta.</p>
     <div class="ctas">
-      <a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Escríbeme por Instagram</a>
-      <a class="boton claro" href="#metodo">Ver cómo funciona</a>
+      <a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
+      <a class="boton linea" href="#como">Ver cómo funciona <svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </div>
-    <div class="respondo"><i></i>Te respondo personalmente</div>
+    <p class="nota">Te respondo yo, personalmente. Sin permanencia.</p>
   </div>
-  <div class="foto-portada">
-    <img src="img/portada.jpg" alt="Entrenando al aire libre" fetchpriority="high">
-    <div class="capas-chips"><span>Movilidad</span><span>Fuerza</span><span>Composición</span></div>
-  </div>
-</div></section>
-
-<section id="metodo"><div class="env">
-  <div class="eyebrow azul">01 · Por qué funciona</div>
-  <h2>Coaching de <em class="c-azul">criterio.</em></h2>
-  <p class="lead">No es una plantilla. Cada semana reviso lo que hiciste, y el plan se ajusta cuando tu respuesta lo pide.</p>
-  <div class="beneficios">
-    <div class="beneficio"><div class="ico" style="background:rgba(60,123,214,.12);color:var(--azul)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></div><b>Estructura.</b><p>Cada ejercicio tiene una razón, según tu nivel y objetivos.</p></div>
-    <div class="beneficio"><div class="ico" style="background:rgba(70,150,90,.13);color:var(--verde)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg></div><b>Personalización.</b><p>Tu agenda, tu equipo, tu historial. El plan se adapta a ti.</p></div>
-    <div class="beneficio"><div class="ico" style="background:rgba(238,132,52,.13);color:var(--naranja)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><b>Seguimiento.</b><p>Revisión semanal de tus datos. Los ajustes salen de ahí, no de la percepción.</p></div>
-  </div>
-
-  <h2 style="margin-top:30px;font-size:clamp(26px, 7vw, 44px)">El progreso llega <em class="c-naranja">en capas.</em></h2>
-  <p class="lead">Los cambios reales ocurren en orden. Esta es la secuencia.</p>
-  <div class="capas">
-    <div class="capa"><div class="n">01</div><div><b>Movimiento</b><p>Mejoras cómo te mueves y controlas tu cuerpo.</p></div></div>
-    <div class="capa"><div class="n">02</div><div><b>Rendimiento</b><p>Subes consistencia y respuesta del entrenamiento.</p></div></div>
-    <div class="capa"><div class="n">03</div><div><b>Composición</b><p>Los cambios físicos llegan cuando el proceso se sostiene.</p></div></div>
-  </div>
-  <div class="nota">El progreso es proporcional a tu consistencia. El método se ajusta a lo que tienes, no a un ideal.</div>
-
-  <h2 style="margin-top:30px;font-size:clamp(26px, 7vw, 44px)">Encajas si <em class="c-amarillo">te identificas.</em></h2>
-  <ul class="encajas">
-    <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Entrenas pero te estancaste.</b> Avanzas sin dirección clara.</span></li>
-    <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Quieres entender el porqué,</b> no seguir órdenes.</span></li>
-    <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Buscas progresión sostenida,</b> no soluciones rápidas.</span></li>
-    <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Estás listo para comprometerte</b> con un proceso continuo.</span></li>
-  </ul>
-</div></section>
-
-<!-- 2 · La app -->
-<section style="padding-top:20px"><div class="env">
-  <div class="eyebrow">02 · Las herramientas</div>
-  <h2>Todo en tu <em class="c-verde">teléfono.</em></h2>
-  <p class="lead">App + acompañamiento humano cercano.</p>
-  <div class="app-intro">
-    <div><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Se acabaron los PDF y los Excel.</b> Todo vive en una app que mide.</span></div>
-    <div><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Genera <b>indicadores de adherencia y seguimiento</b> para tomar decisiones basadas en datos.</span></div>
-  </div>
-  <div class="pantallas">
-    <figure class="pantalla"><div class="telefono"><img src="img/app/semana.jpg" alt="Tu semana en la app" loading="lazy"></div>
-      <figcaption><span class="tag" style="background:rgba(60,123,214,.12);color:#2F6CC4">Tu semana</span><b>Ves cómo vas, de un vistazo.</b>Entreno y comida en un solo lugar, con lo que te toca hoy.</figcaption></figure>
-    <figure class="pantalla"><div class="telefono"><img src="img/app/rutina.jpg" alt="La rutina con videos" loading="lazy"></div>
-      <figcaption><span class="tag" style="background:rgba(60,123,214,.12);color:#2F6CC4">Entrenamiento</span><b>Videos de cada ejercicio.</b>Aprendes la técnica antes de cargar. Registras series, descansos y progreso.</figcaption></figure>
-    <figure class="pantalla"><div class="telefono"><img src="img/app/comida.jpg" alt="Registro de comida" loading="lazy"></div>
-      <figcaption><span class="tag" style="background:rgba(70,150,90,.13);color:#2F7F45">Nutrición</span><b>Registras hablando. Ves tu meta al instante.</b>Dictas lo que comiste y la app lo convierte en calorías y macros.</figcaption></figure>
-    <figure class="pantalla"><div class="telefono"><img src="img/app/recetas.jpg" alt="Recetario" loading="lazy"></div>
-      <figcaption><span class="tag" style="background:rgba(238,132,52,.14);color:#C95F17">Recetario</span><b>Recetas a la medida de tu meta.</b>Con su foto y la porción ya ajustada. Armas tu día o tu semana con su lista de mercado.</figcaption></figure>
-  </div>
-  <div class="desliza">Desliza para ver más →</div>
-
-  <div class="mosaico">
-    <figure><img src="img/platos/balanced-protein-pancakes.jpg" alt="" loading="lazy"><figcaption>Panqueques con mantequilla de almendra<small>Desayuno</small></figcaption></figure>
-    <figure><img src="img/platos/salmon-quinoa.jpg" alt="" loading="lazy"><figcaption>Bowl de salmón y quinoa<small>Almuerzo</small></figcaption></figure>
-    <figure><img src="img/platos/beef-plantain-bowl.jpg" alt="" loading="lazy"><figcaption>Bowl de res y plátano<small>Almuerzo</small></figcaption></figure>
-    <figure><img src="img/platos/yogurt-parfait.jpg" alt="" loading="lazy"><figcaption>Parfait de yogur<small>Snack</small></figcaption></figure>
-    <figure><img src="img/platos/teriyaki-salmon.jpg" alt="" loading="lazy"><figcaption>Salmón teriyaki<small>Cena</small></figcaption></figure>
-    <figure><img src="img/platos/mexican-chicken-bowl.jpg" alt="" loading="lazy"><figcaption>Bowl mexicano de pollo<small>Almuerzo</small></figcaption></figure>
-    <figure><img src="img/platos/creamy-chicken-curry.jpg" alt="" loading="lazy"><figcaption>Pollo al curry cremoso<small>Cena</small></figcaption></figure>
-    <figure><img src="img/platos/chicken-burrito.jpg" alt="" loading="lazy"><figcaption>Bowl burrito de pollo<small>Almuerzo</small></figcaption></figure>
-  </div>
-
-  <div class="humanos">
-    <div class="humano"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div><div><b>Directo conmigo.</b><span>WhatsApp para dudas y revisión semanal.</span></div></div>
-    <div class="humano"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><b>Comunidad privada.</b><span>En la app, con otros clientes activos del programa.</span></div></div>
-    <div class="humano"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 7v14M3 18V4h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v14h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></div><div><b>Material de aprendizaje.</b><span>Guías, videos y referencias del método.</span></div></div>
+  <div class="escena" aria-hidden="true">
+    <svg class="blob" viewBox="0 0 200 200"><path d="M100 0C22 0 0 22 0 100s22 100 100 100 100-22 100-100S178 0 100 0Z"/></svg>
+    <figure class="tel"><img src="img/v2/dash.webp" alt="" width="640" height="1385" fetchpriority="high"></figure>
+    <img class="flota f-descanso" src="img/v2/f-descanso.webp" alt="" width="448" height="97">
+    <img class="flota f-comida" src="img/v2/f-comida.webp" alt="" width="640" height="588">
   </div>
 </div></section>
 
-<!-- 3 · Quién está detrás (discreto) -->
-<section style="padding-top:20px"><div class="env">
-  <div class="eyebrow naranja">03 · El coach</div>
-  <h2>El criterio <em class="c-naranja">detrás.</em></h2>
-  <div class="coach">
-    <img src="img/coach.jpg" alt="Mauro Morón" loading="lazy">
+<section class="datos w rev" aria-label="Lo que incluye">
+  <dl>
+    <div><dt>54 recetas</dt><dd>Cada una con la porción ajustada a tu meta.</dd></div>
+    <div><dt>Revisión semanal</dt><dd>Miro tus datos y ajusto tu plan.</dd></div>
+    <div><dt>Una sola app</dt><dd>Rutina, comida, progreso y aprendizaje.</dd></div>
+    <div><dt>Sin permanencia</dt><dd>Pagas mes a mes. Te quedas si te sirve.</dd></div>
+  </dl>
+</section>
+
+<!-- ═══ Por qué funciona ═══ -->
+<section class="oscuro" id="porque"><div class="w">
+  <div class="cab rev">
     <div>
-      <b>Mauro Morón</b>
-      <div class="rol">ISSA Certified Fitness &amp; Nutrition Coach</div>
-      <p>Años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno post-lesión, salud metabólica. Traduzco literatura — fisiología, biomecánica, nutrición — en un proceso que el cuerpo pueda sostener.</p>
-      <p class="frase">No vendo motivación. Diseño protocolos, mido la respuesta, ajusto.</p>
-      <div class="creds"><span>Certified Personal Trainer</span><span>Sports Nutrition Specialist</span><span>Strength &amp; Conditioning Coach</span><span>Corrective Exercise Specialist</span><span>Online Coaching Specialist</span></div>
+      <p class="sobre">Por qué funciona</p>
+      <h2>El problema no es tu disciplina. <em>Es entrenar sin un método.</em></h2>
+    </div>
+    <p class="lead">Una rutina suelta y una dieta de internet no saben quién eres ni cómo respondes. Aquí el plan se arma para ti y se corrige con lo que pasa cada semana.</p>
+  </div>
+  <div class="versus">
+    <div class="vs-cab" aria-hidden="true"><span>Lo de siempre</span><span>Con método</span></div>
+    <div class="vs-f rev"><p>Una rutina en PDF que nadie revisa.</p><p>Tu rutina en la app, con el video de cada ejercicio y el registro de cada serie.</p></div>
+    <div class="vs-f rev"><p>Una dieta que no encaja con tu vida.</p><p>Una meta de calorías y macros, y 54 recetas para llegar a ella comiendo rico.</p></div>
+    <div class="vs-f rev"><p>Nadie mira si de verdad avanzas.</p><p>Cada semana reviso tu adherencia y tus cargas. Cada mes, tus medidas.</p></div>
+    <div class="vs-f rev"><p>El mismo plan aunque ya no funcione.</p><p>El plan cambia cuando tu respuesta lo pide.</p></div>
+  </div>
+</div></section>
+
+<!-- ═══ Cómo trabajamos ═══ -->
+<section class="sec" id="como"><div class="w">
+  <div class="como-cab rev">
+    <div>
+      <p class="sobre">Cómo funciona</p>
+      <h2>Así trabajamos. <em>Cuatro pasos, sin misterio.</em></h2>
+    </div>
+    <p class="lead">Todo es online. Tú pones la constancia; yo, la estructura y el seguimiento.</p>
+  </div>
+  <ol class="pasos">
+    <li class="rev"><b>Me escribes</b><span>Me cuentas tu contexto, tu historial y lo que quieres lograr. Resuelvo tus dudas antes de empezar.</span></li>
+    <li class="rev"><b>Armo tu plan</b><span>Rutinas según tu nivel, tu equipo y tu agenda. Tu meta de calorías y macros. Todo queda en tu app.</span></li>
+    <li class="rev"><b>Entrenas y registras</b><span>La app te dice qué toca hoy. Anotas tus series y lo que comes en segundos.</span></li>
+    <li class="rev"><b>Reviso y ajusto</b><span>Cada semana miro tus datos y te escribo. El plan se mueve contigo.</span></li>
+  </ol>
+
+  <div class="capas rev">
+    <h3>El progreso llega en capas. <em>En este orden.</em></h3>
+    <ol>
+      <li><b>Movimiento</b><span>Mejoras cómo te mueves y cómo controlas tu cuerpo.</span></li>
+      <li><b>Rendimiento</b><span>Subes cargas, consistencia y respuesta al entrenamiento.</span></li>
+      <li><b>Composición</b><span>Los cambios físicos llegan cuando el proceso se sostiene.</span></li>
+    </ol>
+    <p class="pie">El progreso es proporcional a tu consistencia. El método se ajusta a lo que tienes, no a un ideal.</p>
+  </div>
+</div></section>
+
+<!-- ═══ La app ═══ -->
+<section class="sec" id="app">
+  <div class="w app-cab rev">
+    <div>
+      <p class="sobre">La app</p>
+      <h2>Una app propia, hecha para este método. <em>Ni PDF ni Excel.</em></h2>
+    </div>
+    <p class="lead">Tu rutina, tu comida, tu progreso y lo que aprendes viven en un solo lugar. Y lo que registras ahí es lo que yo reviso cada semana.</p>
+  </div>
+
+  <article class="cap ent"><div class="w">
+    <div class="cap-t rev">
+      <p class="sobre">Entrenamiento</p>
+      <h3>Cada ejercicio con su video. <em>Cada serie, registrada.</em></h3>
+      <ul class="pts">
+        <li>Video y ficha de técnica de cada ejercicio, con los errores más comunes.</li>
+        <li>La app recuerda lo que levantaste la última vez y te muestra cuánto subiste.</li>
+        <li>Cronómetro de descanso entre series, sin salir de la rutina.</li>
+        <li>Le dejas una nota a tu coach desde el mismo ejercicio.</li>
+        <li>Calendario del mes para mover una rutina si se te cruza algo.</li>
+      </ul>
+    </div>
+    <div class="cap-v dos rev">
+      <svg class="blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 0C22 0 0 22 0 100s22 100 100 100 100-22 100-100S178 0 100 0Z"/></svg>
+      <figure class="tel a"><img src="img/v2/rutina-series.webp" alt="La rutina del día en la app: press de banca con dos series registradas y el cronómetro de descanso" width="640" height="1385" loading="lazy"></figure>
+      <figure class="tel b"><img src="img/v2/entreno-calendario.webp" alt="El calendario de entrenamiento del mes" width="640" height="1385" loading="lazy"></figure>
+    </div>
+  </div></article>
+
+  <article class="cap verde inv">
+    <div class="w">
+      <div class="cap-t rev">
+        <p class="sobre">Alimentación</p>
+        <h3>Escribes lo que comiste. <em>La app hace la cuenta.</em></h3>
+        <ul class="pts">
+          <li>Lo dictas o lo escribes como se lo contarías a alguien. Calorías y macros al instante.</li>
+          <li>54 recetas con foto, cada una en la porción que te toca según tu meta.</li>
+          <li>Guardas tus favoritas y las registras con una frase: «almorcé el bowl mexicano».</li>
+          <li>Armas tu día o tu semana y te llevas la lista de mercado.</li>
+        </ul>
+      </div>
+      <div class="cap-v dos rev">
+        <svg class="blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 0C22 0 0 22 0 100s22 100 100 100 100-22 100-100S178 0 100 0Z"/></svg>
+        <figure class="tel a"><img src="img/v2/chat-1.webp" alt="El chat de alimentación: un desayuno escrito en una frase, convertido en calorías y macros" width="640" height="1385" loading="lazy"></figure>
+        <figure class="tel b"><img src="img/v2/receta.webp" alt="Una receta del recetario con su porción ajustada a la meta" width="640" height="1385" loading="lazy"></figure>
+      </div>
+    </div>
+    <div class="platos-zona">
+      <p>Algunas de las 54 recetas del recetario</p>
+      <div class="carril"><div class="platos" id="platos">
+        <figure class="plato"><img src="img/platos/balanced-protein-pancakes.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra<span>Desayuno</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/salmon-quinoa.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl de salmón y quinoa<span>Almuerzo</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/beef-plantain-bowl.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl de res y plátano<span>Almuerzo</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/yogurt-parfait.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Parfait de yogur<span>Snack</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/teriyaki-salmon.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Salmón teriyaki<span>Cena</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/mexican-chicken-bowl.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl mexicano de pollo<span>Almuerzo</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/creamy-chicken-curry.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Pollo al curry cremoso<span>Cena</span></figcaption></figure>
+        <figure class="plato"><img src="img/platos/chicken-burrito.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl burrito de pollo<span>Almuerzo</span></figcaption></figure>
+      </div></div>
+    </div>
+  </article>
+
+  <article class="cap azul"><div class="w">
+    <div class="cap-t rev">
+      <p class="sobre">Progreso</p>
+      <h3>Tu avance, en datos. <em>No en sensaciones.</em></h3>
+      <ul class="pts">
+        <li>Tu peso y tu % de grasa en una gráfica, desde tu punto de partida.</li>
+        <li>Tu % de grasa ubicado en la tabla de referencia de ISSA.</li>
+        <li>Tus fotos de progreso, guardadas y en orden.</li>
+        <li>Cada semana, un resumen de lo que cumpliste y cuál es tu foco.</li>
+      </ul>
+    </div>
+    <div class="cap-v rev">
+      <svg class="blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 0C22 0 0 22 0 100s22 100 100 100 100-22 100-100S178 0 100 0Z"/></svg>
+      <figure class="tel"><img src="img/v2/composicion.webp" alt="La pantalla de composición corporal: % de grasa en la tabla de referencia y la gráfica de peso" width="640" height="1385" loading="lazy"></figure>
+    </div>
+  </div></article>
+
+  <article class="cap nar inv"><div class="w">
+    <div class="cap-t rev">
+      <p class="sobre">Aprendizaje</p>
+      <h3>Entiendes el porqué. <em>Por eso lo sostienes.</em></h3>
+      <p class="txt">Cápsulas cortas, guías, videos y podcast dentro de la app. Aprendes a tu ritmo y dejas de depender de que alguien te diga qué hacer.</p>
+    </div>
+    <div class="cap-lado rev">
+      <ol class="indice" aria-label="Algunas cápsulas del centro de aprendizaje">
+        <li><i>01</i><b>Las cinco capacidades</b><span>Entrenamiento</span></li>
+        <li><i>02</i><b>Cómo crece el músculo</b><span>Entrenamiento</span></li>
+        <li><i>04</i><b>Cuándo subir el peso</b><span>Entrenamiento</span></li>
+        <li><i>07</i><b>Cuánto de cada macro</b><span class="n">Nutrición</span></li>
+        <li><i>09</i><b>Comer bien sin pesar</b><span class="n">Nutrición</span></li>
+        <li><i>10</i><b>Dormir mejor con lo que tienes</b><span class="b">Bienestar</span></li>
+        <li class="mas-f" style="display:block;padding:0;border:0"><span class="mas" style="white-space:normal">Y más: guía de alimentación, videos y podcast.</span></li>
+      </ol>
+    </div>
+  </div></article>
+</section>
+
+<!-- ═══ El coach ═══ -->
+<section class="sec" id="coach">
+  <figure class="banda rev">
+    <img src="img/portada.jpg" alt="Mauro Morón entrenando al aire libre" loading="lazy" width="1400" height="788">
+    <blockquote>
+      <p>No vendo motivación. <em>Diseño el plan, mido la respuesta y ajusto.</em></p>
+      <cite><img src="img/coach.jpg" alt="" width="44" height="44" loading="lazy"><span><b>Mauro Morón</b>ISSA Certified Fitness &amp; Nutrition Coach</span></cite>
+    </blockquote>
+  </figure>
+  <div class="w coach">
+    <div class="rev">
+      <p class="sobre">Tu coach</p>
+      <h2>Detrás de la app hay una persona. <em>Yo reviso tu semana.</em></h2>
+      <p class="bio">Llevo años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno después de una lesión y salud metabólica. Traduzco fisiología, biomecánica y nutrición en un proceso que tu cuerpo pueda sostener.</p>
+      <p class="titulos"><b>Certificaciones ISSA</b>Certified Personal Trainer · Sports Nutrition Specialist · Strength &amp; Conditioning Coach · Corrective Exercise Specialist · Online Coaching Specialist</p>
+    </div>
+    <div class="semana rev">
+      <h3>Lo que hago por ti cada semana</h3>
+      <ul>
+        <li><i>01</i><div>Reviso tu adherencia y tus cargas<span>Con lo que registraste en la app, no con suposiciones.</span></div></li>
+        <li><i>02</i><div>Respondo las notas de tus sesiones<span>Lo que me escribes desde un ejercicio me llega a mí.</span></div></li>
+        <li><i>03</i><div>Reviso tus videos de técnica<span>Te grabas, lo veo y te digo qué corregir.</span></div></li>
+        <li><i>04</i><div>Ajusto tu plan<span>Cuando tu respuesta lo pide, no por calendario.</span></div></li>
+        <li><i>05</i><div>Te respondo por WhatsApp<span>Dudas del día a día, directo conmigo.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Para quién ═══ -->
+<section class="sec" id="paraquien"><div class="w">
+  <div class="rev">
+    <p class="sobre">Para quién es</p>
+    <h2>No es para todo el mundo. <em>Y está bien.</em></h2>
+  </div>
+  <div class="quien">
+    <div class="si rev">
+      <h3>Es para ti si…</h3>
+      <ul>
+        <li>Entrenas, pero te estancaste.</li>
+        <li>Avanzas sin una dirección clara.</li>
+        <li>Quieres entender el porqué, no solo seguir órdenes.</li>
+        <li>Buscas un progreso que se sostenga.</li>
+        <li>Estás listo para comprometerte con un proceso.</li>
+      </ul>
+    </div>
+    <div class="no rev">
+      <h3>No es para ti si…</h3>
+      <ul>
+        <li>Buscas un cambio en dos semanas.</li>
+        <li>Solo quieres una rutina para descargar.</li>
+        <li>No quieres registrar lo que haces: sin datos no hay qué ajustar.</li>
+      </ul>
     </div>
   </div>
 </div></section>
 
-<!-- 4 · La inversión -->
-<section style="padding-top:20px"><div class="env">
-  <div class="eyebrow azul">04 · La inversión</div>
-  <h2>Un plan, <em class="c-azul">todo incluido.</em></h2>
-  <div class="precio">
-    <div class="top">
-      <div class="monto">$250.000 <small>COP / mes</small></div>
-      <div class="usd">o $80 USD · pago mensual</div>
+<!-- ═══ Precio ═══ -->
+<section class="sec" id="precio"><div class="w">
+  <div class="rev">
+    <p class="sobre">La inversión</p>
+    <h2>Un plan. <em>Todo incluido.</em></h2>
+  </div>
+  <div class="plan rev">
+    <div>
+      <p class="precio num">$250.000<small>COP al mes · o $80 USD<br>Pago mensual, sin permanencia.</small></p>
     </div>
-    <ul>
-      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Entrenamiento personalizado</b> a tu nivel y agenda.</span></li>
-      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Nutrición integrada:</b> guía, recetas y Meal Tracker con IA.</span></li>
-      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>App completa:</b> rutinas con video, registro de comida y recetario con fotos.</span></li>
-      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Revisión semanal</b> de tus datos; el plan se ajusta cuando lo piden.</span></li>
-      <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>WhatsApp directo,</b> comunidad y centro de recursos.</span></li>
-    </ul>
-    <div class="abajo">
-      <a class="boton ancho" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Escríbeme por Instagram</a>
-      <div class="chico">Sin permanencia · Cancela cuando quieras · Pago adaptado a tu país</div>
+    <div>
+      <ul class="pts">
+        <li><b>Entrenamiento personalizado</b> a tu nivel, tu equipo y tu agenda.</li>
+        <li><b>Nutrición integrada:</b> tu meta, guía de alimentación y recetario.</li>
+        <li><b>La app completa:</b> rutinas con video, registro de comida, progreso y aprendizaje.</li>
+        <li><b>Revisión semanal</b> de tus datos; el plan se ajusta cuando lo pide.</li>
+        <li><b>WhatsApp directo</b> conmigo y comunidad privada en la app.</li>
+      </ul>
+      <a class="boton ancho" style="margin-top:26px" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
+      <p class="letra-chica">Cancelas cuando quieras · Pago adaptado a tu país</p>
     </div>
   </div>
 </div></section>
 
-<!-- 5 · Preguntas -->
-<section style="padding-top:20px"><div class="env">
-  <div class="eyebrow amarillo">05 · Preguntas</div>
-  <h2>Antes de <em class="c-amarillo">empezar.</em></h2>
-  <div class="preguntas">
-    <details><summary>¿Necesito experiencia previa?</summary><p>No. Empezamos desde donde estás; la primera fase es adaptación y aprendizaje técnico.</p></details>
-    <details><summary>¿Sin gimnasio o sin tiempo?</summary><p>El plan se estructura según tu equipo y tu agenda real. Funciona en casa o gimnasio.</p></details>
-    <details><summary>¿Cómo recibo el plan?</summary><p>Todo pasa por la app (rutinas, videos, registro) y WhatsApp para revisión semanal. 100% online.</p></details>
+<!-- ═══ Preguntas ═══ -->
+<section class="sec" id="preguntas"><div class="w faq-g">
+  <div class="rev">
+    <p class="sobre">Preguntas</p>
+    <h2>Antes de empezar.</h2>
+  </div>
+  <div class="faq rev">
+    <details><summary>¿Necesito experiencia previa?</summary><p>No. Empezamos desde donde estás; la primera fase es de adaptación y aprendizaje técnico.</p></details>
+    <details><summary>¿Y si no tengo gimnasio o tengo poco tiempo?</summary><p>El plan se arma según tu equipo y tu agenda real. Funciona en casa o en gimnasio.</p></details>
+    <details><summary>¿Cómo recibo el plan?</summary><p>Todo pasa por la app (rutinas, videos, registro) y por WhatsApp para la revisión semanal. Es 100% online.</p></details>
     <details><summary>¿En qué se diferencia de un plan genérico?</summary><p>Un PDF no te observa. Aquí cada semana reviso tu adherencia y tus cargas, cada mes tus medidas, y ajusto el plan cuando tu respuesta lo pide. Pagas criterio aplicado a tu caso, no una plantilla.</p></details>
-    <details><summary>¿Cómo empiezo?</summary><p>Me escribes por Instagram — el botón abre el chat y te copia el mensaje para que solo lo pegues. Revisamos tu contexto, historial y objetivos, resuelvo tus dudas y definimos la base de tu plan.</p></details>
-    <details><summary>¿Lo combino con otro deporte?</summary><p>Sí. El programa considera tu carga deportiva para que las sesiones sumen, no compitan.</p></details>
-    <details><summary>¿Hay permanencia?</summary><p>No. Suscripción mensual; cancelas cuando quieras.</p></details>
+    <details><summary>¿Cómo empiezo?</summary><p>Me escribes por Instagram: el botón abre el chat y te copia el mensaje para que solo lo pegues. Revisamos tu contexto, tu historial y tus objetivos, resuelvo tus dudas y definimos la base de tu plan.</p></details>
+    <details><summary>¿Lo puedo combinar con otro deporte?</summary><p>Sí. El programa tiene en cuenta tu carga deportiva para que las sesiones sumen, no compitan.</p></details>
+    <details><summary>¿Hay permanencia?</summary><p>No. Es una suscripción mensual; cancelas cuando quieras.</p></details>
   </div>
 </div></section>
 
-<section class="final" id="cierre"><div class="env">
-  <h2>Empieza tu <em class="c-todos">proceso.</em></h2>
-  <p class="lead">Escríbeme por Instagram. Me cuentas tu contexto y tus objetivos, aclaramos tus dudas y definimos el primer paso concreto de tu plan.</p>
-  <div style="margin-top:24px"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Escríbeme por Instagram</a></div>
-  <div class="respondo" style="justify-content:center"><i></i>Te respondo personalmente</div>
-</div></section>
-<div class="pie">Entrena con Método · © 2026 Mauro Morón</div>
+<!-- ═══ Cierre ═══ -->
+<section class="cierre" id="cierre">
+  <svg class="blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 0C22 0 0 22 0 100s22 100 100 100 100-22 100-100S178 0 100 0Z"/></svg>
+  <div class="w rev">
+    <h2>Empieza tu proceso<b class="punto">.</b></h2>
+    <p class="lead">Escríbeme por Instagram. Me cuentas tu contexto y tus objetivos, aclaramos tus dudas y definimos el primer paso concreto de tu plan.</p>
+    <a class="boton ama" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
+    <p class="nota">Te respondo yo, personalmente.</p>
+  </div>
+</section>
 
-<div class="fijo" id="fijo" aria-hidden="true"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener" tabindex="-1"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Escríbeme por Instagram</a></div>
+</main>
+
+<footer class="w pie-pag"><span>Entrena con Método · © 2026 Mauro Morón</span><a data-ig href="https://ig.me/m/mauromoronm" rel="noopener">Instagram</a></footer>
+
+<div class="fijo" id="fijo" aria-hidden="true"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener" tabindex="-1"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a></div>
 
 <script>
   // CONTACTO — el único lugar para cambiar a dónde escriben (solo Instagram).
@@ -463,6 +786,21 @@
     const pintar = () => { const v = pasoPortada && !enCierre; fijo.classList.toggle('visible', v); fijo.setAttribute('aria-hidden', v ? 'false' : 'true'); };
     new IntersectionObserver(([e]) => { pasoPortada = !e.isIntersecting && e.boundingClientRect.top < 0; pintar(); }).observe(portada);
     new IntersectionObserver(([e]) => { enCierre = e.isIntersecting; pintar(); }).observe(cierre);
+  })();
+</script>
+<script>
+  // Lo que entra al bajar, y el carril de platos (se duplica para que no tenga fin).
+  (function () {
+    var revs = document.querySelectorAll('.rev');
+    if (!('IntersectionObserver' in window)) { revs.forEach(function (e) { e.classList.add('v'); }); }
+    else {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      revs.forEach(function (e) { io.observe(e); });
+    }
+    var platos = document.getElementById('platos');
+    if (platos && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      Array.prototype.slice.call(platos.children).forEach(function (f) { var c = f.cloneNode(true); c.setAttribute('aria-hidden', 'true'); platos.appendChild(c); });
+    }
   })();
 </script>
 </body>
