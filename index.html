@@ -17,7 +17,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Person","name":"Mauro Morón","jobTitle":"ISSA Certified Fitness & Nutrition Coach","description":"Coach online: entrenamiento, nutrición y seguimiento semanal basado en datos."},
-{"@type":"Service","name":"Entrena con Método — Coaching online","serviceType":"Coaching de entrenamiento y nutrición online","provider":{"@type":"Person","name":"Mauro Morón"},"areaServed":"Online","offers":{"@type":"Offer","price":"250000","priceCurrency":"COP","description":"Suscripción mensual sin permanencia. Incluye entrenamiento personalizado, nutrición, app, revisión semanal y WhatsApp directo."}}
+{"@type":"Service","name":"Entrena con Método — Coaching online","serviceType":"Coaching de entrenamiento y nutrición online","provider":{"@type":"Person","name":"Mauro Morón"},"areaServed":"Online","offers":{"@type":"Offer","price":"200000","priceCurrency":"COP","description":"Suscripción mensual sin permanencia. Incluye entrenamiento personalizado, nutrición, app, revisión semanal y WhatsApp directo."}}
 ]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
   .marca { display:flex; align-items:center; gap:9px; font-weight:800; font-size:15.5px; letter-spacing:-.02em; }
   .marca img { width:30px; height:30px; border-radius:9px; }
   .nav-l { display:none; gap:30px; font-size:15px; font-weight:700; }
-  .nav .boton { min-height:42px; padding:0 17px; font-size:14.5px; }
+  .nav .boton { min-height:42px; padding:0 17px; font-size:14.5px; display:none; }   /* en celular el botón vive abajo, fijo */
 
   /* ── Portada ── */
   .portada { position:relative; height:100vh; height:100svh; min-height:680px; max-height:980px; overflow:hidden; color:var(--tx);
@@ -96,7 +96,7 @@
   .o-coach.on { transform:rotate(8deg); }
   .o-coach img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:34%; box-shadow:0 40px 60px -24px rgba(0,0,0,.7), 0 0 0 6px rgba(242,201,76,.9); }
   .velo { position:absolute; left:0; right:0; bottom:0; height:30%; z-index:3; background:var(--c3); -webkit-mask-image:linear-gradient(180deg, transparent, #000 62%); mask-image:linear-gradient(180deg, transparent, #000 62%); }
-  .p-pie { position:absolute; left:0; right:0; bottom:20px; z-index:4; padding:0 16px; display:grid; gap:12px; }
+  .p-pie { position:absolute; left:0; right:0; bottom:calc(92px + env(safe-area-inset-bottom, 0px)); z-index:4; padding:0 16px; display:grid; gap:12px; }
   .tabs { display:grid; grid-template-columns:repeat(4, 1fr); padding:5px; border-radius:999px; }
   .tabs button { height:42px; border-radius:999px; font-size:14.5px; font-weight:700; color:var(--tab); transition:background .4s, color .4s; }
   .tabs button[aria-selected="true"] { background:var(--on); color:var(--on-tx); }
@@ -124,11 +124,18 @@
   .tel { padding:8px; border-radius:44px; background:#1B1B1D; box-shadow:0 40px 60px -30px rgba(0,0,0,.6); }
   .tel img { border-radius:36px; width:100%; }
   .carr figcaption { margin-top:16px; font-size:19px; font-weight:800; letter-spacing:-.025em; text-align:center; }
+  /* Que se vea que se desliza: «Desliza» con su flecha, los puntos debajo y
+     un empujoncito la primera vez que aparece. */
+  .desliza { display:flex; align-items:center; gap:8px; margin-top:20px; font-size:14.5px; font-weight:800; opacity:.92; transition:opacity .5s; }
+  .desliza svg { width:22px; height:22px; animation:empuja 1.6s var(--suave) infinite; }
+  .desliza.listo { opacity:0; }
+  @keyframes empuja { 0%, 100% { transform:translateX(0); } 50% { transform:translateX(7px); } }
+  .puntos { display:flex; justify-content:center; gap:7px; margin-top:18px; }
+  .puntos button { width:8px; height:8px; padding:0; border-radius:99px; background:currentColor; opacity:.35; transition:width .35s var(--suave), opacity .35s; }
+  .puntos button[aria-current="true"] { width:26px; opacity:1; }
 
-  .carril { margin-top:34px; overflow:hidden; }
-  .platos { display:flex; gap:12px; width:max-content; animation:corre 60s linear infinite; }
-  @keyframes corre { to { transform:translateX(calc(-50% - 6px)); } }
-  .plato { width:190px; flex:none; }
+  .carr-platos { margin-top:24px; gap:12px; }
+  .plato { width:56vw; max-width:240px; flex:none; scroll-snap-align:start; }
   .plato img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:28px; }
   .plato figcaption { margin-top:10px; font-size:15px; font-weight:700; letter-spacing:-.015em; line-height:1.2; }
 
@@ -142,6 +149,7 @@
 
   .precio { margin-top:26px; font-size:clamp(66px, 20vw, 150px); font-weight:900; letter-spacing:-.065em; line-height:.86; font-variant-numeric:tabular-nums; }
   .precio small { display:block; margin-top:14px; font-size:17px; font-weight:700; letter-spacing:-.01em; opacity:.8; }
+  .precio .usd { display:inline-block; margin-left:6px; padding:3px 10px; border-radius:999px; background:rgba(31,31,31,.1); font-size:15px; }
   .incluye { margin:26px 0 28px; display:grid; gap:12px; }
   .incluye li { position:relative; padding-left:30px; font-size:18px; font-weight:800; letter-spacing:-.02em; }
   .incluye li::before { content:''; position:absolute; left:3px; top:.4em; width:13px; height:8px; border-left:3px solid var(--ink); border-bottom:3px solid var(--ink); transform:rotate(-45deg); }
@@ -159,12 +167,10 @@
   .cierre .luz { position:absolute; left:50%; bottom:120px; width:340px; height:340px; margin-left:-120px; border-radius:50%; background:rgba(242,201,76,.32); filter:blur(56px); }
   .cierre .pesa { position:absolute; right:-26%; bottom:92px; width:min(112vw, 520px); filter:drop-shadow(0 40px 40px rgba(0,0,0,.7)) brightness(1.12); will-change:transform; }
   .cierre .sobre, .cierre h2 { position:relative; z-index:2; }
-  .cierre .pie-c { position:absolute; left:0; right:0; bottom:22px; padding:0 16px; z-index:3; }
-  .cierre .pie-c .boton { width:100%; }
-  .pie { padding:22px 0 104px; font-size:13px; color:var(--gris); text-align:center; }
+  .pie { padding:22px 0 calc(104px + env(safe-area-inset-bottom, 0px)); font-size:13px; color:var(--gris); text-align:center; }
 
-  .fijo { position:fixed; left:0; right:0; bottom:0; z-index:50; padding:8px 12px calc(10px + env(safe-area-inset-bottom, 0px)); transform:translateY(120%); transition:transform .35s var(--suave); pointer-events:none; }
-  .fijo.visible { transform:none; pointer-events:auto; }
+  /* El único botón en celular: fijo abajo, siempre a mano con el pulgar. */
+  .fijo { position:fixed; left:0; right:0; bottom:0; z-index:50; padding:8px 12px calc(10px + env(safe-area-inset-bottom, 0px)); }
   .fijo-in { padding:6px; border-radius:999px; background:rgba(255,255,255,.55); } .fijo .boton { width:100%; min-height:52px; }
   .ig-toast { position:fixed; left:50%; bottom:calc(92px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 12px); z-index:60; width:max-content; max-width:min(92vw, 420px); background:var(--ink); color:#fff; padding:13px 18px; border-radius:16px; font-size:14.5px; font-weight:600; line-height:1.35; text-align:center; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s var(--suave); }
   .ig-toast.visible { opacity:1; transform:translate(-50%, 0); }
@@ -172,14 +178,14 @@
   .js .rev { opacity:0; transform:translateY(26px); transition:opacity .8s var(--suave), transform .8s var(--suave); }
   .js .rev.v { opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior:auto; } .js .rev { opacity:1; transform:none; transition:none; } .platos { animation:none; } .carril { overflow-x:auto; }
+    html { scroll-behavior:auto; } .js .rev { opacity:1; transform:none; transition:none; } .desliza svg { animation:none; }
     .portada, .obj { transition:none; } .js .portada h1.entra span, .js .lead.entra { animation:none; }
   }
 
   @media (min-width:900px) {
     body { font-size:18px; }
     .w { padding:0 48px; }
-    .nav { top:18px; } .nav-in { height:62px; padding:0 9px 0 18px; } .nav-l { display:flex; }
+    .nav { top:18px; } .nav-in { height:62px; padding:0 9px 0 18px; } .nav-l { display:flex; } .nav .boton { display:inline-flex; }   /* en computador, el botón vive arriba */
     .fijo { display:none; } .pie { padding-bottom:40px; }
     .portada { min-height:720px; max-height:none; border-radius:0 0 56px 56px; }
     .p-in { padding-top:15vh; }
@@ -191,19 +197,18 @@
     .o-coach { width:min(30vw, 54vh); right:10%; bottom:20%; }
     .piso { right:2%; bottom:6%; width:44%; }
     .velo { display:none; }
-    .p-pie { left:48px; right:auto; bottom:44px; padding:0; grid-template-columns:auto auto; gap:14px; align-items:center; }
-    .tabs { width:420px; } .ctas .boton { width:auto; }
+    .p-pie { left:48px; right:auto; bottom:44px; padding:0; }
+    .tabs { width:420px; }
     .bloque { margin:14px 14px 0; border-radius:56px; padding:120px 0 110px; }
     .claro { padding:130px 0 110px; }
     .dos { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
     .pasos { margin-top:0; } .pasos li { grid-template-columns:110px 1fr; padding:24px 0; } .pasos li::before { font-size:96px; } .pasos b { font-size:30px; } .pasos span { font-size:18px; }
-    .carr { justify-content:center; gap:34px; overflow:visible; margin-top:60px; } .carr figure { width:270px; }
-    .plato { width:260px; } .carril { margin-top:60px; }
+    #app .carr { justify-content:center; gap:34px; overflow:visible; margin-top:60px; } #app .carr figure { width:270px; } #app .desliza, #app .puntos { display:none; }
+    .plato { width:260px; } .carr-platos { margin-top:50px; padding:0 48px 6px; }
     .cita { max-width:11em; } .pills li { font-size:16px; padding:12px 20px; }
     .incluye li { font-size:22px; } .faq summary { font-size:23px; padding:24px 0; } .faq { margin-top:0; }
     .cierre { min-height:86vh; padding-top:130px; margin-bottom:14px; }
     .cierre .pesa { right:4%; bottom:4%; width:min(46vw, 80vh); } .cierre .luz { left:auto; right:14%; width:520px; height:520px; bottom:14%; }
-    .cierre .pie-c { position:relative; left:auto; right:auto; bottom:auto; padding:0; margin-top:44px; } .cierre .pie-c .boton { width:auto; }
   }
 </style>
 </head>
@@ -239,7 +244,6 @@
       <button role="tab" aria-selected="false" data-ir="app">App</button>
       <button role="tab" aria-selected="false" data-ir="coach">Coach</button>
     </div>
-    <div class="ctas"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a></div>
   </div>
 </section>
 
@@ -257,8 +261,8 @@
 </div></section>
 
 <section class="bloque b-azul" id="app">
-  <div class="w"><p class="sobre rev">La app</p><h2 class="rev">Todo en tu<br><i>teléfono.</i></h2></div>
-  <div class="carr">
+  <div class="w"><p class="sobre rev">La app</p><h2 class="rev">Todo en tu<br><i>teléfono.</i></h2><p class="desliza" aria-hidden="true">Desliza para ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p></div>
+  <div class="carr" data-carr aria-label="Pantallas de la app">
     <figure class="rev"><div class="tel"><img src="img/v2/dash.webp" alt="La pantalla de inicio de la app" loading="lazy" width="640" height="1385"></div><figcaption>Tu día, de un vistazo</figcaption></figure>
     <figure class="rev"><div class="tel"><img src="img/v2/rutina-series.webp" alt="La rutina del día en la app" loading="lazy" width="640" height="1385"></div><figcaption>Tu rutina, con video</figcaption></figure>
     <figure class="rev"><div class="tel"><img src="img/v2/chat-1.webp" alt="El chat de alimentación de la app" loading="lazy" width="640" height="1385"></div><figcaption>Tu comida, en una frase</figcaption></figure>
@@ -266,8 +270,8 @@
 </section>
 
 <section class="bloque b-verde" id="recetas">
-  <div class="w"><p class="sobre rev">Alimentación</p><h2 class="rev">54 recetas.<br><i>A tu medida.</i></h2></div>
-  <div class="carril"><div class="platos" id="platos">
+  <div class="w"><p class="sobre rev">Alimentación</p><h2 class="rev">54 recetas.<br><i>A tu medida.</i></h2><p class="desliza" aria-hidden="true">Desliza para ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p></div>
+  <div class="carr carr-platos" data-carr aria-label="Algunas recetas">
     <figure class="plato"><img src="img/platos/balanced-protein-pancakes.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra</figcaption></figure>
     <figure class="plato"><img src="img/platos/salmon-quinoa.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl de salmón y quinoa</figcaption></figure>
     <figure class="plato"><img src="img/platos/beef-plantain-bowl.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl de res y plátano</figcaption></figure>
@@ -276,7 +280,7 @@
     <figure class="plato"><img src="img/platos/mexican-chicken-bowl.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl mexicano de pollo</figcaption></figure>
     <figure class="plato"><img src="img/platos/creamy-chicken-curry.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Pollo al curry cremoso</figcaption></figure>
     <figure class="plato"><img src="img/platos/chicken-burrito.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl burrito de pollo</figcaption></figure>
-  </div></div>
+  </div>
 </section>
 
 <section class="bloque b-grafito" id="coach"><div class="w">
@@ -292,7 +296,7 @@
     <h2 class="rev">Un plan.<br><i>Todo incluido.</i></h2>
   </div>
   <div class="rev">
-    <p class="precio">$250.000<small>COP al mes · o $80 USD</small></p>
+    <p class="precio">$200.000<small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
     <ul class="incluye">
       <li>Entrenamiento a tu medida</li>
       <li>Nutrición y recetario</li>
@@ -300,7 +304,6 @@
       <li>Revisión semanal</li>
       <li>WhatsApp directo y comunidad</li>
     </ul>
-    <a class="boton ancho" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a>
     <p class="chica">Sin permanencia · Cancelas cuando quieras</p>
   </div>
 </div></section>
@@ -325,7 +328,6 @@
   <div class="w">
     <p class="sobre" style="color:var(--ama);opacity:1">Empieza hoy</p>
     <h2>Empieza<br>tu <i>proceso</i><span style="color:var(--ama)">.</span></h2>
-    <div class="pie-c"><a class="boton ama" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a></div>
   </div>
 </section>
 
@@ -333,7 +335,7 @@
 
 <footer class="w pie">Entrena con Método · © 2026 Mauro Morón</footer>
 
-<div class="fijo" id="fijo" aria-hidden="true"><div class="fijo-in vidrio"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener" tabindex="-1"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a></div></div>
+<div class="fijo" id="fijo"><div class="fijo-in vidrio"><a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>Escríbeme por Instagram</a></div></div>
 
 <script>
   // CONTACTO — el único lugar para cambiar a dónde escriben (solo Instagram).
@@ -422,18 +424,6 @@
     });
   })();
 
-  // El botón fijo de abajo (celular): sale al pasar la portada y se esconde
-  // cuando se ve el cierre, para no repetir el mismo botón dos veces.
-  (function(){
-    const fijo = document.getElementById('fijo');
-    const portada = document.querySelector('.portada .ctas');
-    const cierre = document.getElementById('cierre');
-    if (!fijo || !portada || !('IntersectionObserver' in window)) return;
-    let pasoPortada = false, enCierre = false;
-    const pintar = () => { const v = pasoPortada && !enCierre; fijo.classList.toggle('visible', v); fijo.setAttribute('aria-hidden', v ? 'false' : 'true'); };
-    new IntersectionObserver(([e]) => { pasoPortada = !e.isIntersecting && e.boundingClientRect.top < 0; pintar(); }).observe(portada);
-    new IntersectionObserver(([e]) => { enCierre = e.isIntersecting; pintar(); }).observe(cierre);
-  })();
 </script>
 <script>
 (function () {
@@ -463,8 +453,31 @@
   P.querySelectorAll('.tabs button').forEach(function (b) { b.addEventListener('click', function () { clearInterval(auto); auto = null; ir(b.getAttribute('data-ir')); }); });
   if (!quieto) auto = setInterval(function () { if (P.getBoundingClientRect().bottom < 240 || document.hidden) return; ir(orden[(orden.indexOf(actual) + 1) % 4]); }, 4600);
 
-  var platos = document.getElementById('platos');
-  if (platos && !quieto) Array.prototype.slice.call(platos.children).forEach(function (f) { var c = f.cloneNode(true); c.setAttribute('aria-hidden', 'true'); platos.appendChild(c); });
+  // Carruseles: puntos que siguen al dedo, «Desliza» que se va al usarlo y un
+  // empujoncito (se asoma la siguiente y vuelve) la primera vez que aparecen.
+  document.querySelectorAll('[data-carr]').forEach(function (c) {
+    var hijos = Array.prototype.slice.call(c.children);
+    var sec = c.closest('section'), pista = sec && sec.querySelector('.desliza');
+    var pts = document.createElement('div'); pts.className = 'puntos'; pts.setAttribute('aria-hidden', 'true');
+    hijos.forEach(function (h, i) { var b = document.createElement('button'); b.type = 'button'; b.tabIndex = -1; b.addEventListener('click', function () { c.scrollTo({ left: h.offsetLeft - (c.clientWidth - h.offsetWidth) / 2, behavior: 'smooth' }); }); pts.appendChild(b); });
+    c.after(pts);
+    var marcar = function () {
+      var centro = c.scrollLeft + c.clientWidth / 2, mejor = 0, dist = 1e9;
+      hijos.forEach(function (h, i) { var d = Math.abs(h.offsetLeft + h.offsetWidth / 2 - centro); if (d < dist) { dist = d; mejor = i; } });
+      if (c.scrollLeft + c.clientWidth >= c.scrollWidth - 4) mejor = hijos.length - 1;
+      Array.prototype.forEach.call(pts.children, function (b, i) { b.setAttribute('aria-current', i === mejor ? 'true' : 'false'); });
+    };
+    var movido = false;
+    c.addEventListener('scroll', function () { marcar(); if (!movido && c.scrollLeft > 30) { movido = true; if (pista) pista.classList.add('listo'); } }, { passive: true });
+    marcar();
+    if (quieto || !('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function (es) { es.forEach(function (e) {
+      if (!e.isIntersecting || movido || c.scrollWidth <= c.clientWidth + 4) return;
+      obs.disconnect();
+      setTimeout(function () { if (movido) return; c.scrollTo({ left: 90, behavior: 'smooth' }); setTimeout(function () { if (!movido || c.scrollLeft < 120) c.scrollTo({ left: 0, behavior: 'smooth' }); movido = false; }, 700); }, 500);
+    }); }, { threshold: 0.6 });
+    obs.observe(c);
+  });
 
   // Al bajar: el objeto de la portada se queda un poco atrás y la pesa del cierre gira
   if (quieto) return;
