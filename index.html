@@ -306,7 +306,7 @@
   .chips span { display:flex; align-items:flex-start; gap:10px; padding:11px 13px; border-radius:16px; font-size:15px; font-weight:700; line-height:1.28; letter-spacing:-.01em; background:rgba(255,255,255,.2); }
   .a-ama .chips span { background:rgba(255,255,255,.5); }
   .chips .ic { font-size:21px; margin-top:-1px; }
-  .bt-tel { width:60%; margin:22px -4% -38% auto; padding:7px; border-radius:36px; background:#1B1B1D; transform:rotate(7deg); box-shadow:0 30px 50px -24px rgba(0,0,0,.5); }
+  .bt-tel { width:60%; margin:30px -4% -38% auto; padding:7px; border-radius:36px; background:#1B1B1D; transform:rotate(7deg); box-shadow:0 30px 50px -24px rgba(0,0,0,.5); }
   .bt-tel img { width:100%; border-radius:30px; }
   .platos3 { display:flex; margin-top:20px; }
   .platos3 img { width:34%; aspect-ratio:1; object-fit:cover; border-radius:99px; border:4px solid #46965A; box-shadow:0 14px 26px -12px rgba(0,0,0,.45); }
@@ -878,7 +878,7 @@
     }
     if (tel) {
       var b = tel.parentNode.getBoundingClientRect();
-      if (b.bottom > 0 && b.top < vh) tel.style.setProperty('--py', (((b.top + b.height / 2) - vh / 2) * 0.12).toFixed(1) + 'px');
+      if (b.bottom > 0 && b.top < vh) tel.style.setProperty('--py', Math.max(0, ((b.top + b.height / 2) - vh / 2) * 0.12).toFixed(1) + 'px');
     }
   }
   window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(pinta); } }, { passive: true });
