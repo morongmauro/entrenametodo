@@ -233,8 +233,20 @@
   .c-comida .ob { width:min(120vw, 60svh); right:-46%; bottom:-10%; transform:rotate(16deg); filter:drop-shadow(0 30px 34px rgba(0,40,10,.35)); }
   .c-app .ob { width:min(62vw, 33svh); right:-6%; bottom:-14%; margin:0; padding:8px; border-radius:46px; background:#1B1B1D; transform:rotate(8deg); box-shadow:0 50px 70px -30px rgba(0,0,0,.55); }
   .c-app .ob img { border-radius:38px; width:100%; }
-  .c-coach .ob { width:min(54vw, 28svh); right:-4%; bottom:6%; margin:0; transform:rotate(8deg); }
-  .c-coach .ob img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:34%; box-shadow:0 40px 60px -24px rgba(0,0,0,.7), 0 0 0 6px rgba(242,201,76,.9); }
+  .carta { container-type:inline-size; }
+  .ficha { width:min(64cqw, 36svh); right:-3%; bottom:12%; padding:1.15em 1.2em 1.1em; border-radius:1.7em; background:#F3F1EB; color:#1F1F1F; font-size:min(3.6cqw, 2svh); transform:rotate(8deg); box-shadow:0 40px 60px -24px rgba(0,0,0,.75), 0 0 0 .4em rgba(242,201,76,.9); }
+  .ficha p { margin:0; }
+  .f-t { font-size:.82em; font-weight:700; color:#6B6B6B; }
+  .f-h { margin-top:.15em !important; font-size:1.45em; font-weight:900; letter-spacing:-.03em; }
+  .f-barras { display:grid; grid-template-columns:repeat(4, 1fr); gap:.55em; align-items:end; height:7.4em; margin-top:.8em; }
+  .f-barras i { position:relative; height:var(--h); border-radius:.55em .55em .25em .25em; background:#F2C94C; }
+  .f-barras i.d { background:#D9D5CB; }
+  .f-barras b { position:absolute; left:0; right:0; top:-1.45em; text-align:center; font-size:.78em; font-weight:800; white-space:nowrap; }
+  .f-sem { display:grid; grid-template-columns:repeat(4, 1fr); gap:.55em; margin-top:.35em; font-size:.72em; font-weight:700; color:#6B6B6B; text-align:center; }
+  .f-l { margin-top:.75em; border-top:1px solid #DDD8CC; }
+  .f-l li { display:flex; justify-content:space-between; gap:.6em; padding:.42em 0; border-bottom:1px solid #E6E2D8; font-size:.86em; font-weight:600; }
+  .f-l li:last-child { border-bottom:0; padding-bottom:0; }
+  .f-l b { font-weight:800; }
   .js .carta .in > * { opacity:0; transform:translateY(22px); transition:opacity .7s var(--suave), transform .7s var(--suave); }
   .js .carta.v .in > * { opacity:1; transform:none; }
   .js .carta.v .in > *:nth-child(2) { transition-delay:.06s; } .js .carta.v .in > *:nth-child(3) { transition-delay:.12s; }
@@ -247,7 +259,45 @@
     .carta h1, .carta h2 { font-size:min(5.6vw, 9vh, 104px); }
     .carta p.l { font-size:17px; }
     .c-entreno .ob { width:110%; right:-34%; bottom:-6%; } .c-comida .ob { width:150%; right:-70%; bottom:-14%; }
-    .c-app .ob { width:54%; right:-6%; bottom:-22%; } .c-coach .ob { width:62%; right:-6%; bottom:8%; }
+    .c-app .ob { width:54%; right:-6%; bottom:-22%; } .ficha { width:70cqw; right:-4%; bottom:7%; font-size:3.9cqw; }
+  }
+
+  /* ══ Lo que el cliente necesita ver al bajar ══ */
+  .sin-arriba { padding-top:0; }
+  .si { margin-top:26px; border-top:2px solid var(--ink); }
+  .si li { position:relative; padding:16px 0 16px 38px; border-bottom:1px solid rgba(31,31,31,.14); font-size:19px; font-weight:700; letter-spacing:-.02em; line-height:1.25; }
+  .si li::before { content:''; position:absolute; left:2px; top:17px; width:24px; height:24px; border-radius:99px; background:var(--verde); }
+  .si li::after { content:''; position:absolute; left:9px; top:24px; width:10px; height:6px; border-left:2.5px solid #fff; border-bottom:2.5px solid #fff; transform:rotate(-45deg); }
+  .no { margin-top:20px; font-size:16.5px; color:var(--gris); } .no b { color:var(--ink); }
+  .areas { display:grid; gap:12px; margin-top:30px; }
+  .area { border-radius:30px; padding:26px 24px 22px; }
+  .area-t { font-size:30px; font-weight:900; letter-spacing:-.045em; line-height:1; }
+  .area ul { margin-top:14px; }
+  .area li { position:relative; padding:9px 0 9px 22px; border-top:1px solid currentColor; border-color:rgba(127,127,127,.25); font-size:16.5px; font-weight:600; line-height:1.3; }
+  .area li::before { content:''; position:absolute; left:2px; top:16px; width:8px; height:8px; border-radius:9px; background:currentColor; opacity:.7; }
+  .a-ama { background:radial-gradient(120% 80% at 80% 100%, #FFE07A 0%, #F2C94C 60%); color:var(--ink); }
+  .a-verde { background:radial-gradient(120% 80% at 80% 100%, #63B279 0%, #46965A 60%); color:#fff; }
+  .a-azul { background:radial-gradient(120% 80% at 80% 100%, #6FA2EE 0%, #3C7BD6 60%); color:#fff; }
+  .a-grafito { background:radial-gradient(120% 80% at 80% 100%, #3B3B41 0%, #1F1F21 60%); color:#fff; }
+  .principios { margin-top:30px; border-top:2px solid rgba(255,255,255,.85); counter-reset:pr; }
+  .principios li { counter-increment:pr; display:grid; grid-template-columns:46px 1fr; padding:17px 0; border-bottom:1px solid rgba(255,255,255,.14); }
+  .principios li::before { content:'0' counter(pr); font-size:15px; font-weight:800; color:var(--ama); padding-top:4px; }
+  .principios b, .principios span { grid-column:2; }
+  .principios b { display:block; font-size:21px; font-weight:800; letter-spacing:-.03em; line-height:1.15; }
+  .principios span { display:block; margin-top:4px; font-size:15.5px; opacity:.74; }
+  .vs { margin-top:26px; display:grid; gap:10px; }
+  .vs li { border-radius:24px; background:#fff; padding:18px 20px; box-shadow:0 1px 0 rgba(31,31,31,.06); }
+  .vs-t { font-size:13.5px; font-weight:800; color:var(--gris); }
+  .vs-a { margin-top:8px; font-size:16px; font-weight:600; color:#8C8A84; text-decoration:line-through; text-decoration-thickness:1.5px; }
+  .vs-b { position:relative; margin-top:4px; padding-left:28px; font-size:20px; font-weight:800; letter-spacing:-.025em; line-height:1.2; }
+  .vs-b::before { content:''; position:absolute; left:0; top:3px; width:20px; height:20px; border-radius:99px; background:var(--ama); }
+  .vs-b::after { content:''; position:absolute; left:6px; top:9px; width:8px; height:5px; border-left:2.5px solid var(--ink); border-bottom:2.5px solid var(--ink); transform:rotate(-45deg); }
+  @media (min-width:900px) {
+    .si { margin-top:0; } .si li { font-size:23px; padding:20px 0 20px 46px; } .si li::before { top:22px; width:28px; height:28px; } .si li::after { left:11px; top:30px; }
+    .areas { grid-template-columns:repeat(4, 1fr); gap:16px; margin-top:56px; }
+    .area { padding:32px 28px 26px; border-radius:36px; } .area-t { font-size:34px; } .area li { font-size:17px; }
+    .principios { margin-top:0; } .principios b { font-size:26px; } .principios span { font-size:17px; } .principios li { padding:22px 0; }
+    .vs { margin-top:0; } .vs li { display:grid; grid-template-columns:110px .9fr 1.5fr; align-items:center; gap:18px; padding:20px 26px; } .vs-a, .vs-b { margin-top:0; } .vs-b { font-size:21px; }
   }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; transition:none; } }
 </style>
@@ -257,7 +307,7 @@
 
 <header class="nav"><div class="nav-in vidrio">
   <a class="marca" href="#" aria-label="Entrena con Método, inicio"><img src="img/icono.svg" alt="" width="30" height="30"><span>Entrena con <i>Método</i></span></a>
-  <nav class="nav-l" aria-label="Secciones"><a href="#como">Cómo funciona</a><a href="#app">La app</a><a href="#coach">Tu coach</a><a href="#precio">Precio</a></nav>
+  <nav class="nav-l" aria-label="Secciones"><a href="#incluye">Qué incluye</a><a href="#como">Cómo funciona</a><a href="#app">La app</a><a href="#precio">Precio</a></nav>
   <a class="boton" data-ig href="https://ig.me/m/mauromoronm" rel="noopener">Escríbeme</a>
 </div></header>
 
@@ -277,10 +327,76 @@
     <figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385" loading="lazy"></figure>
   </article>
   <article class="carta c-coach">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Con un</span><span>coach</span><span><i>real.</i></span></h2><p class="l">Reviso tu semana y ajusto tu plan.</p></div>
-    <figure class="ob"><img src="img/v4/coach.jpg" alt="Mauro Morón, tu coach" width="480" height="480" loading="lazy"></figure>
+    <div class="in"><p class="sobre">Coaching online</p><h2><span>Basado</span><span>en</span><span><i>ciencia.</i></span></h2><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
+    <div class="ob ficha" aria-hidden="true">
+      <p class="f-t">Tu ciclo · Fase 2</p>
+      <p class="f-h">Sentadilla</p>
+      <div class="f-barras"><i style="--h:62%"><b>60 kg</b></i><i style="--h:72%"><b>62,5</b></i><i style="--h:84%"><b>65</b></i><i class="d" style="--h:48%"><b>55</b></i></div>
+      <div class="f-sem"><span>S1</span><span>S2</span><span>S3</span><span>Descarga</span></div>
+      <ul class="f-l"><li>Series registradas<b>12/12</b></li><li>Esfuerzo (RPE)<b>8</b></li><li>Proteína hoy<b>140 g</b></li></ul>
+    </div>
   </article>
 </section>
+
+<section class="claro" id="para"><div class="w dos">
+  <div>
+    <p class="sobre rev">¿Es para ti?</p>
+    <h2 class="rev">Si te<br><i>suena…</i></h2>
+  </div>
+  <div class="rev">
+    <ul class="si">
+      <li>Entrenas, pero hace meses no ves cambios.</li>
+      <li>Quieres bajar grasa o ganar músculo sin dietas extremas.</li>
+      <li>Sigues rutinas sueltas y no sabes si te sirven.</li>
+      <li>Tienes poco tiempo y quieres saber exactamente qué hacer cada día.</li>
+      <li>Entrenas en casa o en gimnasio, con lo que tengas.</li>
+    </ul>
+    <p class="no"><b>No es para ti</b> si buscas un resultado en 15 días o una dieta milagro.</p>
+  </div>
+</div></section>
+
+<section class="claro sin-arriba" id="incluye"><div class="w">
+  <p class="sobre rev">Qué incluye</p>
+  <h2 class="rev">Todo lo<br><i>que recibes.</i></h2>
+  <div class="areas">
+    <article class="area a-ama rev"><p class="area-t">Entrenamiento</p><ul>
+      <li>Rutina hecha para ti, por fases</li>
+      <li>Video de cada ejercicio</li>
+      <li>Registras peso, repeticiones y esfuerzo de cada serie</li>
+      <li>Alternativas si falta una máquina</li>
+      <li>Reviso tu técnica por video</li></ul></article>
+    <article class="area a-verde rev"><p class="area-t">Alimentación</p><ul>
+      <li>Tu meta de calorías y proteína</li>
+      <li>54 recetas en la porción que te toca</li>
+      <li>Registras lo que comes escribiendo una frase</li>
+      <li>Ves cuánta proteína llevas en el día</li></ul></article>
+    <article class="area a-azul rev"><p class="area-t">Seguimiento</p><ul>
+      <li>Revisión semanal de tus datos</li>
+      <li>Peso y % de grasa</li>
+      <li>Fotos de progreso</li>
+      <li>Resumen de tu semana y de tu mes</li></ul></article>
+    <article class="area a-grafito rev"><p class="area-t">Acompañamiento</p><ul>
+      <li>WhatsApp directo conmigo</li>
+      <li>Respondo tus notas de cada ejercicio</li>
+      <li>Cápsulas para entender lo que haces</li>
+      <li>Comunidad</li></ul></article>
+  </div>
+</div></section>
+
+<section class="bloque b-grafito" id="ciencia"><div class="w dos">
+  <div>
+    <p class="sobre rev" style="color:var(--ama);opacity:1">Basado en ciencia</p>
+    <h2 class="rev">Nada al<br><i>azar.</i></h2>
+    <p class="txt rev">Tu plan sigue principios con respaldo científico de primer nivel. No modas.</p>
+  </div>
+  <ol class="principios">
+    <li class="rev"><b>Sobrecarga progresiva</b><span>Subes carga o repeticiones de forma planificada, semana a semana.</span></li>
+    <li class="rev"><b>Esfuerzo medido</b><span>Cada serie lleva su esfuerzo (RPE): ni te quedas corto ni te pasas.</span></li>
+    <li class="rev"><b>Fases y descargas</b><span>El plan cambia a tiempo para que sigas avanzando y no te estanques.</span></li>
+    <li class="rev"><b>Proteína y porciones</b><span>Calculadas para tu peso y tu objetivo.</span></li>
+    <li class="rev"><b>Decisiones con datos</b><span>Ajusto con lo que registras, no con suposiciones.</span></li>
+  </ol>
+</div></section>
 
 <section class="claro" id="como"><div class="w dos">
   <div>
@@ -288,10 +404,10 @@
     <h2 class="rev">Así<br><i>trabajamos.</i></h2>
   </div>
   <ol class="pasos">
-    <li class="rev"><div><b>Me escribes</b><span>Hablamos de tu punto de partida.</span></div></li>
-    <li class="rev"><div><b>Armo tu plan</b><span>Entreno y comida, a tu medida.</span></div></li>
-    <li class="rev"><div><b>Entrenas y registras</b><span>La app te guía cada día.</span></div></li>
-    <li class="rev"><div><b>Reviso y ajusto</b><span>Cada semana, con tus datos.</span></div></li>
+    <li class="rev"><div><b>Me escribes</b><span>Por Instagram. Me cuentas tu objetivo, tu tiempo y tu punto de partida.</span></div></li>
+    <li class="rev"><div><b>Armo tu plan</b><span>Entreno y comida a tu medida, listos en tu app.</span></div></li>
+    <li class="rev"><div><b>Entrenas y registras</b><span>La app te dice qué toca cada día y guardas cada serie.</span></div></li>
+    <li class="rev"><div><b>Reviso y ajusto</b><span>Cada semana miro tus datos y cambio lo que haga falta.</span></div></li>
   </ol>
 </div></section>
 
@@ -325,6 +441,20 @@
   <ul class="pills rev"><li>Revisión semanal</li><li>Videos de técnica</li><li>WhatsApp directo</li><li>Comunidad</li></ul>
 </div></section>
 
+<section class="claro" id="diferencia"><div class="w dos">
+  <div>
+    <p class="sobre rev">La diferencia</p>
+    <h2 class="rev">Solo o<br><i>con método.</i></h2>
+  </div>
+  <ul class="vs">
+    <li class="rev"><p class="vs-t">Tu rutina</p><p class="vs-a">Copiada de internet</p><p class="vs-b">Hecha para ti, por fases</p></li>
+    <li class="rev"><p class="vs-t">Tu progreso</p><p class="vs-a">A ojo</p><p class="vs-b">Cada serie registrada</p></li>
+    <li class="rev"><p class="vs-t">Tu comida</p><p class="vs-a">Dietas que no sostienes</p><p class="vs-b">Recetas en tu porción</p></li>
+    <li class="rev"><p class="vs-t">Tus dudas</p><p class="vs-a">Sin a quién preguntar</p><p class="vs-b">WhatsApp directo con tu coach</p></li>
+    <li class="rev"><p class="vs-t">Los ajustes</p><p class="vs-a">Cuando ya te estancaste</p><p class="vs-b">Cada semana, con tus datos</p></li>
+  </ul>
+</div></section>
+
 <section class="bloque b-ama" id="precio"><div class="w dos">
   <div>
     <p class="sobre rev">La inversión</p>
@@ -336,7 +466,7 @@
       <li>Entrenamiento a tu medida</li>
       <li>Nutrición y recetario</li>
       <li>La app completa</li>
-      <li>Revisión semanal</li>
+      <li>Revisión semanal y de técnica</li>
       <li>WhatsApp directo y comunidad</li>
     </ul>
     <p class="chica">Sin permanencia · Cancelas cuando quieras</p>
@@ -351,6 +481,11 @@
   <div class="faq rev">
     <details><summary>¿Necesito experiencia?</summary><p>No. Empezamos desde donde estás.</p></details>
     <details><summary>¿Y si no tengo gimnasio?</summary><p>El plan se arma con tu equipo y tu agenda. En casa o en gimnasio.</p></details>
+    <details><summary>¿Cuánto tiempo necesito?</summary><p>El que tengas. Armo el plan con los días y los minutos que me digas.</p></details>
+    <details><summary>¿En cuánto tiempo veo resultados?</summary><p>Depende de tu punto de partida y de tu constancia. Lo que sí tienes: cada semana sabes si vas avanzando, porque lo medimos.</p></details>
+    <details><summary>¿Y si viajo o me enfermo?</summary><p>Me avisas y ajustamos el plan. Esos días no cuentan como fallados.</p></details>
+    <details><summary>¿Y si tengo una lesión?</summary><p>Cuéntamelo desde el primer mensaje y adapto los ejercicios. Si la lesión está activa, primero tu médico o fisioterapeuta.</p></details>
+    <details><summary>¿Qué tan seguido hablamos?</summary><p>Reviso tu semana cada semana, y para tus dudas tienes WhatsApp directo conmigo.</p></details>
     <details><summary>¿Cómo recibo el plan?</summary><p>Todo en la app, y por WhatsApp la revisión semanal. 100% online.</p></details>
     <details><summary>¿Cómo empiezo?</summary><p>Me escribes por Instagram. El botón abre el chat y te copia el mensaje.</p></details>
     <details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y cancelas cuando quieras.</p></details>
