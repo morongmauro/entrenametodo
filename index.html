@@ -569,6 +569,21 @@
     .despues p { font-size:19px; }
   }
   @media (prefers-reduced-motion: reduce) { .js .capas .capa { opacity:1; transform:none; transition:none; } .tour-tel img { transition:none; transform:none; } .tour-barras i.va::after { animation:none; transform:scaleX(1); } }
+
+  /* ══ Cartas: texto arriba e imagen en su zona, con desvanecido donde se acercan ══ */
+  .carta { display:flex; flex-direction:column; }
+  .carta .in { flex:none; }
+  .zona { position:relative; flex:1; min-height:0; z-index:1; -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 24%); mask-image:linear-gradient(180deg, transparent 0, #000 24%); }
+  .carta .ob { max-width:none; width:auto; }
+  .c-entreno .ob { height:98%; right:-27%; bottom:-9%; }
+  .c-comida .ob { height:108%; right:-33%; bottom:-15%; }
+  .c-app .ob { height:118%; aspect-ratio:658 / 1403; right:-5%; bottom:-34%; }
+  .c-app .ob img { width:100%; height:100%; object-fit:cover; aspect-ratio:auto; }
+  @media (min-width:900px) {
+    .c-entreno .ob { height:112%; right:-22%; bottom:-10%; }
+    .c-comida .ob { height:124%; right:-26%; bottom:-18%; }
+    .c-app .ob { height:128%; right:-4%; bottom:-40%; }
+  }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
 </style>
 </head>
@@ -621,15 +636,15 @@
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
     <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
-    <img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high">
+    <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
     <div class="in"><p class="sobre">Coaching online</p><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
-    <img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219">
+    <div class="zona"><img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219"></div>
   </article>
   <article class="carta c-app">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu entreno y tu comida de hoy, ya decididos.</p></div>
-    <figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385"></figure>
+    <div class="in"><p class="sobre">Coaching online</p><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu entrenamiento y tu alimentación del día, definidos.</p></div>
+    <div class="zona"><figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385"></figure></div>
   </article>
   <i class="snap" style="--n:0"></i><i class="snap" style="--n:1"></i><i class="snap" style="--n:2"></i>
 </section>
@@ -642,13 +657,13 @@
   </div>
   <div>
     <ul class="dolores2">
-      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-plano"/></svg></span><p><b>Entrenas, pero te estancaste.</b> Meses igual y el espejo no cambia.</p></li>
-      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-azar"/></svg></span><p><b>Avanzas sin una dirección clara:</b> rutinas sueltas, sin saber si te sirven.</p></li>
-      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-cubiertos"/></svg></span><p><b>Dietas que no duran:</b> una semana bien y vuelves a lo mismo.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-plano"/></svg></span><p><b>Entrenas, pero te estancaste:</b> meses de esfuerzo sin cambios visibles.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-azar"/></svg></span><p><b>Avanzas sin una dirección clara:</b> rutinas aisladas, sin certeza de que funcionen.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-cubiertos"/></svg></span><p><b>Dietas que no se sostienen:</b> resultados que se pierden a las pocas semanas.</p></li>
       <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-idea"/></svg></span><p><b>Quieres entender el porqué,</b> no solo seguir órdenes.</p></li>
       <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-meta"/></svg></span><p><b>Buscas un progreso que se sostenga,</b> no soluciones rápidas.</p></li>
     </ul>
-    <p class="giro rev">No es falta de ganas. <b>Te falta un método.</b></p>
+    <p class="giro rev">No es falta de voluntad. <b>Es falta de método.</b></p>
   </div>
 </div></section>
 
@@ -689,7 +704,7 @@
     <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Alimentación</p><p>Calorías y proteína calculadas para tu objetivo, con recetas y porciones que se adaptan a tu vida. Una alimentación que puedes sostener, no una dieta de pocas semanas.</p></article>
     <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento</p><p>Un plan por etapas en el que subes peso o repeticiones poco a poco, con el esfuerzo justo en cada serie y semanas más suaves para recuperarte. Trabajamos fuerza, y también movilidad y agilidad.</p></article>
     <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg>Hábitos</p><p>Sueño, descanso, manejo del estrés y constancia. Lo que pasa fuera del gimnasio también decide tu resultado, y por eso también lo trabajamos.</p></article>
-    <article class="pil pil-base rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg>Conocimiento</p><p>Te explico el porqué de cada decisión, con cápsulas y respuestas a tus dudas, para que tengas criterio propio y sepas manejar cada pilar.</p></article>
+    <article class="pil pil-base rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg>Conocimiento</p><p>Cada decisión tiene una explicación. Con cápsulas de aprendizaje y resolución de dudas desarrollas criterio propio para gestionar cada pilar.</p></article>
   </div></div>
 </section>
 
@@ -707,8 +722,8 @@
     </article>
     <article class="gr a-ama rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>App de entrenamiento</p>
-      <h3>Tu entreno, <i>guiado.</i></h3>
-      <p class="gr-p">Cada ejercicio con <b>video</b>, tu <b>historial</b> de cargas y la <b>recomendación</b> de cuánto subir. Registras cada serie y tenemos <b>comunicación constante</b>: respondo cada nota que me dejas.</p>
+      <h3>Tu entrenamiento, <i>guiado.</i></h3>
+      <p class="gr-p">Cada ejercicio con <b>video</b>, tu <b>historial</b> de cargas y la <b>recomendación</b> de cuánto subir. Registras cada serie y mantenemos <b>comunicación constante</b>: cada nota que dejas recibe respuesta.</p>
       <div class="gr-tel bt-tel" aria-hidden="true"><img src="img/v2/rutina-series.webp" alt="" width="640" height="1385"></div>
     </article>
     <article class="gr a-naranja rev">
@@ -723,10 +738,10 @@
         <p class="g2-ley"><span class="lv">Fuerza ↑</span><span class="ln">% de grasa ↓</span></p></div>
     </article>
     <article class="gr a-grafito rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Tu coach, contigo</p>
-      <h3>No vas <i>solo.</i></h3>
-      <p class="gr-p">Me escribes por <b>WhatsApp</b> y te respondo yo. Trabajamos tus <b>hábitos</b> (sueño, descanso y estrés), aprendes con <b>cápsulas cortas</b> dentro de la app y entras a la <b>comunidad</b> de quienes entrenan con el mismo método.</p>
-      <div class="charla" aria-hidden="true"><p class="tu">Hoy solo tengo 30 minutos</p><p class="yo">Haz el bloque A completo y salta el accesorio. Listo.</p></div>
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Acompañamiento</p>
+      <h3>Acompañamiento <i>directo.</i></h3>
+      <p class="gr-p">Comunicación directa conmigo por <b>WhatsApp</b>, trabajo sobre tus <b>hábitos</b> (sueño, descanso y estrés), <b>cápsulas de aprendizaje</b> dentro de la app y acceso a la <b>comunidad</b> del método.</p>
+      <div class="charla" aria-hidden="true"><p class="tu">Hoy solo tengo 30 minutos</p><p class="yo">Prioriza el bloque principal completo y omite los accesorios. Mantienes el estímulo de la sesión.</p></div>
     </article>
   </div>
 </div></section>
@@ -739,7 +754,7 @@
   </div>
   <div class="tour rev" data-tour>
     <div class="tour-barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="tel tour-tel"><img src="img/v2/comida.webp" alt="Tu día de comida, en vivo" width="640" height="1385" class="on"><img src="img/v2/chat-1.webp" alt="Lo escribes y la app hace la cuenta" width="640" height="1385"><img src="img/v2/receta.webp" alt="Recetas en la porción que te toca" width="640" height="1385"><img src="img/v2/entreno-calendario.webp" alt="Tu mes de entreno, organizado" width="640" height="1385"><img src="img/v2/composicion.webp" alt="Tu grasa y tu músculo, medidos" width="640" height="1385"></div>
+    <div class="tel tour-tel"><img src="img/v2/comida.webp" alt="Tu día de comida, en vivo" width="640" height="1385" class="on"><img src="img/v2/chat-1.webp" alt="Lo escribes y la app hace la cuenta" width="640" height="1385"><img src="img/v2/receta.webp" alt="Recetas en la porción que te toca" width="640" height="1385"><img src="img/v2/entreno-calendario.webp" alt="Tu mes de entrenamiento, organizado" width="640" height="1385"><img src="img/v2/composicion.webp" alt="Tu grasa y tu músculo, medidos" width="640" height="1385"></div>
     <p class="tour-t" aria-live="polite">Tu día de comida, en vivo</p>
     <p class="tour-n">Toca el teléfono para pasar a la siguiente</p>
   </div>
@@ -769,12 +784,12 @@
   <div>
     <p class="sobre rev">La inversión</p>
     <h2 class="rev">Un plan.<br><i>Todo incluido.</i></h2>
-    <p class="dia rev">Menos de <b>$7.000 COP al día</b> por tu entreno, tu comida y tu coach.</p>
+    <p class="dia rev">Menos de <b>$7.000 COP al día</b> por tu entrenamiento, tu alimentación y tu acompañamiento profesional.</p>
   </div>
   <div class="rev">
     <p class="precio"><span class="cifra" data-cifra="200000">$200.000</span><small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
-    <p class="resumen rev">Todo lo que viste: <b>app de alimentación, app de entrenamiento, seguimiento con datos y tu coach contigo.</b></p>
-    <p class="garantia rev"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Pagas mes a mes y cancelas cuando quieras.</span></p>
+    <p class="resumen rev">Incluye: <b>app de alimentación, app de entrenamiento, seguimiento basado en datos y acompañamiento directo.</b></p>
+    <p class="garantia rev"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Suscripción mensual, cancelable en cualquier momento.</span></p>
   </div>
 </div></section>
 
@@ -784,16 +799,16 @@
     <h2 class="rev">Antes de<br><i>empezar.</i></h2>
   </div>
   <div class="faq rev">
-    <details><summary>¿Necesito experiencia?</summary><p>No. Empezamos desde donde estás.</p></details>
-    <details><summary>¿Y si no tengo gimnasio?</summary><p>El plan se arma con tu equipo y tu agenda. En casa o en gimnasio.</p></details>
-    <details><summary>¿Cuánto tiempo necesito?</summary><p>El que tengas. Armo el plan con los días y los minutos que me digas.</p></details>
+    <details><summary>¿Necesito experiencia?</summary><p>No. El plan parte de tu nivel actual.</p></details>
+    <details><summary>¿Y si no tengo gimnasio?</summary><p>El plan se diseña según tu equipo disponible y tu agenda, en casa o en gimnasio.</p></details>
+    <details><summary>¿Cuánto tiempo necesito?</summary><p>El plan se ajusta a tu disponibilidad real: los días y el tiempo con los que cuentas.</p></details>
     <details><summary>¿En cuánto tiempo veo resultados?</summary><p>Depende de tu punto de partida y de tu constancia. Lo que sí tienes: siempre sabes si vas avanzando, porque lo medimos.</p></details>
-    <details><summary>¿Y si viajo o me enfermo?</summary><p>Me avisas y ajustamos el plan. Esos días no cuentan como fallados.</p></details>
-    <details><summary>¿Y si tengo una lesión?</summary><p>Cuéntamelo desde el primer mensaje y adapto los ejercicios. Si la lesión está activa, primero tu médico o fisioterapeuta.</p></details>
-    <details><summary>¿Qué tan seguido hablamos?</summary><p>Sigo tus registros de cerca y, para tus dudas, tienes WhatsApp directo conmigo.</p></details>
+    <details><summary>¿Y si viajo o me enfermo?</summary><p>La planificación se ajusta y esos días no afectan tu registro de cumplimiento.</p></details>
+    <details><summary>¿Y si tengo una lesión?</summary><p>Se considera desde la valoración inicial y los ejercicios se adaptan. Con una lesión activa, el primer paso es tu médico o fisioterapeuta.</p></details>
+    <details><summary>¿Qué tan seguido hablamos?</summary><p>Hago seguimiento continuo de tus registros y cuentas con comunicación directa por WhatsApp para resolver dudas.</p></details>
     <details><summary>¿Cómo recibo el plan?</summary><p>Todo en la app. 100% online.</p></details>
-    <details><summary>¿Cómo empiezo?</summary><p>Me escribes por Instagram y agendamos una videollamada: conversamos a fondo, definimos tu plan de trabajo y te explico la metodología en detalle.</p></details>
-    <details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y cancelas cuando quieras.</p></details>
+    <details><summary>¿Cómo empiezo?</summary><p>El primer paso es un mensaje por Instagram. Luego agendamos una videollamada para profundizar en tu caso, establecer el plan de trabajo y explicar la metodología en detalle.</p></details>
+    <details><summary>¿Hay permanencia?</summary><p>No. La suscripción es mensual y puedes cancelarla en cualquier momento.</p></details>
   </div>
 </div></section>
 
@@ -802,9 +817,9 @@
     <p class="sobre" style="color:var(--ama);opacity:1">Empieza hoy</p>
     <h2>Empieza<br>tu <i>proceso</i><span style="color:var(--ama)">.</span></h2>
     <ol class="despues">
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Me escribes</b> por Instagram.</p></li>
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><p><b>Agendamos una videollamada</b> para conversar a fondo.</p></li>
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><p><b>Definimos tu plan de trabajo</b> y te explico la metodología en detalle.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Primer contacto</b> por Instagram.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><p><b>Videollamada de valoración</b> para profundizar en tu caso.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><p><b>Plan de trabajo definido</b> y metodología explicada en detalle.</p></li>
     </ol>
   </div>
 </section>
