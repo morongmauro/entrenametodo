@@ -4,20 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Entrena con Método · Coaching online · Mauro Morón</title>
-<meta name="description" content="Coaching online: entrenamiento y nutrición personalizados con revisión semanal basada en datos. ISSA Certified Fitness & Nutrition Coach. Escríbeme por Instagram.">
+<meta name="description" content="Coaching online de entrenamiento y nutrición, con método y seguimiento basado en datos. Coach certificado por ISSA. Escríbeme por Instagram.">
 <meta name="theme-color" content="#F4F1EB">
 <link rel="icon" type="image/svg+xml" href="/img/icono.svg?v=4">
 <link rel="icon" type="image/png" sizes="192x192" href="/img/icono-192.png?v=4">
 <link rel="apple-touch-icon" href="/img/icono-apple.png?v=4">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Entrena con Método · Coaching online">
-<meta property="og:description" content="Entrenamiento y nutrición personalizados, con seguimiento semanal personalizado basado en datos. ISSA Certified Fitness & Nutrition Coach.">
+<meta property="og:description" content="Entrenamiento y nutrición con método, una app propia y seguimiento basado en datos. Coach certificado por ISSA.">
 <meta property="og:locale" content="es_CO">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://entrenaconmetodo.vercel.app/">
+<meta property="og:image" content="https://entrenaconmetodo.vercel.app/img/compartir.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://entrenaconmetodo.vercel.app/img/compartir.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Person","name":"Mauro Morón","jobTitle":"ISSA Certified Fitness & Nutrition Coach","description":"Coach online: entrenamiento, nutrición y seguimiento semanal basado en datos."},
-{"@type":"Service","name":"Entrena con Método — Coaching online","serviceType":"Coaching de entrenamiento y nutrición online","provider":{"@type":"Person","name":"Mauro Morón"},"areaServed":"Online","offers":{"@type":"Offer","price":"200000","priceCurrency":"COP","description":"Suscripción mensual sin permanencia. Incluye entrenamiento personalizado, nutrición, app, revisión semanal y WhatsApp directo."}}
+{"@type":"Person","name":"Mauro Morón","jobTitle":"Coach de entrenamiento y nutrición certificado por ISSA","description":"Coach online: entrenamiento, nutrición y seguimiento basado en datos."},
+{"@type":"Service","name":"Entrena con Método — Coaching online","serviceType":"Coaching de entrenamiento y nutrición online","provider":{"@type":"Person","name":"Mauro Morón"},"areaServed":"Online","offers":{"@type":"Offer","price":"200000","priceCurrency":"COP","description":"Suscripción mensual sin permanencia. Incluye entrenamiento personalizado, nutrición, app, seguimiento con datos y WhatsApp directo."}}
 ]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -524,6 +529,52 @@
     .cinta-in { animation:none; } .cinta { overflow-x:auto; }
     .js .gr .gr-tel, .js .gr .grafica2, .js .quien2 img { opacity:1; translate:0 0; transition:none; } .js #app .carr figure.rev { transform:none; }
   }
+
+  /* ══ Para quién, resultados en capas, recorrido de la app, historia, después de escribir ══ */
+  .capas { margin-top:26px; display:grid; gap:0; }
+  .capa { position:relative; display:grid; grid-template-columns:auto auto 1fr; align-items:center; gap:14px; padding:20px 20px 22px; border-radius:26px; box-shadow:0 -12px 26px -18px rgba(0,0,0,.4); }
+  .capa + .capa { margin-top:-10px; }
+  .k1 { background:var(--ama); color:var(--ink); width:84%; z-index:1; }
+  .k2 { background:#EE8434; color:var(--ink); width:92%; z-index:2; }
+  .k3 { background:var(--verde); color:#fff; width:100%; z-index:3; }
+  .k-n { font-size:44px; font-weight:900; letter-spacing:-.06em; line-height:.8; opacity:.9; }
+  .k-ic { display:grid; place-items:center; width:46px; height:46px; border-radius:16px; background:rgba(255,255,255,.3); font-size:27px; }
+  .capa b { display:block; font-size:21px; font-weight:900; letter-spacing:-.035em; line-height:1.1; }
+  .capa p { margin-top:4px; font-size:15px; line-height:1.32; font-weight:600; opacity:.92; }
+  .capas-pie { margin-top:18px; font-size:15.5px; color:var(--gris); line-height:1.4; }
+  .js .capas .capa { opacity:0; transform:translateX(-46px); transition:opacity .55s var(--suave), transform .7s var(--suave); }
+  .js .capas .capa:nth-child(2) { transition-delay:.14s; } .js .capas .capa:nth-child(3) { transition-delay:.28s; }
+  .js .capas.v .capa { opacity:1; transform:none; }
+  .tour { margin:30px auto 0; width:min(66vw, 280px); text-align:center; }
+  .tour-barras { display:flex; gap:5px; margin-bottom:12px; }
+  .tour-barras i { flex:1; height:4px; border-radius:4px; background:rgba(255,255,255,.3); overflow:hidden; position:relative; }
+  .tour-barras i::after { content:''; position:absolute; inset:0; background:#fff; transform:scaleX(0); transform-origin:left; }
+  .tour-barras i.hecha::after { transform:scaleX(1); }
+  .tour-barras i.va::after { animation:llena var(--dur, 2800ms) linear forwards; }
+  @keyframes llena { to { transform:scaleX(1); } }
+  .tour-tel { position:relative; cursor:pointer; }
+  .tour-tel img { display:block; opacity:0; transform:translateX(26px); transition:opacity .5s var(--suave), transform .6s var(--suave); }
+  .tour-tel img + img { position:absolute; left:8px; top:8px; width:calc(100% - 16px); }
+  .tour-tel img.on { opacity:1; transform:none; }
+  .tour-t { margin-top:16px; min-height:2.5em; font-size:19px; font-weight:800; letter-spacing:-.025em; line-height:1.2; }
+  .tour-n { margin-top:4px; font-size:13px; font-weight:600; opacity:.7; }
+  .bio { margin-top:18px; font-size:16px; line-height:1.45; opacity:.82; max-width:26em; }
+  .despues { position:relative; z-index:2; margin-top:26px; display:grid; gap:12px; max-width:30em; }
+  .despues li { display:flex; align-items:center; gap:14px; }
+  .despues span { display:grid; place-items:center; flex:none; width:46px; height:46px; border-radius:16px; background:var(--ama); color:var(--ink); font-size:26px; }
+  .despues p { font-size:17px; line-height:1.3; opacity:.9; } .despues b { font-weight:800; }
+  .a-naranja { background:linear-gradient(180deg, #D5621A 0%, #EE8434 46%, #F6A566 100%) !important; }
+  .gr.a-grafito { padding-bottom:24px; }
+  .js .gr.v .charla p { opacity:1; transform:none; }
+  .fab { transition:transform .25s var(--suave), opacity .2s; } .fab.cambia { opacity:0; }
+  .fab.izq { right:auto; left:14px; }
+  @media (min-width:900px) {
+    .capas { margin-top:0; } .capa { padding:24px 26px 26px; } .capa b { font-size:24px; } .capa p { font-size:16.5px; }
+    .tres { grid-template-columns:repeat(2, 1fr) !important; }
+    .tour { margin-top:0; } .tour-t { font-size:21px; }
+    .despues p { font-size:19px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .js .capas .capa { opacity:1; transform:none; transition:none; } .tour-tel img { transition:none; transform:none; } .tour-barras i.va::after { animation:none; transform:scaleX(1); } }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
 </style>
 </head>
@@ -575,15 +626,15 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
+    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
     <img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high">
   </article>
   <article class="carta c-comida">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Recetas ricas en la porción que te toca.</p></div>
+    <div class="in"><p class="sobre">Coaching online</p><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
     <img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219">
   </article>
   <article class="carta c-app">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu día en una app hecha para este método.</p></div>
+    <div class="in"><p class="sobre">Coaching online</p><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu entreno y tu comida de hoy, ya decididos.</p></div>
     <figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385"></figure>
   </article>
   <i class="snap" style="--n:0"></i><i class="snap" style="--n:1"></i><i class="snap" style="--n:2"></i>
@@ -592,32 +643,34 @@
 <div class="resto">
 <section class="claro" id="dolor"><div class="w dos">
   <div>
-    <p class="sobre rev">¿Te pasa esto?</p>
+    <p class="sobre rev">¿Es para ti?</p>
     <h2 class="rev h-m">Lo intentas,<br><i>pero no avanzas.</i></h2>
   </div>
   <div>
     <ul class="dolores2">
-      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-calx"/></svg></span><p><b>Empiezas el lunes</b> y para el jueves ya lo dejaste.</p></li>
-      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-plano"/></svg></span><p><b>Meses igual:</b> entrenas, pero el espejo no cambia.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-plano"/></svg></span><p><b>Entrenas, pero te estancaste.</b> Meses igual y el espejo no cambia.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-azar"/></svg></span><p><b>Avanzas sin una dirección clara:</b> rutinas sueltas, sin saber si te sirven.</p></li>
       <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-cubiertos"/></svg></span><p><b>Dietas que no duran:</b> una semana bien y vuelves a lo mismo.</p></li>
-      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-duda"/></svg></span><p><b>No sabes si lo haces bien:</b> ni la técnica, ni el peso, ni las porciones.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-idea"/></svg></span><p><b>Quieres entender el porqué,</b> no solo seguir órdenes.</p></li>
+      <li><span class="d-ic"><svg class="ic" aria-hidden="true"><use href="#i-meta"/></svg></span><p><b>Buscas un progreso que se sostenga,</b> no soluciones rápidas.</p></li>
     </ul>
     <p class="giro rev">No es falta de ganas. <b>Te falta un método.</b></p>
   </div>
 </div></section>
 
-<section class="claro sin-arriba" id="diferencia"><div class="w dos">
+<section class="claro sin-arriba" id="resultados"><div class="w dos">
   <div>
-    <p class="sobre rev">La diferencia</p>
-    <h2 class="rev h-m">Solo o<br><i>con método.</i></h2>
+    <p class="sobre rev">Lo que logras</p>
+    <h2 class="rev h-m">El progreso llega<br><i>en capas.</i></h2>
+    <p class="txt rev">Los cambios reales ocurren en orden.</p>
   </div>
-  <div class="vs2" data-mov role="table" aria-label="Solo o con método">
-    <p class="c-s vs-h" role="columnheader">Solo</p><p class="c-c vs-h" role="columnheader">Con método</p>
-    <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Rutina copiada</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Plan hecho para ti</p>
-    <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Progreso a ojo</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Cada serie registrada</p>
-    <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Dietas que no sostienes</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Recetas en tu porción</p>
-    <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Dudas sin respuesta</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>WhatsApp con tu coach</p>
-    <p class="c-s fin"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Ajustas cuando ya te estancaste</p><p class="c-c fin"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Ajustes a tiempo, con tus datos</p>
+  <div>
+    <ol class="capas" data-mov>
+      <li class="capa k1"><span class="k-n">1</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg></span><div><b>Capacidades</b><p>Mejoras cómo te mueves y controlas tu cuerpo: más fuerza, movilidad y agilidad.</p></div></li>
+      <li class="capa k2"><span class="k-n">2</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg></span><div><b>Cómo te sientes</b><p>Más energía, mejor descanso y la confianza de saber qué estás haciendo.</p></div></li>
+      <li class="capa k3"><span class="k-n">3</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg></span><div><b>Aspecto</b><p>Los cambios físicos llegan cuando el proceso se sostiene: menos grasa y más músculo.</p></div></li>
+    </ol>
+    <p class="capas-pie rev">El progreso es proporcional a tu consistencia. El método se ajusta a lo que tienes, no a un ideal.</p>
   </div>
 </div></section>
 
@@ -640,8 +693,8 @@
   </div>
   <div class="w"><div class="pilares">
     <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Alimentación</p><p>Calorías y proteína calculadas para tu objetivo, con recetas y porciones que se adaptan a tu vida. Una alimentación que puedes sostener, no una dieta de pocas semanas.</p></article>
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento</p><p>Programación por fases con sobrecarga progresiva, esfuerzo medido en cada serie y semanas de descarga. Trabajamos fuerza, y también movilidad y agilidad.</p></article>
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg>Hábitos</p><p>Sueño, descanso, manejo del estrés y constancia. Lo que pasa fuera del gimnasio también decide tu resultado, y lo revisamos cada semana.</p></article>
+    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento</p><p>Un plan por etapas en el que subes peso o repeticiones poco a poco, con el esfuerzo justo en cada serie y semanas más suaves para recuperarte. Trabajamos fuerza, y también movilidad y agilidad.</p></article>
+    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg>Hábitos</p><p>Sueño, descanso, manejo del estrés y constancia. Lo que pasa fuera del gimnasio también decide tu resultado, y por eso también lo trabajamos.</p></article>
     <article class="pil pil-base rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg>Conocimiento</p><p>Te explico el porqué de cada decisión, con cápsulas y respuestas a tus dudas, para que tengas criterio propio y sepas manejar cada pilar.</p></article>
   </div></div>
 </section>
@@ -667,7 +720,7 @@
     <article class="gr a-naranja rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg>Seguimiento basado en datos</p>
       <h3>Medimos lo que <i>importa.</i></h3>
-      <p class="gr-p">Tu <b>composición corporal</b>, tus <b>avances de entrenamiento</b> y tus capacidades: <b>fuerza, movilidad y agilidad</b>. Las decisiones sobre tu plan salen de esos datos, no de suposiciones.</p>
+      <p class="gr-p">Cuánta <b>grasa y músculo</b> tienes, tus <b>avances de entrenamiento</b> y tus capacidades: <b>fuerza, movilidad y agilidad</b>. Las decisiones sobre tu plan salen de esos datos, no de suposiciones.</p>
       <div class="grafica2" aria-hidden="true"><p class="g2-t">Tus avances · 12 semanas <b>ejemplo</b></p>
         <svg viewBox="0 0 260 118"><g stroke="#ECEAE4" stroke-width="1"><path d="M0 20H260M0 50H260M0 80H260M0 110H260"/></g>
           <path class="g-linea" pathLength="1" d="M8 98 L48 90 L88 78 L128 68 L168 54 L208 42 L248 28" fill="none" stroke="#46965A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -675,23 +728,35 @@
           <circle class="g-punto" cx="248" cy="28" r="6" fill="#46965A"/><circle class="g-punto" cx="248" cy="82" r="6" fill="#EE8434"/></svg>
         <p class="g2-ley"><span class="lv">Fuerza ↑</span><span class="ln">% de grasa ↓</span></p></div>
     </article>
+    <article class="gr a-grafito rev">
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Tu coach, contigo</p>
+      <h3>No vas <i>solo.</i></h3>
+      <p class="gr-p">Me escribes por <b>WhatsApp</b> y te respondo yo. Trabajamos tus <b>hábitos</b> (sueño, descanso y estrés), aprendes con <b>cápsulas cortas</b> dentro de la app y entras a la <b>comunidad</b> de quienes entrenan con el mismo método.</p>
+      <div class="charla" aria-hidden="true"><p class="tu">Hoy solo tengo 30 minutos</p><p class="yo">Haz el bloque A completo y salta el accesorio. Listo.</p></div>
+    </article>
   </div>
 </div></section>
 
-<section class="bloque b-azul" id="app">
-  <div class="w"><p class="sobre rev">La app</p><h2 class="rev h-m">Todo en tu teléfono.<br><i>En tiempo real.</i></h2><p class="txt rev">Nada de Excel ni PDF: eso es cosa del pasado. Tu plan, tus registros y tus avances se actualizan al momento.</p><p class="desliza" aria-hidden="true">Desliza para ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p></div>
-  <div class="carr" data-carr aria-label="Pantallas de la app">
-    <figure class="rev"><div class="tel"><img src="img/v2/dash.webp" alt="La pantalla de inicio de la app" width="640" height="1385"></div><figcaption>Tu día, de un vistazo</figcaption></figure>
-    <figure class="rev"><div class="tel"><img src="img/v2/rutina-series.webp" alt="La rutina del día en la app" width="640" height="1385"></div><figcaption>Tu rutina, con video</figcaption></figure>
-    <figure class="rev"><div class="tel"><img src="img/v2/chat-1.webp" alt="El chat de alimentación de la app" width="640" height="1385"></div><figcaption>Tu comida, en una frase</figcaption></figure>
+<section class="bloque b-azul" id="app"><div class="w dos">
+  <div>
+    <p class="sobre rev">La app</p>
+    <h2 class="rev h-m">Todo en tu teléfono.<br><i>En tiempo real.</i></h2>
+    <p class="txt rev">Nada de Excel ni PDF: eso es cosa del pasado. Tu plan, tus registros y tus avances se actualizan al momento.</p>
   </div>
-</section>
+  <div class="tour rev" data-tour>
+    <div class="tour-barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="tel tour-tel"><img src="img/v2/comida.webp" alt="Tu día de comida, en vivo" width="640" height="1385" class="on"><img src="img/v2/chat-1.webp" alt="Lo escribes y la app hace la cuenta" width="640" height="1385"><img src="img/v2/receta.webp" alt="Recetas en la porción que te toca" width="640" height="1385"><img src="img/v2/entreno-calendario.webp" alt="Tu mes de entreno, organizado" width="640" height="1385"><img src="img/v2/composicion.webp" alt="Tu grasa y tu músculo, medidos" width="640" height="1385"></div>
+    <p class="tour-t" aria-live="polite">Tu día de comida, en vivo</p>
+    <p class="tour-n">Toca el teléfono para pasar a la siguiente</p>
+  </div>
+</div></section>
 
 <section class="bloque b-grafito" id="coach"><div class="w dos">
   <div>
     <p class="sobre rev" style="color:var(--ama);opacity:1">Tu coach</p>
     <h2 class="rev h-m">Trabajo con<br><i>método y ciencia.</i></h2>
     <p class="quien2 rev"><img src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
+    <p class="bio rev">Llevo años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno después de una lesión y salud metabólica. Traduzco fisiología, biomecánica y nutrición en un proceso que tu cuerpo pueda sostener.</p>
   </div>
   <div>
     <p class="certs-t rev">Certificaciones ISSA</p>
@@ -714,7 +779,7 @@
   </div>
   <div class="rev">
     <p class="precio"><span class="cifra" data-cifra="200000">$200.000</span><small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
-    <p class="resumen rev">Todo lo que viste: <b>app de alimentación, app de entrenamiento, seguimiento con datos y tu coach.</b></p>
+    <p class="resumen rev">Todo lo que viste: <b>app de alimentación, app de entrenamiento, seguimiento con datos y tu coach contigo.</b></p>
     <p class="garantia rev"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Pagas mes a mes y cancelas cuando quieras.</span></p>
   </div>
 </div></section>
@@ -728,12 +793,12 @@
     <details><summary>¿Necesito experiencia?</summary><p>No. Empezamos desde donde estás.</p></details>
     <details><summary>¿Y si no tengo gimnasio?</summary><p>El plan se arma con tu equipo y tu agenda. En casa o en gimnasio.</p></details>
     <details><summary>¿Cuánto tiempo necesito?</summary><p>El que tengas. Armo el plan con los días y los minutos que me digas.</p></details>
-    <details><summary>¿En cuánto tiempo veo resultados?</summary><p>Depende de tu punto de partida y de tu constancia. Lo que sí tienes: cada semana sabes si vas avanzando, porque lo medimos.</p></details>
+    <details><summary>¿En cuánto tiempo veo resultados?</summary><p>Depende de tu punto de partida y de tu constancia. Lo que sí tienes: siempre sabes si vas avanzando, porque lo medimos.</p></details>
     <details><summary>¿Y si viajo o me enfermo?</summary><p>Me avisas y ajustamos el plan. Esos días no cuentan como fallados.</p></details>
     <details><summary>¿Y si tengo una lesión?</summary><p>Cuéntamelo desde el primer mensaje y adapto los ejercicios. Si la lesión está activa, primero tu médico o fisioterapeuta.</p></details>
-    <details><summary>¿Qué tan seguido hablamos?</summary><p>Reviso tu semana cada semana, y para tus dudas tienes WhatsApp directo conmigo.</p></details>
-    <details><summary>¿Cómo recibo el plan?</summary><p>Todo en la app, y por WhatsApp la revisión semanal. 100% online.</p></details>
-    <details><summary>¿Cómo empiezo?</summary><p>Me escribes por Instagram. El botón abre el chat y te copia el mensaje.</p></details>
+    <details><summary>¿Qué tan seguido hablamos?</summary><p>Sigo tus registros de cerca y, para tus dudas, tienes WhatsApp directo conmigo.</p></details>
+    <details><summary>¿Cómo recibo el plan?</summary><p>Todo en la app. 100% online.</p></details>
+    <details><summary>¿Cómo empiezo?</summary><p>Me escribes por Instagram y agendamos una videollamada: conversamos a fondo, definimos tu plan de trabajo y te explico la metodología en detalle.</p></details>
     <details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y cancelas cuando quieras.</p></details>
   </div>
 </div></section>
@@ -742,7 +807,11 @@
   <div class="w">
     <p class="sobre" style="color:var(--ama);opacity:1">Empieza hoy</p>
     <h2>Empieza<br>tu <i>proceso</i><span style="color:var(--ama)">.</span></h2>
-    <p class="cierre-l">Me escribes, hablamos de tu objetivo y te digo cómo te puedo ayudar.</p>
+    <ol class="despues">
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Me escribes</b> por Instagram.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><p><b>Agendamos una videollamada</b> para conversar a fondo.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><p><b>Definimos tu plan de trabajo</b> y te explico la metodología en detalle.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -898,7 +967,7 @@
   var contar = function () {
     if (!cifra || cifra.dataset.hecho) return; cifra.dataset.hecho = '1';
     var fin = +cifra.dataset.cifra, t0 = null;
-    var paso = function (t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3);
+    var paso = function (t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 450), e = 1 - Math.pow(1 - k, 3);
       cifra.textContent = '$' + Math.round(fin * e / 1000 * 1000).toLocaleString('es-CO'); if (k < 1) requestAnimationFrame(paso); };
     requestAnimationFrame(paso);
   };
@@ -913,6 +982,7 @@
   var rueda = document.querySelector('.rueda'), flechas = rueda && rueda.querySelector('.flechas'), nodos = rueda ? rueda.querySelectorAll('.nodo') : [];
   var linea = document.querySelector('.linea'), barra = linea && linea.querySelector('.ln-barra'), pasos = linea ? linea.querySelectorAll('li:not(.ln-barra)') : [];
   var tel = document.querySelector('.bt-tel');
+  var fab = document.getElementById('fijo'), resto = document.querySelector('.resto'), zona = null;
   var ancho = window.matchMedia('(min-width:900px)');
   var pend = false;
   function pinta() {
@@ -937,6 +1007,10 @@
         li.classList.toggle('on', on);
       });
     }
+    if (fab && resto) {
+      var z = (!ancho.matches && resto.getBoundingClientRect().top > vh * 0.55) ? 'izq' : 'der';
+      if (z !== zona) { var primera = zona === null; zona = z; if (primera) fab.classList.toggle('izq', z === 'izq'); else { fab.classList.add('cambia'); setTimeout(function () { fab.classList.toggle('izq', zona === 'izq'); fab.classList.remove('cambia'); }, 200); } }
+    }
     if (tel) {
       var b = tel.parentNode.getBoundingClientRect();
       if (b.bottom > 0 && b.top < vh) tel.style.setProperty('--py', Math.max(0, ((b.top + b.height / 2) - vh / 2) * 0.12).toFixed(1) + 'px');
@@ -945,6 +1019,27 @@
   window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(pinta); } }, { passive: true });
   window.addEventListener('resize', pinta);
   pinta();
+})();
+</script>
+<script>
+// Recorrido de la app: las pantallas pasan solas (como historias) mientras se
+// ve; un toque pasa a la siguiente. Con «reducir movimiento» solo pasa al tocar.
+(function () {
+  var t = document.querySelector('[data-tour]'); if (!t) return;
+  var imgs = t.querySelectorAll('.tour-tel img'), barras = t.querySelectorAll('.tour-barras i'), txt = t.querySelector('.tour-t');
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches, DUR = 2800, i = 0, reloj = null, visible = false;
+  function pon(n) {
+    i = (n + imgs.length) % imgs.length;
+    imgs.forEach(function (im, k) { im.classList.toggle('on', k === i); });
+    barras.forEach(function (b, k) { b.classList.remove('va'); b.classList.toggle('hecha', k < i); });
+    txt.textContent = imgs[i].alt;
+    clearTimeout(reloj);
+    if (visible && !quieto) { void barras[i].offsetWidth; barras[i].style.setProperty('--dur', DUR + 'ms'); barras[i].classList.add('va'); reloj = setTimeout(function () { pon(i + 1); }, DUR); }
+    else if (quieto) barras[i].classList.add('hecha');
+  }
+  t.querySelector('.tour-tel').addEventListener('click', function () { pon(i + 1); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; pon(i); }, { threshold: 0.35 }).observe(t);
+  else { visible = true; pon(0); }
 })();
 </script>
 </body>
