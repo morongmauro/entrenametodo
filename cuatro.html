@@ -357,6 +357,63 @@
     .ln-ic { width:58px; height:58px; } .linea b { font-size:24px; }
     .dia { font-size:22px; } .incl span { font-size:16px; padding:14px; }
   }
+
+  /* ══ Movimiento al bajar ══ */
+  .js .st > * { opacity:0; transform:translateY(26px) scale(.97); transition:opacity .6s var(--suave), transform .75s var(--suave); transition-delay:calc(var(--i, 0) * 90ms); }
+  .js .st.v > * { opacity:1; transform:none; }
+  .js .dolores.v .d-ic { animation:pop .7s var(--suave) both; animation-delay:calc(var(--i, 0) * 90ms + .25s); }
+  @keyframes pop { 0% { transform:scale(.3) rotate(-18deg); opacity:0; } 60% { transform:scale(1.15) rotate(4deg); opacity:1; } 100% { transform:none; } }
+  .giro b { background-repeat:no-repeat; background-size:100% 100%; }
+  .js .giro b { background-size:0% 100%; transition:background-size 1.1s var(--suave) .45s; }
+  .js .giro.v b { background-size:100% 100%; }
+  .js .vs2 > p { opacity:0; transform:translateX(-16px); transition:opacity .5s var(--suave), transform .6s var(--suave); transition-delay:calc(var(--i, 0) * 120ms); }
+  .js .vs2 > .c-c { transform:translateX(22px); transition-delay:calc(var(--i, 0) * 120ms + 160ms); }
+  .js .vs2.v > p { opacity:1; transform:none; }
+  .flechas { transform-box:view-box; transform-origin:150px 150px; }
+  .nodo { transition:opacity .45s var(--suave), transform .45s var(--suave); }
+  .rueda.activa .nodo { opacity:.45; }
+  .rueda.activa .nodo.on { opacity:1; transform:translate(-50%, -50%) scale(1.14); }
+  .rueda .nodo span { transition:box-shadow .45s; }
+  .rueda.activa .nodo.on span { box-shadow:0 0 0 8px rgba(242,201,76,.22), 0 14px 30px -12px rgba(242,201,76,.7); }
+  .bt-tel { transform:translateY(var(--py, 0px)) rotate(7deg); will-change:transform; }
+  .js .platos3 img { opacity:0; transform:translateX(-70px) rotate(-120deg); transition:opacity .5s var(--suave), transform .9s var(--suave); }
+  .js .platos3 img:nth-child(2) { transition-delay:.15s; } .js .platos3 img:nth-child(3) { transition-delay:.3s; }
+  .js .bt.v .platos3 img { opacity:1; transform:none; }
+  .js .g-linea { stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.6s var(--suave) .35s; }
+  .js .bt.v .g-linea { stroke-dashoffset:0; }
+  .js .g-area { opacity:0; transition:opacity .8s .9s; } .js .bt.v .g-area { opacity:1; }
+  .js .g-punto { opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(0); transition:opacity .3s 1.8s, transform .5s cubic-bezier(.3,1.8,.5,1) 1.8s; }
+  .js .bt.v .g-punto { opacity:1; transform:none; }
+  .js .charla p { opacity:0; transform:translateY(12px) scale(.94); transition:opacity .45s var(--suave), transform .5s var(--suave); }
+  .js .charla .tu { transform-origin:left bottom; transition-delay:.45s; } .js .charla .yo { transform-origin:right bottom; transition-delay:1.35s; }
+  .js .bt.v .charla p { opacity:1; transform:none; }
+  .js .chips span { opacity:0; transform:translateY(8px); transition:opacity .4s var(--suave), transform .5s var(--suave); }
+  .js .bt.v .chips span { opacity:1; transform:none; }
+  .js .bt.v .chips span:nth-child(2) { transition-delay:.08s; } .js .bt.v .chips span:nth-child(3) { transition-delay:.16s; } .js .bt.v .chips span:nth-child(4) { transition-delay:.24s; }
+  .cert { position:relative; overflow:hidden; }
+  .brillo { position:absolute; top:0; bottom:0; left:-60%; width:40%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent); transform:skewX(-18deg); pointer-events:none; }
+  .js .cert.v .brillo { animation:brillo 1.4s var(--suave) .7s both; }
+  @keyframes brillo { from { left:-60%; } to { left:130%; } }
+  .js .cert .cert-sello { opacity:0; transform:scale(.3) rotate(-140deg); transition:opacity .4s .15s, transform .9s cubic-bezier(.3,1.5,.5,1) .15s; }
+  .js .cert.v .cert-sello { opacity:1; transform:none; }
+  .linea { position:relative; }
+  .ln-barra { position:absolute !important; left:28px; top:29px; bottom:60px; width:2px !important; padding:0 !important; display:block !important; background:var(--ink); transform-origin:top; transform:scaleY(var(--lp, 0)); z-index:0; }
+  .linea .ln-barra::before { display:none !important; }
+  .linea li:not(.ln-barra) { z-index:1; }
+  .js .linea .ln-ic { transition:transform .5s cubic-bezier(.3,1.6,.5,1), background .4s, color .4s; background:#D9D5CB; color:#8C8A84; transform:scale(.86); }
+  .js .linea li.on .ln-ic { background:var(--ink); color:var(--ama); transform:none; }
+  .js .linea li:not(.ln-barra) > div { opacity:.35; transition:opacity .5s; } .js .linea li.on > div { opacity:1; }
+  .js .incl.st > * { transform:translateY(16px) scale(.9); }
+  .js .incl.st.v > * { transform:none; }
+  @media (min-width:900px) {
+    .ln-barra { left:29px; right:calc(25% - 18px); top:29px; bottom:auto; width:auto !important; height:2px; transform:scaleX(var(--lp, 0)); transform-origin:left; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .st > *, .js .vs2 > p, .js .platos3 img, .js .charla p, .js .chips span, .js .cert .cert-sello, .js .g-area, .js .g-punto { opacity:1 !important; transform:none !important; transition:none !important; }
+    .js .g-linea { stroke-dashoffset:0; transition:none; } .js .giro b { background-size:100% 100%; transition:none; }
+    .js .dolores.v .d-ic, .js .cert.v .brillo { animation:none; } .bt-tel { transform:rotate(7deg); }
+    .js .linea .ln-ic, .js .linea li > div { opacity:1; transform:none; background:var(--ink); color:var(--ama); } .ln-barra { transform:none; }
+  }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; transition:none; } }
 </style>
 </head>
@@ -451,7 +508,7 @@
     <p class="sobre rev">La diferencia</p>
     <h2 class="rev h-m">Solo o<br><i>con método.</i></h2>
   </div>
-  <div class="vs2 rev" role="table" aria-label="Solo o con método">
+  <div class="vs2" data-mov role="table" aria-label="Solo o con método">
     <p class="c-s vs-h" role="columnheader">Solo</p><p class="c-c vs-h" role="columnheader">Con método</p>
     <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Rutina copiada</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Plan hecho para ti</p>
     <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Progreso a ojo</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Cada serie registrada</p>
@@ -472,7 +529,7 @@
       <svg class="aro" viewBox="0 0 300 300" aria-hidden="true">
         <defs><marker id="punta" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#F2C94C"/></marker></defs>
         <circle cx="150" cy="150" r="118" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="22"/>
-        <g fill="none" stroke="#F2C94C" stroke-width="3" stroke-linecap="round" marker-end="url(#punta)">
+        <g class="flechas" fill="none" stroke="#F2C94C" stroke-width="3" stroke-linecap="round" marker-end="url(#punta)">
           <path d="M190.4 39.1A118 118 0 0 1 260.9 109.6"/><path d="M260.9 190.4A118 118 0 0 1 190.4 260.9"/>
           <path d="M109.6 260.9A118 118 0 0 1 39.1 190.4"/><path d="M39.1 109.6A118 118 0 0 1 109.6 39.1"/>
         </g>
@@ -513,7 +570,7 @@
       <p class="bt-l">Cada semana vemos tu avance con datos, no a ojo.</p>
       <div class="chips"><span><svg class="ic" aria-hidden="true"><use href="#i-calok"/></svg>Revisión semanal</span><span><svg class="ic" aria-hidden="true"><use href="#i-bascula"/></svg>Peso y % de grasa</span><span><svg class="ic" aria-hidden="true"><use href="#i-foto"/></svg>Fotos de progreso</span></div>
       <div class="grafica" aria-hidden="true"><p>Tu cintura · 8 semanas <b>ejemplo</b></p>
-        <svg viewBox="0 0 240 80"><path d="M4 18 L36 22 L68 30 L100 33 L132 42 L164 48 L196 55 L236 62" fill="none" stroke="#3C7BD6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 18 L36 22 L68 30 L100 33 L132 42 L164 48 L196 55 L236 62 L236 80 L4 80Z" fill="rgba(60,123,214,.12)"/><circle cx="236" cy="62" r="5" fill="#3C7BD6"/></svg></div>
+        <svg viewBox="0 0 240 80"><path class="g-linea" pathLength="1" d="M4 18 L36 22 L68 30 L100 33 L132 42 L164 48 L196 55 L236 62" fill="none" stroke="#3C7BD6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 18 L36 22 L68 30 L100 33 L132 42 L164 48 L196 55 L236 62 L236 80 L4 80Z" class="g-area" fill="rgba(60,123,214,.12)"/><circle class="g-punto" cx="236" cy="62" r="5" fill="#3C7BD6"/></svg></div>
     </article>
     <article class="bt bt-acomp a-grafito rev">
       <p class="bt-t"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Acompañamiento</p>
@@ -554,7 +611,7 @@
     <p class="firma rev"><b>Mauro Morón</b>Coach de entrenamiento y nutrición</p>
   </div>
   <div>
-    <div class="cert rev">
+    <div class="cert rev"><i class="brillo" aria-hidden="true"></i>
       <span class="cert-sello"><svg class="ic" aria-hidden="true"><use href="#i-sello"/></svg></span>
       <div><p class="cert-org">Certificado · ISSA</p><b>Certified Fitness &amp; Nutrition Coach</b><span>International Sports Sciences Association</span></div>
     </div>
@@ -569,7 +626,7 @@
 <section class="claro" id="como"><div class="w">
   <p class="sobre rev">Cómo empiezas</p>
   <h2 class="rev h-m">Cuatro pasos.<br><i>Sin enredos.</i></h2>
-  <ol class="linea">
+  <ol class="linea" data-mov><li class="ln-barra" aria-hidden="true"></li>
     <li class="rev"><span class="ln-ic"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><div><b>Me escribes</b><span>Por Instagram: tu objetivo, tu tiempo y tu punto de partida.</span></div></li>
     <li class="rev"><span class="ln-ic"><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><div><b>Armo tu plan</b><span>Entreno y comida a tu medida, listos en tu app.</span></div></li>
     <li class="rev"><span class="ln-ic"><svg class="ic" aria-hidden="true"><use href="#i-movil"/></svg></span><div><b>Entrenas y registras</b><span>La app te dice qué toca y guardas cada serie.</span></div></li>
@@ -584,13 +641,13 @@
     <p class="dia rev">Menos de <b>$7.000 COP al día</b> por tu entreno, tu comida y tu coach.</p>
   </div>
   <div class="rev">
-    <p class="precio">$200.000<small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
+    <p class="precio"><span class="cifra" data-cifra="200000">$200.000</span><small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
     <div class="incl">
       <span><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento a tu medida</span><span><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Nutrición y 54 recetas</span>
       <span><svg class="ic" aria-hidden="true"><use href="#i-movil"/></svg>La app completa</span><span><svg class="ic" aria-hidden="true"><use href="#i-calok"/></svg>Revisión semanal</span>
       <span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg>Revisión de técnica</span><span><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp y comunidad</span>
     </div>
-    <p class="garantia"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Pagas mes a mes y cancelas cuando quieras.</span></p>
+    <p class="garantia rev"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Pagas mes a mes y cancelas cuando quieras.</span></p>
   </div>
 </div></section>
 
@@ -762,6 +819,73 @@
     if (c.top < vh && c.bottom > 0) { var d = Math.max(-1, Math.min(1, (c.top + c.height / 2 - vh / 2) / vh)); pesa.style.transform = 'translate3d(0,' + (d * 40).toFixed(1) + 'px,0) rotate(' + (-6 + d * 16).toFixed(1) + 'deg)'; }
   }
   window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(pinta); } }, { passive: true });
+  pinta();
+})();
+</script>
+<script>
+// Movimiento al bajar: listas que entran una a una, el ciclo que gira con el
+// scroll, la línea de pasos que se llena, el teléfono que flota y el precio que
+// cuenta hasta $200.000. Con «reducir movimiento» todo queda quieto y visible.
+(function () {
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var IO = 'IntersectionObserver' in window;
+  ['.dolores', '.principios2', '.incl', '.compromisos'].forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (c) {
+      c.classList.remove('rev'); c.classList.add('st');
+      Array.prototype.forEach.call(c.children, function (h, i) { h.classList.remove('rev'); h.style.setProperty('--i', i); });
+    });
+  });
+  document.querySelectorAll('.vs2').forEach(function (c) { Array.prototype.forEach.call(c.children, function (h, i) { h.style.setProperty('--i', Math.floor(i / 2)); }); });
+  var cifra = document.querySelector('[data-cifra]');
+  var contar = function () {
+    if (!cifra || cifra.dataset.hecho) return; cifra.dataset.hecho = '1';
+    var fin = +cifra.dataset.cifra, t0 = null;
+    var paso = function (t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3);
+      cifra.textContent = '$' + Math.round(fin * e / 1000 * 1000).toLocaleString('es-CO'); if (k < 1) requestAnimationFrame(paso); };
+    requestAnimationFrame(paso);
+  };
+  var obs = document.querySelectorAll('.st, [data-mov], .precio');
+  if (!IO || quieto) { obs.forEach(function (e) { e.classList.add('v'); }); }
+  else {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('v'); if (e.target.classList.contains('precio')) contar(); io.unobserve(e.target); }); }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+    obs.forEach(function (e) { io.observe(e); });
+  }
+  if (quieto) { document.querySelectorAll('.linea li').forEach(function (l) { l.classList.add('on'); }); return; }
+
+  var rueda = document.querySelector('.rueda'), flechas = rueda && rueda.querySelector('.flechas'), nodos = rueda ? rueda.querySelectorAll('.nodo') : [];
+  var linea = document.querySelector('.linea'), barra = linea && linea.querySelector('.ln-barra'), pasos = linea ? linea.querySelectorAll('li:not(.ln-barra)') : [];
+  var tel = document.querySelector('.bt-tel');
+  var ancho = window.matchMedia('(min-width:900px)');
+  var pend = false;
+  function pinta() {
+    pend = false; var vh = window.innerHeight;
+    if (rueda) {
+      var r = rueda.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) {
+        var p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+        flechas.style.transform = 'rotate(' + (p * 360).toFixed(1) + 'deg)';
+        rueda.classList.add('activa');
+        var act = Math.min(3, Math.floor(p * 4));
+        nodos.forEach(function (n, i) { n.classList.toggle('on', i === act); });
+      }
+    }
+    if (linea) {
+      var l = linea.getBoundingClientRect(), lp;
+      if (ancho.matches) lp = Math.max(0, Math.min(1, (vh * 0.8 - l.top) / (vh * 0.45)));
+      else lp = Math.max(0, Math.min(1, (vh * 0.62 - l.top - 29) / Math.max(1, l.height - 89)));
+      barra.style.setProperty('--lp', lp.toFixed(3));
+      pasos.forEach(function (li, i) {
+        var on = ancho.matches ? lp >= (pasos.length > 1 ? i / (pasos.length - 1) : 0) - 0.001 : li.getBoundingClientRect().top + 29 <= vh * 0.62 + 1;
+        li.classList.toggle('on', on);
+      });
+    }
+    if (tel) {
+      var b = tel.parentNode.getBoundingClientRect();
+      if (b.bottom > 0 && b.top < vh) tel.style.setProperty('--py', (((b.top + b.height / 2) - vh / 2) * 0.12).toFixed(1) + 'px');
+    }
+  }
+  window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(pinta); } }, { passive: true });
+  window.addEventListener('resize', pinta);
   pinta();
 })();
 </script>
