@@ -215,10 +215,18 @@
      color, su frase gigante y su objeto inclinado a la derecha. En celular se
      apilan al bajar (cada carta sube y tapa la anterior); en computador van
      las cuatro en fila. ══ */
-  .cuatro { position:relative; padding:12px 10px 0; }
-  .carta { position:sticky; top:12px; height:calc(100svh - 60px); min-height:560px; max-height:860px; margin-bottom:22px; border-radius:34px; overflow:hidden;
+  .cuatro { position:relative; padding:12px 10px 0; --ch:clamp(560px, calc(100svh - 60px), 860px); }
+  .carta { position:sticky; top:12px; height:var(--ch); margin-bottom:22px; border-radius:34px; overflow:hidden;
     box-shadow:0 -10px 30px -18px rgba(0,0,0,.35); }
-  .carta:nth-child(2) { top:24px; } .carta:nth-child(3) { top:36px; } .carta:nth-child(4) { top:48px; }
+  .carta:nth-child(2) { top:24px; } .carta:nth-child(3) { top:36px; }
+  /* Cada gesto deja una carta completa: lo hace el navegador (scroll-snap), no un script. */
+  .snap { display:none; }
+  @media (max-width:899px) and (pointer:coarse) {
+    html { scroll-snap-type:y mandatory; }
+    .snap { display:block; position:absolute; left:0; top:calc(12px + var(--n) * (var(--ch) + 22px)); width:1px; height:1px; pointer-events:none;
+      scroll-snap-align:start; scroll-snap-stop:always; scroll-margin-top:calc(var(--n) * 12px); }
+    .resto { scroll-snap-align:start; }
+  }
   .carta .in { position:relative; z-index:2; padding:30px 24px 0; }
   .carta h1, .carta h2 { margin-top:14px; font-size:min(21vw, 13svh, 150px); font-weight:900; letter-spacing:-.055em; line-height:.86; }
   .carta h1 span, .carta h2 span { display:block; }
@@ -228,7 +236,8 @@
   .c-comida { background:radial-gradient(120% 60% at 70% 70%, #63B279 0%, #46965A 46%, #357A47 100%); color:#fff; }
   .c-app { background:radial-gradient(120% 60% at 70% 70%, #6FA2EE 0%, #3C7BD6 46%, #2C63B8 100%); color:#fff; }
   .c-coach { background:radial-gradient(110% 60% at 60% 75%, #3B3B41 0%, #1F1F21 50%, #141416 100%); color:#fff; }
-  .c-entreno .ob { width:min(92vw, 46svh); right:-20%; bottom:-4%; transform:rotate(-9deg); filter:drop-shadow(0 30px 30px rgba(60,40,0,.3)); }
+  .c-entreno::after { content:''; position:absolute; left:0; right:0; bottom:0; height:18%; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(233,185,47,0), rgba(233,185,47,.78)); }
+  .c-entreno .ob { width:min(92vw, 46svh); right:-20%; bottom:-4%; transform:rotate(12deg); filter:drop-shadow(0 30px 30px rgba(60,40,0,.3)); }
   .c-comida .ob { width:min(120vw, 60svh); right:-46%; bottom:-10%; transform:rotate(16deg); filter:drop-shadow(0 30px 34px rgba(0,40,10,.35)); }
   .c-app .ob { width:min(62vw, 33svh); right:-6%; bottom:-14%; margin:0; padding:8px; border-radius:46px; background:#1B1B1D; transform:rotate(8deg); box-shadow:0 50px 70px -30px rgba(0,0,0,.55); }
   .c-app .ob img { border-radius:38px; width:100%; }
@@ -249,16 +258,16 @@
   .js .carta .in > * { opacity:0; transform:translateY(22px); transition:opacity .7s var(--suave), transform .7s var(--suave); }
   .js .carta.v .in > * { opacity:1; transform:none; }
   .js .carta.v .in > *:nth-child(2) { transition-delay:.06s; } .js .carta.v .in > *:nth-child(3) { transition-delay:.12s; }
-  .js .carta .ob { opacity:0; transition:opacity .8s var(--suave) .1s, translate .9s var(--suave) .1s; translate:14% 4%; }
-  .js .carta.v .ob { opacity:1; translate:0 0; }
+  .js .carta .ob { opacity:0; transition:opacity .7s var(--suave) .1s, translate 1s var(--suave) .1s, rotate 1s var(--suave) .1s; translate:60% 0; rotate:16deg; }
+  .js .carta.v .ob { opacity:1; translate:0 0; rotate:0deg; }
   @media (min-width:900px) {
-    .cuatro { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; padding:24px 14px 0; }
+    .cuatro { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; padding:24px 14px 0; }
     .carta { position:relative; top:auto !important; height:min(82vh, 820px); min-height:600px; margin:0; border-radius:40px; }
     .carta .in { padding:34px 26px 0; }
-    .carta h1, .carta h2 { font-size:min(5.6vw, 9vh, 104px); }
+    .carta h1, .carta h2 { font-size:min(6.2vw, 9.4vh, 108px); }
     .carta p.l { font-size:17px; }
-    .c-entreno .ob { width:110%; right:-34%; bottom:-6%; } .c-comida .ob { width:150%; right:-70%; bottom:-14%; }
-    .c-app .ob { width:54%; right:-6%; bottom:-22%; } .ficha { width:70cqw; right:-4%; bottom:7%; font-size:3.9cqw; }
+    .c-entreno .ob { width:88%; right:-20%; bottom:-6%; } .c-comida .ob { width:118%; right:-50%; bottom:-16%; }
+    .c-app .ob { width:48%; right:-4%; bottom:-28%; } .ficha { width:70cqw; right:-4%; bottom:7%; font-size:3.9cqw; }
   }
 
   /* ══ Al bajar: problema → solución → ciencia → qué incluye → coach → pasos → oferta ══ */
@@ -484,7 +493,33 @@
     .gr-tel { width:66%; margin-bottom:-40%; } .certs-t { margin-top:0; }
     .cierre2 { padding:130px 0 120px; }
   }
-  @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; transition:none; } }
+
+  /* ══ Ajustes: naranja de la marca, cinta de recetas, imágenes desde el lado ══ */
+  .a-naranja { background:radial-gradient(120% 80% at 80% 100%, #F9B27C 0%, #EE8434 62%); color:var(--ink); }
+  .tel img, .gr-tel img, .c-app .ob img { aspect-ratio:640 / 1385; background:#F3F1EB; }
+  .gr-sub { margin-top:24px; font-size:clamp(27px, 7.6vw, 36px); font-weight:900; letter-spacing:-.045em; line-height:1; } .gr-sub i { font-style:italic; }
+  .gr-sub + .gr-p { margin-top:8px; }
+  .cinta { margin:20px -22px 0; padding-bottom:24px; overflow:hidden; }
+  .cinta-in { display:flex; gap:10px; width:max-content; animation:cinta 46s linear infinite; }
+  .cinta figure { width:128px; flex:none; }
+  .cinta img { width:128px; height:128px; object-fit:cover; border-radius:24px; background:rgba(255,255,255,.2); }
+  .cinta figcaption { margin-top:7px; font-size:12.5px; font-weight:700; line-height:1.2; opacity:.92; }
+  @keyframes cinta { from { transform:translateX(0); } to { transform:translateX(calc(-50% - 5px)); } }
+  .js .gr .gr-tel { opacity:0; translate:70% 0; transition:opacity .7s var(--suave) .15s, translate 1s var(--suave) .15s; }
+  .js .gr.v .gr-tel { opacity:1; translate:0 0; }
+  .js .gr .grafica2 { opacity:0; translate:-18% 0; transition:opacity .7s var(--suave) .15s, translate .9s var(--suave) .15s; }
+  .js .gr.v .grafica2 { opacity:1; translate:0 0; }
+  .js #app .carr figure.rev { transform:translateX(110px); }
+  .js #app .carr figure.rev.v { transform:none; }
+  .js #app .carr figure.rev:nth-child(2) { transition-delay:.12s; } .js #app .carr figure.rev:nth-child(3) { transition-delay:.24s; }
+  .js .quien2 img { transition:translate .9s var(--suave) .1s, opacity .6s .1s; translate:-60px 0; opacity:0; }
+  .js .quien2.v img { translate:0 0; opacity:1; }
+  @media (min-width:900px) { .cinta { margin:20px -28px 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .cinta-in { animation:none; } .cinta { overflow-x:auto; }
+    .js .gr .gr-tel, .js .gr .grafica2, .js .quien2 img { opacity:1; translate:0 0; transition:none; } .js #app .carr figure.rev { transform:none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
 </style>
 </head>
 <body>
@@ -535,29 +570,21 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l">Rutinas con video y cada serie registrada.</p></div>
+    <div class="in"><p class="sobre">Coaching online</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
     <img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high">
   </article>
   <article class="carta c-comida">
     <div class="in"><p class="sobre">Coaching online</p><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Recetas ricas en la porción que te toca.</p></div>
-    <img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219" loading="lazy">
+    <img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219">
   </article>
   <article class="carta c-app">
     <div class="in"><p class="sobre">Coaching online</p><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu día en una app hecha para este método.</p></div>
-    <figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385" loading="lazy"></figure>
+    <figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385"></figure>
   </article>
-  <article class="carta c-coach">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Basado</span><span>en</span><span><i>ciencia.</i></span></h2><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
-    <div class="ob ficha" aria-hidden="true">
-      <p class="f-t">Tu ciclo · Fase 2</p>
-      <p class="f-h">Sentadilla</p>
-      <div class="f-barras"><i style="--h:62%"><b>60 kg</b></i><i style="--h:72%"><b>62,5</b></i><i style="--h:84%"><b>65</b></i><i class="d" style="--h:48%"><b>55</b></i></div>
-      <div class="f-sem"><span>S1</span><span>S2</span><span>S3</span><span>Descarga</span></div>
-      <ul class="f-l"><li>Series registradas<b>12/12</b></li><li>Esfuerzo (RPE)<b>8</b></li><li>Proteína hoy<b>140 g</b></li></ul>
-    </div>
-  </article>
+  <i class="snap" style="--n:0"></i><i class="snap" style="--n:1"></i><i class="snap" style="--n:2"></i>
 </section>
 
+<div class="resto">
 <section class="claro" id="dolor"><div class="w dos">
   <div>
     <p class="sobre rev">¿Te pasa esto?</p>
@@ -585,7 +612,7 @@
     <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Progreso a ojo</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Cada serie registrada</p>
     <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Dietas que no sostienes</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Recetas en tu porción</p>
     <p class="c-s"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Dudas sin respuesta</p><p class="c-c"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>WhatsApp con tu coach</p>
-    <p class="c-s fin"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Ajustas cuando ya te estancaste</p><p class="c-c fin"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Ajustes cada semana</p>
+    <p class="c-s fin"><svg class="ic" aria-hidden="true"><use href="#i-no"/></svg>Ajustas cuando ya te estancaste</p><p class="c-c fin"><svg class="ic" aria-hidden="true"><use href="#i-si"/></svg>Ajustes a tiempo, con tus datos</p>
   </div>
 </div></section>
 
@@ -621,19 +648,21 @@
     <article class="gr a-verde rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>App de alimentación</p>
       <h3>Hace los cálculos <i>por ti.</i></h3>
-      <p class="gr-p">Escribes lo que comiste en una frase y la app calcula tus calorías y tu proteína al instante. Además te sugiere <b>recetas personalizadas</b>, en la porción que te toca.</p>
-      <div class="gr-tel" aria-hidden="true"><img src="img/v2/chat-1.webp" alt="" loading="lazy" width="640" height="1385"></div>
+      <p class="gr-p">Escribes lo que comiste en una frase y la app calcula tus calorías y tu proteína al instante.</p>
+      <p class="gr-sub">Recetas <i>a tu medida.</i></p>
+      <p class="gr-p">Te sugiere <b>recetas personalizadas</b>, en la porción que te toca.</p>
+      <div class="cinta" aria-hidden="true"><div class="cinta-in"><figure><img src="img/platos/balanced-protein-pancakes.jpg" alt="" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra</figcaption></figure><figure><img src="img/platos/salmon-quinoa.jpg" alt="" width="400" height="400"><figcaption>Bowl de salmón y quinoa</figcaption></figure><figure><img src="img/platos/beef-plantain-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl de res y plátano</figcaption></figure><figure><img src="img/platos/yogurt-parfait.jpg" alt="" width="400" height="400"><figcaption>Parfait de yogur</figcaption></figure><figure><img src="img/platos/teriyaki-salmon.jpg" alt="" width="400" height="400"><figcaption>Salmón teriyaki</figcaption></figure><figure><img src="img/platos/mexican-chicken-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl mexicano de pollo</figcaption></figure><figure><img src="img/platos/creamy-chicken-curry.jpg" alt="" width="400" height="400"><figcaption>Pollo al curry cremoso</figcaption></figure><figure><img src="img/platos/chicken-burrito.jpg" alt="" width="400" height="400"><figcaption>Bowl burrito de pollo</figcaption></figure><figure><img src="img/platos/balanced-protein-pancakes.jpg" alt="" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra</figcaption></figure><figure><img src="img/platos/salmon-quinoa.jpg" alt="" width="400" height="400"><figcaption>Bowl de salmón y quinoa</figcaption></figure><figure><img src="img/platos/beef-plantain-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl de res y plátano</figcaption></figure><figure><img src="img/platos/yogurt-parfait.jpg" alt="" width="400" height="400"><figcaption>Parfait de yogur</figcaption></figure><figure><img src="img/platos/teriyaki-salmon.jpg" alt="" width="400" height="400"><figcaption>Salmón teriyaki</figcaption></figure><figure><img src="img/platos/mexican-chicken-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl mexicano de pollo</figcaption></figure><figure><img src="img/platos/creamy-chicken-curry.jpg" alt="" width="400" height="400"><figcaption>Pollo al curry cremoso</figcaption></figure><figure><img src="img/platos/chicken-burrito.jpg" alt="" width="400" height="400"><figcaption>Bowl burrito de pollo</figcaption></figure></div></div>
     </article>
     <article class="gr a-ama rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>App de entrenamiento</p>
       <h3>Tu entreno, <i>guiado.</i></h3>
       <p class="gr-p">Cada ejercicio con <b>video</b>, tu <b>historial</b> de cargas y la <b>recomendación</b> de cuánto subir. Registras cada serie y tenemos <b>comunicación constante</b>: respondo cada nota que me dejas.</p>
-      <div class="gr-tel bt-tel" aria-hidden="true"><img src="img/v2/rutina-series.webp" alt="" loading="lazy" width="640" height="1385"></div>
+      <div class="gr-tel bt-tel" aria-hidden="true"><img src="img/v2/rutina-series.webp" alt="" width="640" height="1385"></div>
     </article>
-    <article class="gr a-azul rev">
+    <article class="gr a-naranja rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg>Seguimiento basado en datos</p>
       <h3>Medimos lo que <i>importa.</i></h3>
-      <p class="gr-p">Tu <b>composición corporal</b>, tus <b>avances de entrenamiento</b> y tus capacidades: <b>fuerza, movilidad y agilidad</b>. Cada semana lo reviso y ajusto tu plan con esos datos.</p>
+      <p class="gr-p">Tu <b>composición corporal</b>, tus <b>avances de entrenamiento</b> y tus capacidades: <b>fuerza, movilidad y agilidad</b>. Las decisiones sobre tu plan salen de esos datos, no de suposiciones.</p>
       <div class="grafica2" aria-hidden="true"><p class="g2-t">Tus avances · 12 semanas <b>ejemplo</b></p>
         <svg viewBox="0 0 260 118"><g stroke="#ECEAE4" stroke-width="1"><path d="M0 20H260M0 50H260M0 80H260M0 110H260"/></g>
           <path class="g-linea" pathLength="1" d="M8 98 L48 90 L88 78 L128 68 L168 54 L208 42 L248 28" fill="none" stroke="#46965A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -647,23 +676,9 @@
 <section class="bloque b-azul" id="app">
   <div class="w"><p class="sobre rev">La app</p><h2 class="rev h-m">Todo en tu teléfono.<br><i>En tiempo real.</i></h2><p class="txt rev">Nada de Excel ni PDF: eso es cosa del pasado. Tu plan, tus registros y tus avances se actualizan al momento.</p><p class="desliza" aria-hidden="true">Desliza para ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p></div>
   <div class="carr" data-carr aria-label="Pantallas de la app">
-    <figure class="rev"><div class="tel"><img src="img/v2/dash.webp" alt="La pantalla de inicio de la app" loading="lazy" width="640" height="1385"></div><figcaption>Tu día, de un vistazo</figcaption></figure>
-    <figure class="rev"><div class="tel"><img src="img/v2/rutina-series.webp" alt="La rutina del día en la app" loading="lazy" width="640" height="1385"></div><figcaption>Tu rutina, con video</figcaption></figure>
-    <figure class="rev"><div class="tel"><img src="img/v2/chat-1.webp" alt="El chat de alimentación de la app" loading="lazy" width="640" height="1385"></div><figcaption>Tu comida, en una frase</figcaption></figure>
-  </div>
-</section>
-
-<section class="bloque b-verde" id="recetas">
-  <div class="w"><p class="sobre rev">Alimentación</p><h2 class="rev">Comida rica.<br><i>A tu medida.</i></h2><p class="desliza" aria-hidden="true">Desliza para ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></p></div>
-  <div class="carr carr-platos" data-carr aria-label="Algunas recetas">
-    <figure class="plato"><img src="img/platos/balanced-protein-pancakes.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra</figcaption></figure>
-    <figure class="plato"><img src="img/platos/salmon-quinoa.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl de salmón y quinoa</figcaption></figure>
-    <figure class="plato"><img src="img/platos/beef-plantain-bowl.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl de res y plátano</figcaption></figure>
-    <figure class="plato"><img src="img/platos/yogurt-parfait.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Parfait de yogur</figcaption></figure>
-    <figure class="plato"><img src="img/platos/teriyaki-salmon.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Salmón teriyaki</figcaption></figure>
-    <figure class="plato"><img src="img/platos/mexican-chicken-bowl.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl mexicano de pollo</figcaption></figure>
-    <figure class="plato"><img src="img/platos/creamy-chicken-curry.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Pollo al curry cremoso</figcaption></figure>
-    <figure class="plato"><img src="img/platos/chicken-burrito.jpg" alt="" loading="lazy" width="400" height="400"><figcaption>Bowl burrito de pollo</figcaption></figure>
+    <figure class="rev"><div class="tel"><img src="img/v2/dash.webp" alt="La pantalla de inicio de la app" width="640" height="1385"></div><figcaption>Tu día, de un vistazo</figcaption></figure>
+    <figure class="rev"><div class="tel"><img src="img/v2/rutina-series.webp" alt="La rutina del día en la app" width="640" height="1385"></div><figcaption>Tu rutina, con video</figcaption></figure>
+    <figure class="rev"><div class="tel"><img src="img/v2/chat-1.webp" alt="El chat de alimentación de la app" width="640" height="1385"></div><figcaption>Tu comida, en una frase</figcaption></figure>
   </div>
 </section>
 
@@ -671,7 +686,7 @@
   <div>
     <p class="sobre rev" style="color:var(--ama);opacity:1">Tu coach</p>
     <h2 class="rev h-m">Trabajo con<br><i>método y ciencia.</i></h2>
-    <p class="quien2 rev"><img src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64" loading="lazy"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
+    <p class="quien2 rev"><img src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
   </div>
   <div>
     <p class="certs-t rev">Certificaciones ISSA</p>
@@ -726,9 +741,10 @@
   </div>
 </section>
 
-</main>
-
 <footer class="w pie">Entrena con Método · © 2026 Mauro Morón</footer>
+</div>
+
+</main>
 
 <a class="fab" id="fijo" data-ig href="https://ig.me/m/mauromoronm" rel="noopener" aria-label="Escríbeme por Instagram"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Escríbeme</span></a>
 
@@ -924,48 +940,6 @@
   window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(pinta); } }, { passive: true });
   window.addEventListener('resize', pinta);
   pinta();
-})();
-</script>
-<script>
-// Portada en celular: cada gesto muestra una carta COMPLETA (como pasar una
-// página), suave pero decidido. Después de la última carta, scroll libre.
-(function () {
-  var cartas = Array.prototype.slice.call(document.querySelectorAll('.carta'));
-  var cu = document.querySelector('.cuatro'), sig = document.getElementById('dolor');
-  if (!cartas.length || !cu || !sig) return;
-  var ancho = window.matchMedia('(min-width:900px)');
-  var modo = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-  var puntos = [], tocando = false, auto = false, reposo = window.scrollY, t = null, tAuto = null;
-  function medir() {
-    var base = cu.getBoundingClientRect().top + window.scrollY + parseFloat(getComputedStyle(cu).paddingTop);
-    var paso = cartas[0].offsetHeight + parseFloat(getComputedStyle(cartas[0]).marginBottom);
-    puntos = cartas.map(function (c, i) { return Math.max(0, Math.round(base + i * paso - parseFloat(getComputedStyle(c).top))); });
-    puntos.push(Math.round(sig.getBoundingClientRect().top + window.scrollY));
-  }
-  function ir(y) {
-    if (Math.abs(window.scrollY - y) < 3) { reposo = y; return; }
-    auto = true; clearTimeout(tAuto);
-    window.scrollTo({ top: y, behavior: modo });
-    tAuto = setTimeout(function () { auto = false; reposo = window.scrollY; }, 900);
-  }
-  function decidir() {
-    if (ancho.matches || tocando) return;
-    if (auto) { auto = false; clearTimeout(tAuto); reposo = window.scrollY; return; }
-    var y = window.scrollY, fin = puntos[puntos.length - 1];
-    if (y > fin + 4) { reposo = y; return; }
-    var k, d = y - reposo;
-    if (d > 6) { k = puntos.filter(function (p) { return p >= y - 2; })[0]; }
-    else if (d < -6) { var atras = puntos.filter(function (p) { return p <= y + 2; }); k = atras[atras.length - 1]; }
-    else { k = puntos.reduce(function (a, p) { return Math.abs(p - y) < Math.abs(a - y) ? p : a; }, puntos[0]); }
-    if (k == null) { reposo = y; return; }
-    ir(k);
-  }
-  window.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(decidir, 110); }, { passive: true });
-  window.addEventListener('touchstart', function () { tocando = true; clearTimeout(t); }, { passive: true });
-  window.addEventListener('touchend', function () { tocando = false; clearTimeout(t); t = setTimeout(decidir, 110); }, { passive: true });
-  window.addEventListener('resize', medir);
-  window.addEventListener('load', medir);
-  medir();
 })();
 </script>
 </body>
