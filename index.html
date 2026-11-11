@@ -224,14 +224,8 @@
   .carta { position:sticky; top:12px; height:var(--ch); margin-bottom:22px; border-radius:34px; overflow:hidden;
     box-shadow:0 -10px 30px -18px rgba(0,0,0,.35); }
   .carta:nth-child(2) { top:24px; } .carta:nth-child(3) { top:36px; }
-  /* Cada gesto deja una carta completa: lo hace el navegador (scroll-snap), no un script. */
+  /* Sin paso forzado entre cartas: el scroll es el natural del teléfono (nada lo interviene). */
   .snap { display:none; }
-  @media (max-width:899px) and (pointer:coarse) {
-    html { scroll-snap-type:y mandatory; }
-    .snap { display:block; position:absolute; left:0; top:calc(12px + var(--n) * (var(--ch) + 22px)); width:1px; height:1px; pointer-events:none;
-      scroll-snap-align:start; scroll-snap-stop:always; scroll-margin-top:calc(var(--n) * 12px); }
-    .resto { scroll-snap-align:start; }
-  }
   .carta .in { position:relative; z-index:2; padding:30px 24px 0; }
   .carta h1, .carta h2 { margin-top:14px; font-size:min(21vw, 13svh, 150px); font-weight:900; letter-spacing:-.055em; line-height:.86; }
   .carta h1 span, .carta h2 span { display:block; }
@@ -1040,6 +1034,56 @@
   t.querySelector('.tour-tel').addEventListener('click', function () { pon(i + 1); });
   if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; pon(i); }, { threshold: 0.35 }).observe(t);
   else { visible = true; pon(0); }
+})();
+</script>
+<script>
+// MEDICIÓN (anónima): cuenta visitas, hasta qué sección baja cada persona,
+// quién toca «Escríbeme» y qué preguntas abre. No guarda nombres ni datos
+// personales: solo un código al azar de este navegador. Se ve en el CRM, en
+// «Mi negocio». La clave de abajo es la PÚBLICA del CRM y la base solo le
+// permite AGREGAR filas a esta tabla (no leer, cambiar ni borrar nada).
+// Para que tus propias visitas no cuenten: abre una vez  /?yo=1  (y /?yo=0 para volver a contarlas).
+(function () {
+  var BASE = 'https://evabivmzrdclhwlpqdoy.supabase.co/rest/v1/landing_eventos', CLAVE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2YWJpdm16cmRjbGh3bHBxZG95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MzY1ODAsImV4cCI6MjA5ODMxMjU4MH0.ZgWQhiCaRyEcwe6W-J_iRtHguPr2ACjCoekdL9cbICo';
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.get('yo') === '1') localStorage.setItem('ecm:nomedir', '1');
+    if (q.get('yo') === '0') localStorage.removeItem('ecm:nomedir');
+    if (localStorage.getItem('ecm:nomedir') === '1') return;
+    var h = location.hostname;
+    if (h === 'localhost' || h === '127.0.0.1' || h.indexOf('-git-') > -1 || navigator.webdriver) return;
+    if (/bot|crawl|spider|preview|facebookexternalhit|whatsapp|lighthouse|headless/i.test(navigator.userAgent)) return;
+    var azar = function () { return (Date.now().toString(36) + Math.random().toString(36).slice(2, 12)).slice(0, 20); };
+    var v = localStorage.getItem('ecm:v'); if (!v) { v = azar(); localStorage.setItem('ecm:v', v); }
+    var sesion = azar();
+    var ref = (document.referrer || '').toLowerCase(), ua = navigator.userAgent, utm = (q.get('utm_source') || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 30);
+    var origen = utm || (/instagram/i.test(ua) || ref.indexOf('instagram') > -1 ? 'instagram' : /fban|fbav/i.test(ua) || ref.indexOf('facebook') > -1 ? 'facebook' : ref.indexOf('google') > -1 ? 'google'
+      : ref.indexOf('whatsapp') > -1 || ref.indexOf('wa.me') > -1 ? 'whatsapp' : ref.indexOf('tiktok') > -1 ? 'tiktok' : !ref || ref.indexOf(h) > -1 ? 'directo' : ref.replace(/^https?:\/\//, '').split('/')[0].slice(0, 40));
+    var dispositivo = window.matchMedia('(max-width:899px)').matches ? 'celular' : 'computador';
+    var cola = [], reloj = null, ultima = 'portada', vistas = {};
+    var enviar = function () {
+      clearTimeout(reloj); reloj = null; if (!cola.length) return;
+      var lote = cola; cola = [];
+      try { fetch(BASE, { method: 'POST', keepalive: true, headers: { apikey: CLAVE, Authorization: 'Bearer ' + CLAVE, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify(lote) }).catch(function () {}); } catch (e) {}
+    };
+    var anotar = function (tipo, detalle, ya) {
+      cola.push({ visitante: v, sesion: sesion, tipo: tipo, detalle: detalle ? String(detalle).slice(0, 120) : null, origen: origen, dispositivo: dispositivo });
+      if (ya) enviar(); else if (!reloj) reloj = setTimeout(enviar, 1500);
+    };
+    anotar('visita', null);
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) {
+        if (!e.isIntersecting) return; var k = e.target.getAttribute('data-med'); ultima = k;
+        if (!vistas[k]) { vistas[k] = 1; if (k !== 'portada') anotar('seccion', k); }
+      }); }, { rootMargin: '-45% 0px -45% 0px' });
+      var cartas = document.querySelectorAll('.carta'); ['portada', 'carta2', 'carta3'].forEach(function (k, i) { if (cartas[i]) { cartas[i].setAttribute('data-med', k); io.observe(cartas[i]); } });
+      ['dolor', 'resultados', 'ciencia', 'incluye', 'app', 'coach', 'precio', 'preguntas', 'cierre'].forEach(function (id) { var el = document.getElementById(id); if (el) { el.setAttribute('data-med', id); io.observe(el); } });
+    }
+    document.querySelectorAll('a[data-ig]').forEach(function (a) { a.addEventListener('click', function () { anotar('clic', ultima, true); }); });
+    document.querySelectorAll('#preguntas details').forEach(function (d) { d.addEventListener('toggle', function () { if (d.open) { var t = d.querySelector('summary'); anotar('pregunta', t ? t.textContent.trim() : ''); } }); });
+    window.addEventListener('pagehide', enviar);
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') enviar(); });
+  } catch (e) { /* medir nunca debe romper la página */ }
 })();
 </script>
 </body>
