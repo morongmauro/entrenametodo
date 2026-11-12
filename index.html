@@ -625,7 +625,8 @@
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
 
   /* ══ Primera carta: entrada con impacto (títulos que suben, trazo, pesa que se balancea) ══ */
-  .c-entreno .ob { height:138%; bottom:-16%; transform:translateX(60%) rotate(20deg); }
+  .c-entreno .ob { height:132%; bottom:-30%; transform:translateX(58%) rotate(32deg); }
+  .c-entreno .zona { -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 9%); mask-image:linear-gradient(180deg, transparent 0, #000 9%); }
   @media (min-width:900px) { .c-entreno .ob { height:165%; bottom:-24%; } }
   .c-entreno .sobre { display:inline-flex; padding:7px 13px 7px 11px; border-radius:999px; background:rgba(31,31,31,.08); opacity:1; font-size:13px; letter-spacing:.01em; }
   .c-entreno h1 { margin-top:20px; }
@@ -644,7 +645,7 @@
   @keyframes eSube { from { transform:translateY(105%); } to { transform:none; } }
   @keyframes eTrazo { from { stroke-dashoffset:320; } to { stroke-dashoffset:0; } }
   @keyframes eChip { 0% { opacity:0; transform:translateY(10px) scale(.86); } 70% { opacity:1; transform:translateY(-2px) scale(1.04); } 100% { opacity:1; transform:none; } }
-  @keyframes ePesa { 0% { opacity:0; transform:translateX(110%) rotate(48deg); } 55% { opacity:1; transform:translateX(54%) rotate(12deg); } 78% { transform:translateX(61%) rotate(23deg); } 100% { opacity:1; transform:translateX(60%) rotate(20deg); } }
+  @keyframes ePesa { 0% { opacity:0; transform:translateX(110%) rotate(60deg); } 55% { opacity:1; transform:translateX(52%) rotate(24deg); } 78% { transform:translateX(59%) rotate(35deg); } 100% { opacity:1; transform:translateX(58%) rotate(32deg); } }
   @keyframes eVaiven { 0%, 100% { rotate:0deg; } 50% { rotate:-2.2deg; } }
   .js .c-entreno .in > h1 { opacity:1; transform:none; transition:none; }
   .js .c-entreno h1 > span > span { transform:translateY(105%); }
@@ -660,7 +661,7 @@
   .js .c-entreno.v .ob { opacity:1; animation:ePesa 1.5s cubic-bezier(.2,.75,.25,1) .25s both, eVaiven 5.5s ease-in-out 2s infinite; }
   @media (prefers-reduced-motion: reduce) {
     .js .c-entreno h1 > span > span, .js .c-entreno .e-chip, .js .c-entreno .ob, .js .c-entreno .trazo path { animation:none !important; transform:none; opacity:1; stroke-dashoffset:0; }
-    .js .c-entreno .ob { transform:translateX(60%) rotate(20deg); }
+    .js .c-entreno .ob { transform:translateX(58%) rotate(32deg); }
   }
 </style>
 </head>
