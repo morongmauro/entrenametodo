@@ -626,19 +626,20 @@
 
   /* ══ Primera carta: entrada con impacto (títulos que suben, trazo, pesa que se balancea) ══ */
   .c-entreno .ob { height:132%; bottom:-30%; transform:translateX(58%) rotate(32deg); }
-  .c-entreno .zona { -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 9%); mask-image:linear-gradient(180deg, transparent 0, #000 9%); }
+  .c-entreno .zona { -webkit-mask-image:none; mask-image:none; }
+  .c-entreno::after { display:none; }
   @media (min-width:900px) { .c-entreno .ob { height:165%; bottom:-24%; } }
-  .c-entreno .sobre { display:inline-flex; padding:7px 13px 7px 11px; border-radius:999px; background:rgba(31,31,31,.08); opacity:1; font-size:13px; letter-spacing:.01em; }
-  .c-entreno h1 { margin-top:20px; }
+    .c-entreno h1 { margin-top:20px; }
   .c-entreno h1 > span { overflow:hidden; padding:0 .08em .06em 0; margin:0 -.08em -.06em 0; }
   .c-entreno h1 > span > span { display:block; }
   .c-entreno h1 .m > span { position:relative; display:inline-block; }
   .c-entreno h1 i { position:relative; z-index:1; }
   .trazo { position:absolute; z-index:0; left:-2%; right:4%; bottom:.02em; width:98%; height:.3em; overflow:visible; }
   .trazo path { fill:none; stroke:#FFF4CC; stroke-width:12; stroke-linecap:round; stroke-dasharray:320; stroke-dashoffset:0; }
-  .c-entreno p.l { margin-top:26px; max-width:none; line-height:1.4; }
-  .e-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-  .e-chip { display:inline-flex; align-items:center; gap:7px; padding:8px 14px 8px 12px; border-radius:999px; background:var(--ink); color:#fff; font-size:clamp(14px, 3.8vw, 17px); font-weight:800; white-space:nowrap; letter-spacing:-.01em; }
+  .c-entreno p.l { margin-top:26px; max-width:none; line-height:1.35; }
+  .c-entreno p.l b { display:block; max-width:15em; }
+  .e-chips { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:14px; }
+  .e-chip { display:inline-flex; align-items:center; gap:7px; padding:7px 11px; border-radius:999px; background:var(--ink); color:#fff; font-size:clamp(11px, 3.1vw, 16px); font-weight:800; white-space:nowrap; letter-spacing:-.01em; }
   .e-chip svg { width:10px; height:10px; fill:var(--ama); }
   .e-chip + .e-chip svg { fill:#8FD0A2; }
   .c-entreno p.l2 { margin-top:12px; line-height:1.45; opacity:.78; }
@@ -713,7 +714,7 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span><span>Entrena</span></span><span><span>con</span></span><span class="m"><span><i>método.</i><svg class="trazo" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M6 20 C 60 9, 150 6, 294 14"/></svg></span></span></h1><p class="l"><span class="e-chips"><span class="e-chip"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2 L10.5 9 H1.5 Z"/></svg>Más fuerza</span><span class="e-chip"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 10 L10.5 3 H1.5 Z"/></svg>Menos grasa</span></span><b>Y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
+    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span><span>Entrena</span></span><span><span>con</span></span><span class="m"><span><i>método.</i><svg class="trazo" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M6 20 C 60 9, 150 6, 294 14"/></svg></span></span></h1><p class="l"><span class="e-chips"><span class="e-chip">Entrenamiento</span><span class="e-chip">Alimentación</span><span class="e-chip">Aprendizaje</span></span><b>Más fuerza, menos grasa y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
     <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
