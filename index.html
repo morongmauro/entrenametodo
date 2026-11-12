@@ -585,7 +585,43 @@
     .c-comida .ob { height:124%; bottom:-18%; }
     .c-app .ob { height:128%; bottom:-40%; }
   }
+
+  /* ══ Propuesta: sección única de lo que recibes, botón en precio y cierre, portada con resultado ══ */
+  .carta p.l b { font-weight:800; }
+  .carta p.l2 { margin-top:8px; max-width:16em; font-size:clamp(13px, 3.6vw, 16px); font-weight:600; line-height:1.3; opacity:.75; }
+  #incluye .tour { margin-top:22px; width:min(52vw, 230px); }
+  #incluye .tour-barras i { background:rgba(31,31,31,.15); } #incluye .tour-barras i::after { background:var(--ink); }
+  #incluye .tour-t { font-size:16px; min-height:2.4em; } #incluye .tour-n { font-size:12.5px; }
+  .lista-in { display:grid; grid-template-columns:minmax(0, 1fr); gap:10px; margin-top:26px; min-width:0; }
+  .li { min-width:0; }
+  .li { border-radius:24px; padding:20px 20px 18px; }
+  .li h3 { margin-top:6px; font-size:clamp(25px, 7vw, 32px); font-weight:900; letter-spacing:-.045em; line-height:.95; }
+  .li h3 i { font-style:italic; }
+  .li .gr-p { margin-top:8px; font-size:15px; line-height:1.38; }
+  .li.a-naranja h3 { color:#fff; }
+  .mini-platos { display:flex; gap:6px; margin-top:12px; overflow:hidden; }
+  .mini-platos img { width:56px; height:56px; flex:none; object-fit:cover; border-radius:14px; }
+  .li .grafica2 { margin:14px 0 2px; }
+  .js .li.v .g-linea { stroke-dashoffset:0; } .js .li .g-l2 { transition-delay:.6s; } .js .li.v .g-area { opacity:1; } .js .li.v .g-punto { opacity:1; transform:none; }
+  .metricas { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .metricas span { padding:6px 11px; border-radius:999px; background:rgba(255,255,255,.4); font-size:13px; font-weight:800; }
+  .cta { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; min-height:58px; margin-top:18px; border-radius:999px; font-size:17px; font-weight:800; letter-spacing:-.01em; transition:transform .2s var(--suave); }
+  .cta:active { transform:scale(.98); } .cta .ig-ico { width:22px; height:22px; }
+  .cta-oscuro { background:var(--ink); color:#fff; }
+  .cta-ama { position:relative; z-index:2; max-width:30em; background:var(--ama); color:var(--ink); margin-top:26px; }
+  .cta-n { position:relative; z-index:2; margin-top:10px; font-size:13.5px; line-height:1.35; opacity:.75; max-width:30em; }
+  .cta-oscuro + .cta-n { text-align:center; }
+  @media (min-width:900px) {
+    #incluye .tour { margin:30px 0 0; width:250px; } .lista-in { margin-top:0; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px; }
+    #incluye .dos { grid-template-columns:minmax(0, .8fr) minmax(0, 1.5fr); }
+    .li { padding:24px; } .li h3 { font-size:28px; } .li .gr-p { font-size:15.5px; }
+    .cta { max-width:420px; } .cta-oscuro + .cta-n { text-align:left; max-width:420px; }
+  }
   .privacidad { display:block; margin-top:6px; font-size:12px; opacity:.8; }
+  .cifras { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; margin-top:20px; max-width:28em; }
+  .cifras p { padding:14px 16px; border-radius:18px; background:rgba(242,201,76,.12); border:1px solid rgba(242,201,76,.4); }
+  .cifras b { display:block; font-size:22px; font-weight:900; letter-spacing:-.03em; color:var(--ama); line-height:1.05; }
+  .cifras span { display:block; margin-top:3px; font-size:13.5px; opacity:.8; }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
 </style>
 </head>
@@ -637,7 +673,7 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l">Método estructurado y basado en ciencia de primer nivel.</p></div>
+    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l"><b>Más fuerza, menos grasa y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
     <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
@@ -710,55 +746,46 @@
   </div></div>
 </section>
 
-<section class="claro" id="incluye"><div class="w">
-  <p class="sobre rev">Qué incluye</p>
-  <h2 class="rev h-m">Todo lo<br><i>que recibes.</i></h2>
-  <div class="tres">
-    <article class="gr a-verde rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>App de alimentación</p>
-      <h3>Hace los cálculos <i>por ti.</i></h3>
-      <p class="gr-p">Escribes lo que comiste en una frase y la app calcula tus calorías y tu proteína al instante.</p>
-      <p class="gr-sub">Recetas <i>a tu medida.</i></p>
-      <p class="gr-p">Te sugiere <b>recetas personalizadas</b>, en la porción que te toca.</p>
-      <div class="cinta" aria-hidden="true"><div class="cinta-in"><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/balanced-protein-pancakes.jpg" alt="" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/salmon-quinoa.jpg" alt="" width="400" height="400"><figcaption>Bowl de salmón y quinoa</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/beef-plantain-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl de res y plátano</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/yogurt-parfait.jpg" alt="" width="400" height="400"><figcaption>Parfait de yogur</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/teriyaki-salmon.jpg" alt="" width="400" height="400"><figcaption>Salmón teriyaki</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/mexican-chicken-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl mexicano de pollo</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/creamy-chicken-curry.jpg" alt="" width="400" height="400"><figcaption>Pollo al curry cremoso</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/chicken-burrito.jpg" alt="" width="400" height="400"><figcaption>Bowl burrito de pollo</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/balanced-protein-pancakes.jpg" alt="" width="400" height="400"><figcaption>Panqueques con mantequilla de almendra</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/salmon-quinoa.jpg" alt="" width="400" height="400"><figcaption>Bowl de salmón y quinoa</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/beef-plantain-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl de res y plátano</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/yogurt-parfait.jpg" alt="" width="400" height="400"><figcaption>Parfait de yogur</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/teriyaki-salmon.jpg" alt="" width="400" height="400"><figcaption>Salmón teriyaki</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/mexican-chicken-bowl.jpg" alt="" width="400" height="400"><figcaption>Bowl mexicano de pollo</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/creamy-chicken-curry.jpg" alt="" width="400" height="400"><figcaption>Pollo al curry cremoso</figcaption></figure><figure><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/chicken-burrito.jpg" alt="" width="400" height="400"><figcaption>Bowl burrito de pollo</figcaption></figure></div></div>
-    </article>
-    <article class="gr a-ama rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>App de entrenamiento</p>
-      <h3>Tu entrenamiento, <i>guiado.</i></h3>
-      <p class="gr-p">Cada ejercicio con <b>video</b>, tu <b>historial</b> de cargas y la <b>recomendación</b> de cuánto subir. Registras cada serie y mantenemos <b>comunicación constante</b>: cada nota que dejas recibe respuesta.</p>
-      <div class="gr-tel bt-tel" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/rutina-series.webp" alt="" width="640" height="1385"></div>
-    </article>
-    <article class="gr a-naranja rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg>Seguimiento basado en datos</p>
-      <h3>Medimos lo que <i>importa.</i></h3>
-      <p class="gr-p">Cuánta <b>grasa y músculo</b> tienes, tus <b>avances de entrenamiento</b> y tus capacidades: <b>fuerza, movilidad y agilidad</b>. Las decisiones sobre tu plan salen de esos datos, no de suposiciones.</p>
-      <div class="grafica2" aria-hidden="true"><p class="g2-t">Tus avances · 12 semanas <b>ejemplo</b></p>
-        <svg viewBox="0 0 260 118"><g stroke="#ECEAE4" stroke-width="1"><path d="M0 20H260M0 50H260M0 80H260M0 110H260"/></g>
-          <path class="g-linea" pathLength="1" d="M8 98 L48 90 L88 78 L128 68 L168 54 L208 42 L248 28" fill="none" stroke="#46965A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path class="g-linea g-l2" pathLength="1" d="M8 30 L48 36 L88 46 L128 53 L168 63 L208 71 L248 82" fill="none" stroke="#EE8434" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle class="g-punto" cx="248" cy="28" r="6" fill="#46965A"/><circle class="g-punto" cx="248" cy="82" r="6" fill="#EE8434"/></svg>
-        <p class="g2-ley"><span class="lv">Fuerza ↑</span><span class="ln">% de grasa ↓</span></p></div>
-    </article>
-    <article class="gr a-grafito rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Acompañamiento</p>
-      <h3>Acompañamiento <i>directo.</i></h3>
-      <p class="gr-p">Comunicación directa conmigo por <b>WhatsApp</b>, trabajo sobre tus <b>hábitos</b> (sueño, descanso y estrés), <b>cápsulas de aprendizaje</b> dentro de la app y acceso a la <b>comunidad</b> del método.</p>
-      <div class="charla" aria-hidden="true"><p class="tu">Hoy solo tengo 30 minutos</p><p class="yo">Prioriza el bloque principal completo y omite los accesorios. Mantienes el estímulo de la sesión.</p></div>
-    </article>
-  </div>
-</div></section>
-
-<section class="bloque b-azul" id="app"><div class="w dos">
+<section class="claro" id="incluye"><div class="w dos">
   <div>
-    <p class="sobre rev">La app</p>
+    <p class="sobre rev">Qué incluye</p>
     <h2 class="rev h-m">Todo en tu teléfono.<br><i>En tiempo real.</i></h2>
-    <p class="txt rev">Nada de Excel ni PDF: eso es cosa del pasado. Tu plan, tus registros y tus avances se actualizan al momento.</p>
-  </div>
-  <div class="tour rev" data-tour>
+    <p class="txt rev">Nada de Excel ni PDF: tu plan, tus registros y tus avances se actualizan al momento.</p>
+    <div class="tour rev" data-tour>
     <div class="tour-barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="tel tour-tel"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/comida.webp" alt="Tu día de comida, en vivo" width="640" height="1385" class="on"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/chat-1.webp" alt="Lo escribes y la app hace la cuenta" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/receta.webp" alt="Recetas en la porción que te toca" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/entreno-calendario.webp" alt="Tu mes de entrenamiento, organizado" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/composicion.webp" alt="Tu grasa y tu músculo, medidos" width="640" height="1385"></div>
     <p class="tour-t" aria-live="polite">Tu día de comida, en vivo</p>
     <p class="tour-n">Toca el teléfono para pasar a la siguiente</p>
+  </div>
+  </div>
+  <div class="lista-in">
+    <article class="li a-verde rev">
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>App de alimentación</p>
+      <h3>Hace los cálculos <i>por ti.</i></h3>
+      <p class="gr-p">Escribes lo que comiste en una frase y obtienes calorías y proteína al instante. Te sugiere <b>recetas personalizadas</b> en tu porción.</p>
+      <div class="mini-platos" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/balanced-protein-pancakes.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/salmon-quinoa.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/beef-plantain-bowl.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/yogurt-parfait.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/teriyaki-salmon.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/mexican-chicken-bowl.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/creamy-chicken-curry.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/chicken-burrito.jpg" alt="" width="400" height="400"></div>
+    </article>
+    <article class="li a-ama rev">
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>App de entrenamiento</p>
+      <h3>Tu entrenamiento, <i>guiado.</i></h3>
+      <p class="gr-p">Cada ejercicio con <b>video</b>, tu <b>historial</b> de cargas y la <b>recomendación</b> de cuánto subir. Cada nota que dejas recibe respuesta.</p>
+    </article>
+    <article class="li a-naranja rev">
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg>Seguimiento basado en datos</p>
+      <h3>Medimos lo que <i>importa.</i></h3>
+      <p class="gr-p">Composición corporal, avances de entrenamiento y capacidades. Las decisiones sobre tu plan salen de tus datos.</p>
+      <div class="grafica2" aria-hidden="true"><p class="g2-t">Tus avances · 12 semanas <b>ejemplo</b></p>
+        <svg viewBox="0 0 260 118"><g stroke="#ECEAE4" stroke-width="1"><path d="M0 20H260M0 50H260M0 80H260M0 110H260"/></g>
+          <path class="g-linea" pathLength="1" d="M8 98 C13.0 96.3 28.0 89.0 38 88 C48.0 87.0 58.0 94.0 68 92 C78.0 90.0 88.0 78.0 98 76 C108.0 74.0 118.0 82.3 128 80 C138.0 77.7 148.0 64.3 158 62 C168.0 59.7 178.0 69.0 188 66 C198.0 63.0 208.0 50.3 218 44 C228.0 37.7 243.0 30.7 248 28" fill="none" stroke="#46965A" stroke-width="4" stroke-linecap="round"/>
+          <path class="g-linea g-l2" pathLength="1" d="M8 30 C13.0 31.3 28.0 37.3 38 38 C48.0 38.7 58.0 32.7 68 34 C78.0 35.3 88.0 44.7 98 46 C108.0 47.3 118.0 40.3 128 42 C138.0 43.7 148.0 54.3 158 56 C168.0 57.7 178.0 50.0 188 52 C198.0 54.0 208.0 63.0 218 68 C228.0 73.0 243.0 79.7 248 82" fill="none" stroke="#EE8434" stroke-width="4" stroke-linecap="round"/>
+          <circle class="g-punto" cx="248" cy="28" r="6" fill="#46965A"/><circle class="g-punto" cx="248" cy="82" r="6" fill="#EE8434"/></svg>
+        <p class="g2-ley"><span class="lv">Fuerza ↑</span><span class="ln">% de grasa ↓</span></p></div>
+    </article>
+    <article class="li a-grafito rev">
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Acompañamiento</p>
+      <h3>Acompañamiento <i>directo.</i></h3>
+      <p class="gr-p">Comunicación directa conmigo por <b>WhatsApp</b>, trabajo sobre tus <b>hábitos</b>, <b>cápsulas de aprendizaje</b> y acceso a la <b>comunidad</b> del método.</p>
+    </article>
   </div>
 </div></section>
 
@@ -768,6 +795,7 @@
     <h2 class="rev h-m">Trabajo con<br><i>método y ciencia.</i></h2>
     <p class="quien2 rev"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
     <p class="bio rev">Llevo años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno después de una lesión y salud metabólica. Traduzco fisiología, biomecánica y nutrición en un proceso que tu cuerpo pueda sostener.</p>
+    <div class="cifras rev"><p><b>7 años</b><span>de experiencia</span></p><p><b>Todas las edades</b><span>géneros y países</span></p></div>
   </div>
   <div>
     <p class="certs-t rev">Certificaciones ISSA</p>
@@ -792,6 +820,8 @@
     <p class="precio"><span class="cifra" data-cifra="200000">$200.000</span><small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
     <p class="resumen rev">Incluye: <b>app de alimentación, app de entrenamiento, seguimiento basado en datos y acompañamiento directo.</b></p>
     <p class="garantia rev"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Suscripción mensual, cancelable en cualquier momento.</span></p>
+    <a class="cta cta-oscuro" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Quiero empezar</span></a>
+    <p class="cta-n">Se abre el chat de Instagram. Después agendamos una videollamada sin costo para definir cómo empezar.</p>
   </div>
 </div></section>
 
@@ -806,10 +836,10 @@
     <details><summary>¿Cuánto tiempo necesito?</summary><p>El plan se ajusta a tu disponibilidad real: los días y el tiempo con los que cuentas.</p></details>
     <details><summary>¿En cuánto tiempo veo resultados?</summary><p>Depende de tu punto de partida y de tu constancia. Lo que sí tienes: siempre sabes si vas avanzando, porque lo medimos.</p></details>
     <details><summary>¿Y si viajo o me enfermo?</summary><p>La planificación se ajusta y esos días no afectan tu registro de cumplimiento.</p></details>
-    <details><summary>¿Y si tengo una lesión?</summary><p>Se considera desde la valoración inicial y los ejercicios se adaptan. Con una lesión activa, el primer paso es tu médico o fisioterapeuta.</p></details>
+    <details><summary>¿Y si tengo una lesión?</summary><p>Lo conversamos desde la primera llamada y los ejercicios se adaptan. Con una lesión activa, el primer paso es tu médico o fisioterapeuta.</p></details>
     <details><summary>¿Qué tan seguido hablamos?</summary><p>Hago seguimiento continuo de tus registros y cuentas con comunicación directa por WhatsApp para resolver dudas.</p></details>
     <details><summary>¿Cómo recibo el plan?</summary><p>Todo en la app. 100% online.</p></details>
-    <details><summary>¿Cómo empiezo?</summary><p>El primer paso es un mensaje por Instagram. Luego agendamos una videollamada para profundizar en tu caso, establecer el plan de trabajo y explicar la metodología en detalle.</p></details>
+    <details><summary>¿Cómo empiezo?</summary><p>Escríbeme por Instagram. Agendamos una videollamada sin costo para conocer tu caso, definir el plan de trabajo y explicarte la metodología en detalle.</p></details>
     <details><summary>¿Hay permanencia?</summary><p>No. La suscripción es mensual y puedes cancelarla en cualquier momento.</p></details>
   </div>
 </div></section>
@@ -819,10 +849,12 @@
     <p class="sobre" style="color:var(--ama);opacity:1">Empieza hoy</p>
     <h2>Empieza<br>tu <i>proceso</i><span style="color:var(--ama)">.</span></h2>
     <ol class="despues">
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Primer contacto</b> por Instagram.</p></li>
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><p><b>Videollamada de valoración</b> para profundizar en tu caso.</p></li>
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><p><b>Plan de trabajo definido</b> y metodología explicada en detalle.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Me escribes por Instagram</b> con tu objetivo.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><p><b>Videollamada sin costo</b> para conocer tu caso y definir cómo empezar.</p></li>
+      <li><span><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><p><b>Arrancas con tu plan</b> en la app, con la metodología explicada en detalle.</p></li>
     </ol>
+    <a class="cta cta-ama" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Quiero empezar</span></a>
+    <p class="cta-n">Se abre el chat de Instagram. Después agendamos una videollamada sin costo para definir cómo empezar.</p>
   </div>
 </section>
 
