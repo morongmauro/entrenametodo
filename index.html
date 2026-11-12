@@ -623,6 +623,45 @@
   .cifras b { display:block; font-size:22px; font-weight:900; letter-spacing:-.03em; color:var(--ama); line-height:1.05; }
   .cifras span { display:block; margin-top:3px; font-size:13.5px; opacity:.8; }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
+
+  /* ══ Primera carta: entrada con impacto (títulos que suben, trazo, pesa que se balancea) ══ */
+  .c-entreno .ob { height:138%; bottom:-16%; transform:translateX(60%) rotate(20deg); }
+  @media (min-width:900px) { .c-entreno .ob { height:165%; bottom:-24%; } }
+  .c-entreno .sobre { display:inline-flex; padding:7px 13px 7px 11px; border-radius:999px; background:rgba(31,31,31,.08); opacity:1; font-size:13px; letter-spacing:.01em; }
+  .c-entreno h1 { margin-top:20px; }
+  .c-entreno h1 > span { overflow:hidden; padding:0 .08em .06em 0; margin:0 -.08em -.06em 0; }
+  .c-entreno h1 > span > span { display:block; }
+  .c-entreno h1 .m > span { position:relative; display:inline-block; }
+  .c-entreno h1 i { position:relative; z-index:1; }
+  .trazo { position:absolute; z-index:0; left:-2%; right:4%; bottom:.02em; width:98%; height:.3em; overflow:visible; }
+  .trazo path { fill:none; stroke:#FFF4CC; stroke-width:12; stroke-linecap:round; stroke-dasharray:320; stroke-dashoffset:0; }
+  .c-entreno p.l { margin-top:26px; max-width:none; line-height:1.4; }
+  .e-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .e-chip { display:inline-flex; align-items:center; gap:7px; padding:8px 14px 8px 12px; border-radius:999px; background:var(--ink); color:#fff; font-size:clamp(14px, 3.8vw, 17px); font-weight:800; white-space:nowrap; letter-spacing:-.01em; }
+  .e-chip svg { width:10px; height:10px; fill:var(--ama); }
+  .e-chip + .e-chip svg { fill:#8FD0A2; }
+  .c-entreno p.l2 { margin-top:12px; line-height:1.45; opacity:.78; }
+  @keyframes eSube { from { transform:translateY(105%); } to { transform:none; } }
+  @keyframes eTrazo { from { stroke-dashoffset:320; } to { stroke-dashoffset:0; } }
+  @keyframes eChip { 0% { opacity:0; transform:translateY(10px) scale(.86); } 70% { opacity:1; transform:translateY(-2px) scale(1.04); } 100% { opacity:1; transform:none; } }
+  @keyframes ePesa { 0% { opacity:0; transform:translateX(110%) rotate(48deg); } 55% { opacity:1; transform:translateX(54%) rotate(12deg); } 78% { transform:translateX(61%) rotate(23deg); } 100% { opacity:1; transform:translateX(60%) rotate(20deg); } }
+  @keyframes eVaiven { 0%, 100% { rotate:0deg; } 50% { rotate:-2.2deg; } }
+  .js .c-entreno .in > h1 { opacity:1; transform:none; transition:none; }
+  .js .c-entreno h1 > span > span { transform:translateY(105%); }
+  .js .c-entreno.v h1 > span > span { animation:eSube .9s cubic-bezier(.16,.84,.24,1) both; }
+  .js .c-entreno.v h1 > span:nth-child(2) > span { animation-delay:.12s; }
+  .js .c-entreno.v h1 > span:nth-child(3) > span { animation-delay:.24s; }
+  .js .c-entreno .trazo path { stroke-dashoffset:320; }
+  .js .c-entreno.v .trazo path { animation:eTrazo .7s cubic-bezier(.6,0,.3,1) .95s both; }
+  .js .c-entreno .e-chip { opacity:0; }
+  .js .c-entreno.v .e-chip { animation:eChip .6s var(--suave) 1.1s both; }
+  .js .c-entreno.v .e-chip + .e-chip { animation-delay:1.22s; }
+  .js .c-entreno .ob { opacity:0; translate:0 0; rotate:0deg; transition:none; }
+  .js .c-entreno.v .ob { opacity:1; animation:ePesa 1.5s cubic-bezier(.2,.75,.25,1) .25s both, eVaiven 5.5s ease-in-out 2s infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .c-entreno h1 > span > span, .js .c-entreno .e-chip, .js .c-entreno .ob, .js .c-entreno .trazo path { animation:none !important; transform:none; opacity:1; stroke-dashoffset:0; }
+    .js .c-entreno .ob { transform:translateX(60%) rotate(20deg); }
+  }
 </style>
 </head>
 <body>
@@ -673,7 +712,7 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span>Entrena</span><span>con</span><span><i>método.</i></span></h1><p class="l"><b>Más fuerza, menos grasa y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
+    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span><span>Entrena</span></span><span><span>con</span></span><span class="m"><span><i>método.</i><svg class="trazo" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M6 20 C 60 9, 150 6, 294 14"/></svg></span></span></h1><p class="l"><span class="e-chips"><span class="e-chip"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2 L10.5 9 H1.5 Z"/></svg>Más fuerza</span><span class="e-chip"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 10 L10.5 3 H1.5 Z"/></svg>Menos grasa</span></span><b>Y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
     <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
@@ -795,7 +834,7 @@
     <h2 class="rev h-m">Trabajo con<br><i>método y ciencia.</i></h2>
     <p class="quien2 rev"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
     <p class="bio rev">Llevo años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno después de una lesión y salud metabólica. Traduzco fisiología, biomecánica y nutrición en un proceso que tu cuerpo pueda sostener.</p>
-    <div class="cifras rev"><p><b>7 años</b><span>de experiencia</span></p><p><b>Todas las edades</b><span>géneros y países</span></p></div>
+    <div class="cifras rev"><p><b>8 años</b><span>de experiencia</span></p><p><b>Todas las edades</b><span>géneros y países</span></p></div>
   </div>
   <div>
     <p class="certs-t rev">Certificaciones ISSA</p>
