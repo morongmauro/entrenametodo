@@ -937,6 +937,31 @@
     const url = alDM ? "https://ig.me/m/" + u : "https://www.instagram.com/" + u + "/";
     const enlaces = document.querySelectorAll('a[data-ig]');
     enlaces.forEach(a => { a.href = url; });
+
+    // En el celular se abre la APP de Instagram, no la web (la web pide
+    // iniciar sesión, sobre todo dentro del navegador de Instagram, y ahí se
+    // pierde el contacto). iPhone: instagram:// abre tu perfil en la app con
+    // «Mensaje» arriba. Android: se le pide a la app que abra el chat. Si la
+    // app no está o no responde en 1,5 s, sigue al chat en la web como antes.
+    // En el computador no cambia nada.
+    const ua = navigator.userAgent || "";
+    const esIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const esAndroid = /Android/i.test(ua);
+    if (esIOS || esAndroid) {
+      const web = "https://ig.me/m/" + u;
+      const app = esIOS
+        ? "instagram://user?username=" + u
+        : "intent://ig.me/m/" + u + "#Intent;scheme=https;package=com.instagram.android;S.browser_fallback_url=" + encodeURIComponent(web) + ";end";
+      enlaces.forEach(a => a.addEventListener("click", (e) => {
+        e.preventDefault();
+        let listo = false;
+        const salio = () => { if (document.hidden) { listo = true; clearTimeout(t); } };
+        document.addEventListener("visibilitychange", salio);
+        window.addEventListener("pagehide", salio);
+        const t = setTimeout(() => { document.removeEventListener("visibilitychange", salio); if (!listo && !document.hidden) location.href = web; }, 1500);
+        location.href = app;
+      }));
+    }
     if (!INSTAGRAM_COPIAR_PLANTILLA || !MENSAJE_PLANTILLA) return;
 
     let temporizador = null;
