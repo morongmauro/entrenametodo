@@ -224,6 +224,9 @@
   .carta { position:sticky; top:12px; height:var(--ch); margin-bottom:22px; border-radius:34px; overflow:hidden;
     box-shadow:0 -10px 30px -18px rgba(0,0,0,.35); }
   .carta:nth-child(2) { top:24px; } .carta:nth-child(3) { top:36px; }
+  /* Cada carta se queda sola un tramo de scroll antes de que suba la siguiente
+     (si no, con un deslizón se pasa de la primera a la tercera sin ver la segunda). */
+  @media (max-width:899px) { .carta:nth-child(1), .carta:nth-child(2) { margin-bottom:42svh; } }
   /* Sin paso forzado entre cartas: el scroll es el natural del teléfono (nada lo interviene). */
   .snap { display:none; }
   .carta .in { position:relative; z-index:2; padding:30px 24px 0; }
@@ -262,8 +265,8 @@
   .js .carta .in > * { opacity:0; transform:translateY(22px); transition:opacity .7s var(--suave), transform .7s var(--suave); }
   .js .carta.v .in > * { opacity:1; transform:none; }
   .js .carta.v .in > *:nth-child(2) { transition-delay:.06s; } .js .carta.v .in > *:nth-child(3) { transition-delay:.12s; }
-  .js .carta .ob { opacity:0; transition:opacity .7s var(--suave) .1s, translate 1s var(--suave) .1s, rotate 1s var(--suave) .1s; translate:60% 0; rotate:16deg; }
-  .js .carta.v .ob { opacity:1; translate:0 0; rotate:0deg; }
+  .js .carta .ob { opacity:0; transition:opacity .8s var(--suave) .15s, translate 1.1s cubic-bezier(.16,.84,.24,1) .15s; translate:85% 0; }
+  .js .carta.v .ob { opacity:1; translate:0 0; }
   @media (min-width:900px) {
     .cuatro { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; padding:24px 14px 0; }
     .carta { position:relative; top:auto !important; height:min(82vh, 820px); min-height:600px; margin:0; border-radius:40px; }
@@ -646,20 +649,18 @@
   @keyframes eSube { from { transform:translateY(105%); } to { transform:none; } }
   @keyframes eTrazo { from { stroke-dashoffset:320; } to { stroke-dashoffset:0; } }
   @keyframes eChip { 0% { opacity:0; transform:translateY(10px) scale(.86); } 70% { opacity:1; transform:translateY(-2px) scale(1.04); } 100% { opacity:1; transform:none; } }
-  @keyframes ePesa { 0% { opacity:0; transform:translateX(110%) rotate(60deg); } 55% { opacity:1; transform:translateX(52%) rotate(24deg); } 78% { transform:translateX(59%) rotate(35deg); } 100% { opacity:1; transform:translateX(58%) rotate(32deg); } }
-  @keyframes eVaiven { 0%, 100% { rotate:0deg; } 50% { rotate:-2.2deg; } }
+  @keyframes ePesa { 0% { opacity:0; transform:translateX(140%) rotate(32deg); } 35% { opacity:1; } 100% { opacity:1; transform:translateX(58%) rotate(32deg); } }
   .js .c-entreno .in > h1 { opacity:1; transform:none; transition:none; }
   .js .c-entreno h1 > span > span { transform:translateY(105%); }
   .js .c-entreno.v h1 > span > span { animation:eSube .9s cubic-bezier(.16,.84,.24,1) both; }
   .js .c-entreno.v h1 > span:nth-child(2) > span { animation-delay:.12s; }
   .js .c-entreno.v h1 > span:nth-child(3) > span { animation-delay:.24s; }
   .js .c-entreno .trazo path { stroke-dashoffset:320; }
-  .js .c-entreno.v .trazo path { animation:eTrazo .7s cubic-bezier(.6,0,.3,1) .95s both; }
   .js .c-entreno .e-chip { opacity:0; }
   .js .c-entreno.v .e-chip { animation:eChip .6s var(--suave) 1.1s both; }
   .js .c-entreno.v .e-chip + .e-chip { animation-delay:1.22s; }
   .js .c-entreno .ob { opacity:0; translate:0 0; rotate:0deg; transition:none; }
-  .js .c-entreno.v .ob { opacity:1; animation:ePesa 1.5s cubic-bezier(.2,.75,.25,1) .25s both, eVaiven 5.5s ease-in-out 2s infinite; }
+  .js .c-entreno.v .ob { opacity:1; animation:ePesa 1.1s cubic-bezier(.16,.84,.24,1) .25s both; }
   @media (prefers-reduced-motion: reduce) {
     .js .c-entreno h1 > span > span, .js .c-entreno .e-chip, .js .c-entreno .ob, .js .c-entreno .trazo path { animation:none !important; transform:none; opacity:1; stroke-dashoffset:0; }
     .js .c-entreno .ob { transform:translateX(58%) rotate(32deg); }
@@ -714,7 +715,7 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span><span>Entrena</span></span><span><span>con</span></span><span class="m"><span><i>método.</i><svg class="trazo" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M6 20 C 60 9, 150 6, 294 14"/></svg></span></span></h1><p class="l"><span class="e-chips"><span class="e-chip">Entrenamiento</span><span class="e-chip">Alimentación</span><span class="e-chip">Aprendizaje</span></span><b>Más fuerza, menos grasa y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
+    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span><span>Entrena</span></span><span><span>con</span></span><span class="m"><span><i>método.</i></span></span></h1><p class="l"><span class="e-chips"><span class="e-chip">Entrenamiento</span><span class="e-chip">Alimentación</span><span class="e-chip">Aprendizaje</span></span><b>Más fuerza, menos grasa y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
     <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
