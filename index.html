@@ -461,6 +461,15 @@
   .pil-t { display:flex; align-items:center; gap:10px; font-size:20px; font-weight:900; letter-spacing:-.03em; }
   .pil-t .ic { font-size:28px; color:var(--ama); }
   .pil p:not(.pil-t) { margin-top:8px; font-size:15.5px; line-height:1.4; opacity:.8; }
+  @media (max-width:899px) {
+    /* Ciencia en una pantalla: el templo y los pilares en 2 columnas, una línea cada uno. */
+    /* En el celular basta el templo (ya nombra los 4 pilares): los recuadros repetían lo mismo. */
+    #ciencia .templo { margin-top:22px; } .pilares { display:none; }
+    section#incluye .tour { width:min(40vw, 170px); margin-top:18px; } section#incluye .tour-t { font-size:15px; min-height:0; }
+    .pil { padding:14px; border-radius:18px; } .pil-t { font-size:16px; gap:7px; } .pil-t .ic { font-size:22px; } .pil p:not(.pil-t) { margin-top:5px; font-size:13.5px; line-height:1.32; }
+    /* Lo que recibes: tarjetas cortas. */
+    .lista-in { margin-top:18px; gap:8px; } .li { padding:16px 18px 15px; border-radius:20px; } .li h3 { font-size:clamp(22px, 6.2vw, 27px); } .li .gr-p { margin-top:6px; font-size:14.5px; }
+  }
   .tres { display:grid; gap:12px; margin-top:30px; }
   .gr { position:relative; overflow:hidden; border-radius:30px; padding:26px 22px 0; }
   .gr-k { display:flex; align-items:center; gap:9px; font-size:14px; font-weight:800; opacity:.9; } .gr-k .ic { font-size:22px; }
@@ -781,10 +790,10 @@
     </div>
   </div>
   <div class="w"><div class="pilares">
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Alimentación</p><p>Calorías y proteína calculadas para tu objetivo, con recetas y porciones que se adaptan a tu vida. Una alimentación que puedes sostener, no una dieta de pocas semanas.</p></article>
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento</p><p>Un plan por etapas en el que subes peso o repeticiones poco a poco, con el esfuerzo justo en cada serie y semanas más suaves para recuperarte. Trabajamos fuerza, y también movilidad y agilidad.</p></article>
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg>Hábitos</p><p>Sueño, descanso, manejo del estrés y constancia. Lo que pasa fuera del gimnasio también decide tu resultado, y por eso también lo trabajamos.</p></article>
-    <article class="pil pil-base rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg>Conocimiento</p><p>Cada decisión tiene una explicación. Con cápsulas de aprendizaje y resolución de dudas desarrollas criterio propio para gestionar cada pilar.</p></article>
+    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Alimentación</p><p>Calorías y proteína para tu objetivo, sin dietas de pocas semanas.</p></article>
+    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento</p><p>Plan por etapas: subes poco a poco, con el esfuerzo justo.</p></article>
+    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg>Hábitos</p><p>Sueño, estrés y constancia también deciden tu resultado.</p></article>
+    <article class="pil pil-base rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg>Conocimiento</p><p>Cápsulas y dudas resueltas: criterio propio para cada pilar.</p></article>
   </div></div>
 </section>
 
@@ -804,29 +813,22 @@
     <article class="li a-verde rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>App de alimentación</p>
       <h3>Hace los cálculos <i>por ti.</i></h3>
-      <p class="gr-p">Escribes lo que comiste en una frase y obtienes calorías y proteína al instante. Te sugiere <b>recetas personalizadas</b> en tu porción.</p>
-      <div class="mini-platos" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/balanced-protein-pancakes.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/salmon-quinoa.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/beef-plantain-bowl.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/yogurt-parfait.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/teriyaki-salmon.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/mexican-chicken-bowl.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/creamy-chicken-curry.jpg" alt="" width="400" height="400"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/platos/chicken-burrito.jpg" alt="" width="400" height="400"></div>
+      <p class="gr-p">Escribes lo que comiste y hace la cuenta. <b>Recetas</b> en tu porción.</p>
     </article>
     <article class="li a-ama rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>App de entrenamiento</p>
       <h3>Tu entrenamiento, <i>guiado.</i></h3>
-      <p class="gr-p">Cada ejercicio con <b>video</b>, tu <b>historial</b> de cargas y la <b>recomendación</b> de cuánto subir. Cada nota que dejas recibe respuesta.</p>
+      <p class="gr-p"><b>Video</b> de cada ejercicio, tu <b>historial</b> y cuánto subir.</p>
     </article>
     <article class="li a-naranja rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg>Seguimiento basado en datos</p>
       <h3>Medimos lo que <i>importa.</i></h3>
-      <p class="gr-p">Composición corporal, avances de entrenamiento y capacidades. Las decisiones sobre tu plan salen de tus datos.</p>
-      <div class="grafica2" aria-hidden="true"><p class="g2-t">Tus avances · 12 semanas <b>ejemplo</b></p>
-        <svg viewBox="0 0 260 118"><g stroke="#ECEAE4" stroke-width="1"><path d="M0 20H260M0 50H260M0 80H260M0 110H260"/></g>
-          <path class="g-linea" pathLength="1" d="M8 98 C13.0 96.3 28.0 89.0 38 88 C48.0 87.0 58.0 94.0 68 92 C78.0 90.0 88.0 78.0 98 76 C108.0 74.0 118.0 82.3 128 80 C138.0 77.7 148.0 64.3 158 62 C168.0 59.7 178.0 69.0 188 66 C198.0 63.0 208.0 50.3 218 44 C228.0 37.7 243.0 30.7 248 28" fill="none" stroke="#46965A" stroke-width="4" stroke-linecap="round"/>
-          <path class="g-linea g-l2" pathLength="1" d="M8 30 C13.0 31.3 28.0 37.3 38 38 C48.0 38.7 58.0 32.7 68 34 C78.0 35.3 88.0 44.7 98 46 C108.0 47.3 118.0 40.3 128 42 C138.0 43.7 148.0 54.3 158 56 C168.0 57.7 178.0 50.0 188 52 C198.0 54.0 208.0 63.0 218 68 C228.0 73.0 243.0 79.7 248 82" fill="none" stroke="#EE8434" stroke-width="4" stroke-linecap="round"/>
-          <circle class="g-punto" cx="248" cy="28" r="6" fill="#46965A"/><circle class="g-punto" cx="248" cy="82" r="6" fill="#EE8434"/></svg>
-        <p class="g2-ley"><span class="lv">Fuerza ↑</span><span class="ln">% de grasa ↓</span></p></div>
+      <p class="gr-p">Composición, fuerza y capacidades: tu plan se ajusta con tus datos.</p>
     </article>
     <article class="li a-grafito rev">
       <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-chats"/></svg>Acompañamiento</p>
       <h3>Acompañamiento <i>directo.</i></h3>
-      <p class="gr-p">Comunicación directa conmigo por <b>WhatsApp</b>, trabajo sobre tus <b>hábitos</b>, <b>cápsulas de aprendizaje</b> y acceso a la <b>comunidad</b> del método.</p>
+      <p class="gr-p"><b>WhatsApp</b> directo conmigo, <b>cápsulas</b> y <b>comunidad</b>.</p>
     </article>
   </div>
 </div></section>
