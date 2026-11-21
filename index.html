@@ -29,7 +29,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,700..900&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/v4/pesa.webp" fetchpriority="high">
-<script>document.documentElement.classList.add('js');</script>
+<script>document.documentElement.classList.add('js');
+// Alto de pantalla FIJO para las cartas. En el navegador de Instagram (y en
+// Safari) la barra de arriba se esconde/aparece al hacer scroll y cambia el
+// alto de la pantalla: con svh las cartas cambiaban de tamaño en pleno scroll
+// y daban saltos. Se mide una vez y solo se vuelve a medir si cambia el ancho
+// (girar el teléfono), no el alto.
+(function () { var w = 0; function f() { if (innerWidth === w) return; w = innerWidth; document.documentElement.style.setProperty('--u', (innerHeight / 100).toFixed(2) + 'px'); } f(); addEventListener('resize', f); })();</script>
 <style>
   /* Página de venta · «Color total»: un color de la marca a pantalla completa,
      letra gigante y un objeto real enorme. Cada bloque, un color y una idea. */
@@ -220,17 +226,18 @@
      color, su frase gigante y su objeto inclinado a la derecha. En celular se
      apilan al bajar (cada carta sube y tapa la anterior); en computador van
      las cuatro en fila. ══ */
-  .cuatro { position:relative; padding:12px 10px 0; --ch:clamp(560px, calc(100svh - 60px), 860px); }
+  :root { --u:1svh; }
+  .cuatro { position:relative; padding:12px 10px 0; --ch:clamp(560px, calc(100 * var(--u) - 60px), 860px); }
   .carta { position:sticky; top:12px; height:var(--ch); margin-bottom:22px; border-radius:34px; overflow:hidden;
     box-shadow:0 -10px 30px -18px rgba(0,0,0,.35); }
   .carta:nth-child(2) { top:24px; } .carta:nth-child(3) { top:36px; }
   /* Cada carta se queda sola un tramo de scroll antes de que suba la siguiente
      (si no, con un deslizón se pasa de la primera a la tercera sin ver la segunda). */
-  @media (max-width:899px) { .carta:nth-child(1), .carta:nth-child(2) { margin-bottom:42svh; } }
+  @media (max-width:899px) { .carta:nth-child(1), .carta:nth-child(2) { margin-bottom:calc(42 * var(--u)); } }
   /* Sin paso forzado entre cartas: el scroll es el natural del teléfono (nada lo interviene). */
   .snap { display:none; }
   .carta .in { position:relative; z-index:2; padding:30px 24px 0; }
-  .carta h1, .carta h2 { margin-top:14px; font-size:min(21vw, 13svh, 150px); font-weight:900; letter-spacing:-.055em; line-height:.86; }
+  .carta h1, .carta h2 { margin-top:14px; font-size:min(21vw, calc(13 * var(--u)), 150px); font-weight:900; letter-spacing:-.055em; line-height:.86; }
   .carta h1 span, .carta h2 span { display:block; }
   .carta p.l { margin-top:18px; max-width:13em; font-size:clamp(15px, 4.2vw, 19px); font-weight:600; line-height:1.3; opacity:.9; }
   .carta .ob { position:absolute; z-index:1; pointer-events:none; }
@@ -244,12 +251,12 @@
   .c-entreno::before, .c-app::before { content:''; position:absolute; z-index:0; pointer-events:none; left:var(--sx); top:var(--sy); width:var(--sw); bottom:-4%; transform:skewX(-24deg); transform-origin:bottom;
     background:linear-gradient(180deg, transparent 0%, var(--som) 70%); -webkit-mask-image:linear-gradient(90deg, transparent, #000 34%, #000 62%, transparent); mask-image:linear-gradient(90deg, transparent, #000 34%, #000 62%, transparent); }
   .c-entreno { --som:rgba(90,60,0,.34); --sx:-14%; --sy:58%; --sw:78%; } .c-app { --som:rgba(8,30,90,.34); --sx:-14%; --sy:56%; --sw:70%; }
-  .c-entreno .ob { max-width:none; width:min(128vw, 64svh); right:-52%; bottom:-8%; transform:rotate(12deg); filter:drop-shadow(0 30px 34px rgba(60,40,0,.35)); }
-  .c-comida .ob { width:min(120vw, 60svh); right:-46%; bottom:-10%; transform:rotate(16deg); filter:drop-shadow(0 30px 34px rgba(0,40,10,.35)); }
-  .c-app .ob { width:min(80vw, 43svh); right:-12%; bottom:-27%; margin:0; padding:9px; border-radius:52px; background:#1B1B1D; transform:rotate(8deg); box-shadow:-18px 34px 50px -18px rgba(4,20,70,.55); }
+  .c-entreno .ob { max-width:none; width:min(128vw, calc(64 * var(--u))); right:-52%; bottom:-8%; transform:rotate(12deg); filter:drop-shadow(0 30px 34px rgba(60,40,0,.35)); }
+  .c-comida .ob { width:min(120vw, calc(60 * var(--u))); right:-46%; bottom:-10%; transform:rotate(16deg); filter:drop-shadow(0 30px 34px rgba(0,40,10,.35)); }
+  .c-app .ob { width:min(80vw, calc(43 * var(--u))); right:-12%; bottom:-27%; margin:0; padding:9px; border-radius:52px; background:#1B1B1D; transform:rotate(8deg); box-shadow:-18px 34px 50px -18px rgba(4,20,70,.55); }
   .c-app .ob img { border-radius:43px; width:100%; }
   .carta { container-type:inline-size; }
-  .ficha { width:min(64cqw, 36svh); right:-3%; bottom:12%; padding:1.15em 1.2em 1.1em; border-radius:1.7em; background:#F3F1EB; color:#1F1F1F; font-size:min(3.6cqw, 2svh); transform:rotate(8deg); box-shadow:0 40px 60px -24px rgba(0,0,0,.75), 0 0 0 .4em rgba(242,201,76,.9); }
+  .ficha { width:min(64cqw, calc(36 * var(--u))); right:-3%; bottom:12%; padding:1.15em 1.2em 1.1em; border-radius:1.7em; background:#F3F1EB; color:#1F1F1F; font-size:min(3.6cqw, calc(2 * var(--u))); transform:rotate(8deg); box-shadow:0 40px 60px -24px rgba(0,0,0,.75), 0 0 0 .4em rgba(242,201,76,.9); }
   .ficha p { margin:0; }
   .f-t { font-size:.82em; font-weight:700; color:#6B6B6B; }
   .f-h { margin-top:.15em !important; font-size:1.45em; font-weight:900; letter-spacing:-.03em; }
@@ -635,6 +642,14 @@
   .cifras b { display:block; font-size:22px; font-weight:900; letter-spacing:-.03em; color:var(--ama); line-height:1.05; }
   .cifras span { display:block; margin-top:3px; font-size:13.5px; opacity:.8; }
   @media (prefers-reduced-motion: reduce) { .js .carta .in > *, .js .carta .ob { opacity:1; transform:none; translate:0 0; rotate:0deg; transition:none; } }
+  /* En celular las cartas 2 y 3 ya traen su texto y su objeto puestos: la
+     carta que sube ES el movimiento. Antes, al asomar, el texto aparecía
+     desvanecido y el aguacate entraba de lado mientras la carta subía: dos
+     movimientos a la vez, se veía errático (y al volver a subir, igual). */
+  @media (max-width:899px) {
+    .js .carta:not(.c-entreno) .in > * { opacity:1; transform:none; transition:none; }
+    .js .carta:not(.c-entreno) .ob { opacity:1; translate:0 0; transition:none; }
+  }
 
   /* ══ Primera carta: entrada con impacto (títulos que suben, trazo, pesa que se balancea) ══ */
   .c-entreno .ob { height:132%; bottom:-30%; transform:translateX(58%) rotate(32deg); }
