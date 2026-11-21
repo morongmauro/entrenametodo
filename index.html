@@ -690,42 +690,15 @@
     .js .c-entreno .ob { transform:translateX(58%) rotate(32deg); }
   }
 
-  /* ══ Propuesta 21 nov: más al grano, sin señas de plantilla ══
-     Portada de una pantalla (qué es, para quién, un dato y el botón), sin
-     etiquetas con punto, sin subrayado, sin diagrama, sin cajas con borde y
-     con menos aire entre secciones. */
-  .heroN { position:relative; margin:8px 8px 0; border-radius:34px; overflow:hidden; min-height:calc(100 * var(--u, 1svh) - 16px); padding:26px 22px 0;
-    background:radial-gradient(120% 70% at 75% 85%, #FFE07A 0%, #F2C94C 50%, #E9B92F 100%); color:#1F1F1F; display:flex; flex-direction:column; }
-  .hN-marca { font-size:15px; font-weight:900; letter-spacing:-.02em; }
-  .heroN h1 { margin-top:18px; font-size:clamp(40px, 11.5vw, 84px); font-weight:900; letter-spacing:-.05em; line-height:.95; max-width:9.5em; }
-  .heroN h1 i { display:block; }
-  .hN-sub { margin-top:16px; max-width:21em; font-size:17px; line-height:1.38; font-weight:600; color:#3A3320; }
-  .heroN .cta { margin-top:20px; max-width:420px; }
-  .hN-quien { display:flex; align-items:center; gap:11px; margin-top:16px; font-size:13.5px; line-height:1.3; color:#3A3320; }
-  .hN-quien img { width:44px; height:44px; border-radius:99px; object-fit:cover; flex:none; }
-  .hN-quien b { display:block; font-size:15px; color:#1F1F1F; }
-  .hN-tel { position:relative; flex:1; min-height:170px; margin:22px -22px 0; overflow:hidden; }
-  .hN-tel img { position:absolute; left:50%; top:0; width:min(62vw, 300px); transform:translateX(-50%) rotate(-4deg); border-radius:34px; border:8px solid #1B1B1D; box-shadow:0 30px 60px -20px rgba(60,40,0,.55); }
-  @media (min-width:900px) {
-    .heroN { margin:14px 14px 0; border-radius:48px; padding:64px 64px 0; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; min-height:min(88vh, 860px); }
-    .hN-in { padding-bottom:64px; align-self:center; }
-    .hN-tel { margin:0; } .hN-tel img { width:min(26vw, 360px); top:40px; }
-  }
+  /* ══ Ajustes 21 nov: mismo diseño, menos señas de plantilla ══ */
   .sobre { display:none !important; }
   .bloque h2, .claro h2 { margin-top:0; }
-  .giro b { background:none !important; }
-  @media (max-width:899px) {
-    .bloque { padding:44px 0 42px; }
-    .claro { padding:46px 0 40px; }
-    .sin-arriba { padding-top:0; }
-    .cierre { min-height:0; padding:44px 0 36px; }
-    #ciencia .pilares { display:grid; }
-  }
-  /* Pilares, certificaciones y cifras: filas limpias, sin cajas con borde. */
-  .pilares { gap:0; margin-top:22px; }
-  .pil, .pil-base { background:none; border:0; border-radius:0; padding:16px 0; }
-  .pil + .pil { border-top:1px solid rgba(255,255,255,.12); }
-  .pil-base .pil-t { color:var(--ama); }
+  .giro b, .js .giro b, .js .giro.v b { background:none !important; }
+  @media (max-width:899px) { .carta:nth-child(1), .carta:nth-child(2) { margin-bottom:calc(16 * var(--u, 1svh)); } }
+  .c-entreno h1 { margin-top:6px; }
+  .c-entreno p.l2 { font-weight:700; opacity:.7; }
+  .cierre { min-height:0; }
+  .cierre-t { position:relative; z-index:2; margin-top:18px; max-width:22em; font-size:18px; line-height:1.4; font-weight:600; opacity:.88; }
   .certs2 .cert { background:none; border:0; border-radius:0; padding:12px 0; }
   .certs2 .cert + .cert { border-top:1px solid rgba(255,255,255,.12); }
   .cert .brillo { display:none; }
@@ -779,15 +752,20 @@
 
 <main id="contenido">
 
-<section class="heroN" id="portada" aria-label="Entrena con Método">
-  <div class="hN-in">
-    <p class="hN-marca">Entrena con Método</p>
-    <h1>Baja grasa y gana fuerza <i>sin vivir a dieta.</i></h1>
-    <p class="hN-sub">Coaching online de entrenamiento y nutrición. Tu plan vive en una app y lo ajusto con tus datos.</p>
-    <a class="cta cta-oscuro" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Escríbeme por Instagram</span></a>
-    <p class="hN-quien"><img src="img/v4/coach.jpg" alt="" width="44" height="44"><span><b>Con Mauro Morón</b>8 años · certificado ISSA · menos de $7.000 al día</span></p>
-  </div>
-  <figure class="hN-tel"><img src="img/v2/dash.webp" alt="La app: tu día de entrenamiento y comida" width="640" height="1385" fetchpriority="high"></figure>
+<section class="cuatro" id="portada" aria-label="Entrena con Método">
+  <article class="carta c-entreno">
+    <div class="in"><h1><span><span>Más fuerza,</span></span><span><span>menos</span></span><span class="m"><span><i>grasa.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición, con un plan diseñado para sostenerse.</b></p><p class="l2">Entrena con Método · Mauro Morón</p></div>
+    <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
+  </article>
+  <article class="carta c-comida">
+    <div class="in"><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
+    <div class="zona"><img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219"></div>
+  </article>
+  <article class="carta c-app">
+    <div class="in"><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu entrenamiento y tu alimentación del día, definidos.</p></div>
+    <div class="zona"><figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385"></figure></div>
+  </article>
+  <i class="snap" style="--n:0"></i><i class="snap" style="--n:1"></i><i class="snap" style="--n:2"></i>
 </section>
 
 <div class="resto">
@@ -807,36 +785,9 @@
   </div>
 </div></section>
 
-<section class="claro sin-arriba" id="resultados"><div class="w dos">
-  <div>
-    <h2 class="rev h-m">El progreso llega<br><i>en capas.</i></h2>
-    <p class="txt rev">Los cambios reales ocurren en orden.</p>
-  </div>
-  <div>
-    <ol class="capas" data-mov>
-      <li class="capa k1"><span class="k-n">1</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg></span><div><b>Capacidades</b><p>Mejoras cómo te mueves y controlas tu cuerpo: más fuerza, movilidad y agilidad.</p></div></li>
-      <li class="capa k2"><span class="k-n">2</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg></span><div><b>Cómo te sientes</b><p>Más energía, mejor descanso y la confianza de saber qué estás haciendo.</p></div></li>
-      <li class="capa k3"><span class="k-n">3</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg></span><div><b>Aspecto</b><p>Los cambios físicos llegan cuando el proceso se sostiene: menos grasa y más músculo.</p></div></li>
-    </ol>
-    <p class="capas-pie rev">El progreso es proporcional a tu consistencia. El método se ajusta a lo que tienes, no a un ideal.</p>
-  </div>
-</div></section>
 
-<section class="bloque b-grafito" id="ciencia">
-  <div class="w dos">
-    <div>
-      <h2 class="rev">Nada al<br><i>azar.</i></h2>
-      <p class="txt rev">Tu resultado se sostiene sobre tres pilares, y sobre el conocimiento para manejarlos con criterio. Cada decisión tiene respaldo científico.</p>
-    </div>
-    
-  </div>
-  <div class="w"><div class="pilares">
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Alimentación</p><p>Calorías y proteína para tu objetivo, sin dietas de pocas semanas.</p></article>
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Entrenamiento</p><p>Plan por etapas: subes poco a poco, con el esfuerzo justo.</p></article>
-    <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg>Hábitos</p><p>Sueño, estrés y constancia también deciden tu resultado.</p></article>
-    <article class="pil pil-base rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg>Conocimiento</p><p>Cápsulas y dudas resueltas: criterio propio para cada pilar.</p></article>
-  </div></div>
-</section>
+
+
 
 <section class="claro" id="incluye"><div class="w dos">
   <div>
@@ -873,11 +824,26 @@
   </div>
 </div></section>
 
+<section class="claro sin-arriba" id="resultados"><div class="w dos">
+  <div>
+    <h2 class="rev h-m">El progreso llega<br><i>en capas.</i></h2>
+    <p class="txt rev">Los cambios reales ocurren en orden.</p>
+  </div>
+  <div>
+    <ol class="capas" data-mov>
+      <li class="capa k1"><span class="k-n">1</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg></span><div><b>Capacidades</b><p>Mejoras cómo te mueves y controlas tu cuerpo: más fuerza, movilidad y agilidad.</p></div></li>
+      <li class="capa k2"><span class="k-n">2</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg></span><div><b>Cómo te sientes</b><p>Más energía, mejor descanso y la confianza de saber qué estás haciendo.</p></div></li>
+      <li class="capa k3"><span class="k-n">3</span><span class="k-ic"><svg class="ic" aria-hidden="true"><use href="#i-sube"/></svg></span><div><b>Aspecto</b><p>Los cambios físicos llegan cuando el proceso se sostiene: menos grasa y más músculo.</p></div></li>
+    </ol>
+    <p class="capas-pie rev">El progreso es proporcional a tu consistencia. El método se ajusta a lo que tienes, no a un ideal.</p>
+  </div>
+</div></section>
+
 <section class="bloque b-grafito" id="coach"><div class="w dos">
   <div>
     <h2 class="rev h-m">Trabajo con<br><i>método y ciencia.</i></h2>
     <p class="quien2 rev"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
-    <p class="bio rev">Llevo años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno después de una lesión y salud metabólica. Traduzco fisiología, biomecánica y nutrición en un proceso que tu cuerpo pueda sostener.</p>
+    <p class="bio rev">Ocho años de práctica en composición corporal, rendimiento y regreso al entrenamiento después de una lesión. Cada plan se construye sobre evidencia y se ajusta a tu contexto real: tu agenda, tu equipo y tu punto de partida.</p>
     <div class="cifras rev"><p><b>8 años</b><span>de experiencia</span></p><p><b>Todas las edades</b><span>géneros y países</span></p></div>
   </div>
   <div>
@@ -896,7 +862,7 @@
 <section class="bloque b-ama" id="precio"><div class="w dos">
   <div>
     <h2 class="rev">Un plan.<br><i>Todo incluido.</i></h2>
-    <p class="dia rev">Menos de <b>$7.000 COP al día</b> por tu entrenamiento, tu alimentación y tu acompañamiento profesional.</p>
+    <p class="dia rev">Una suscripción mensual que integra entrenamiento, nutrición y seguimiento. Menos de <b>$7.000 COP al día</b>.</p>
   </div>
   <div class="rev">
     <p class="precio"><span class="cifra" data-cifra="200000">$200.000</span><small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
@@ -928,11 +894,7 @@
 <section class="bloque b-grafito cierre cierre2" id="cierre">
   <div class="w">
     <h2>Empieza<br>tu <i>proceso</i><span style="color:var(--ama)">.</span></h2>
-    <ol class="despues">
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Me escribes por Instagram</b> con tu objetivo.</p></li>
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-camara"/></svg></span><p><b>Videollamada sin costo</b> para conocer tu caso y definir cómo empezar.</p></li>
-      <li><span><svg class="ic" aria-hidden="true"><use href="#i-plan"/></svg></span><p><b>Arrancas con tu plan</b> en la app, con la metodología explicada en detalle.</p></li>
-    </ol>
+    <p class="cierre-t">El primer paso es una conversación. Escríbeme y definimos juntos por dónde empezar.</p>
     <a class="cta cta-ama" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Quiero empezar</span></a>
     <p class="cta-n">Se abre el chat de Instagram. Después agendamos una videollamada sin costo para definir cómo empezar.</p>
   </div>
@@ -1230,7 +1192,7 @@
         if (!e.isIntersecting) return; var k = e.target.getAttribute('data-med'); ultima = k;
         if (!vistas[k]) { vistas[k] = 1; if (k !== 'portada') anotar('seccion', k); }
       }); }, { rootMargin: '-45% 0px -45% 0px' });
-      var cartas = [document.getElementById('portada')]; ['portada', 'carta2', 'carta3'].forEach(function (k, i) { if (cartas[i]) { cartas[i].setAttribute('data-med', k); io.observe(cartas[i]); } });
+      var cartas = document.querySelectorAll('.carta'); ['portada', 'carta2', 'carta3'].forEach(function (k, i) { if (cartas[i]) { cartas[i].setAttribute('data-med', k); io.observe(cartas[i]); } });
       ['dolor', 'resultados', 'ciencia', 'incluye', 'app', 'coach', 'precio', 'preguntas', 'cierre'].forEach(function (id) { var el = document.getElementById(id); if (el) { el.setAttribute('data-med', id); io.observe(el); } });
     }
     document.querySelectorAll('a[data-ig]').forEach(function (a) { a.addEventListener('click', function () { anotar('clic', ultima, true); }); });
