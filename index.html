@@ -696,7 +696,12 @@
   .giro b, .js .giro b, .js .giro.v b { background:none !important; }
   @media (max-width:899px) { .carta:nth-child(1), .carta:nth-child(2) { margin-bottom:calc(16 * var(--u, 1svh)); } }
   .c-entreno h1 { margin-top:6px; }
-  .c-entreno p.l2 { font-weight:700; opacity:.7; }
+  .c-entreno p.l2 { font-weight:700; opacity:.7; margin-top:6px; }
+  /* Título de cinco líneas: más chico que el de las otras cartas para que
+     «composición» quepa entera, y el texto de abajo separado por una línea. */
+  .c-entreno h1.h1-largo { font-size:min(12.4vw, calc(7.4 * var(--u, 1svh)), 96px); line-height:.9; }
+  .c-entreno h1.h1-largo + p.l { position:relative; margin-top:22px; padding-top:18px; }
+  .c-entreno h1.h1-largo + p.l::before { content:''; position:absolute; left:0; top:0; width:56px; height:3px; border-radius:3px; background:#1F1F1F; opacity:.85; }
   .cierre { min-height:0; }
   .cierre-t { position:relative; z-index:2; margin-top:18px; max-width:22em; font-size:18px; line-height:1.4; font-weight:600; opacity:.88; }
   .certs2 .cert { background:none; border:0; border-radius:0; padding:12px 0; }
@@ -754,7 +759,7 @@
 
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
-    <div class="in"><h1><span><span>Más fuerza,</span></span><span><span>menos</span></span><span class="m"><span><i>grasa.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición, con un plan diseñado para sostenerse.</b></p><p class="l2">Entrena con Método · Mauro Morón</p></div>
+    <div class="in"><h1 class="h1-largo"><span><span>Más fuerza</span></span><span><span>y movilidad.</span></span><span><span>Mejor</span></span><span><span>composición</span></span><span class="m"><span><i>corporal.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición.</b></p><p class="l2">Entrena con Método · Mauro Morón</p></div>
     <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
