@@ -689,6 +689,48 @@
     .js .c-entreno h1 > span > span, .js .c-entreno .e-chip, .js .c-entreno .ob, .js .c-entreno .trazo path { animation:none !important; transform:none; opacity:1; stroke-dashoffset:0; }
     .js .c-entreno .ob { transform:translateX(58%) rotate(32deg); }
   }
+
+  /* ══ Propuesta 21 nov: más al grano, sin señas de plantilla ══
+     Portada de una pantalla (qué es, para quién, un dato y el botón), sin
+     etiquetas con punto, sin subrayado, sin diagrama, sin cajas con borde y
+     con menos aire entre secciones. */
+  .heroN { position:relative; margin:8px 8px 0; border-radius:34px; overflow:hidden; min-height:calc(100 * var(--u, 1svh) - 16px); padding:26px 22px 0;
+    background:radial-gradient(120% 70% at 75% 85%, #FFE07A 0%, #F2C94C 50%, #E9B92F 100%); color:#1F1F1F; display:flex; flex-direction:column; }
+  .hN-marca { font-size:15px; font-weight:900; letter-spacing:-.02em; }
+  .heroN h1 { margin-top:18px; font-size:clamp(40px, 11.5vw, 84px); font-weight:900; letter-spacing:-.05em; line-height:.95; max-width:9.5em; }
+  .heroN h1 i { display:block; }
+  .hN-sub { margin-top:16px; max-width:21em; font-size:17px; line-height:1.38; font-weight:600; color:#3A3320; }
+  .heroN .cta { margin-top:20px; max-width:420px; }
+  .hN-quien { display:flex; align-items:center; gap:11px; margin-top:16px; font-size:13.5px; line-height:1.3; color:#3A3320; }
+  .hN-quien img { width:44px; height:44px; border-radius:99px; object-fit:cover; flex:none; }
+  .hN-quien b { display:block; font-size:15px; color:#1F1F1F; }
+  .hN-tel { position:relative; flex:1; min-height:170px; margin:22px -22px 0; overflow:hidden; }
+  .hN-tel img { position:absolute; left:50%; top:0; width:min(62vw, 300px); transform:translateX(-50%) rotate(-4deg); border-radius:34px; border:8px solid #1B1B1D; box-shadow:0 30px 60px -20px rgba(60,40,0,.55); }
+  @media (min-width:900px) {
+    .heroN { margin:14px 14px 0; border-radius:48px; padding:64px 64px 0; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; min-height:min(88vh, 860px); }
+    .hN-in { padding-bottom:64px; align-self:center; }
+    .hN-tel { margin:0; } .hN-tel img { width:min(26vw, 360px); top:40px; }
+  }
+  .sobre { display:none !important; }
+  .bloque h2, .claro h2 { margin-top:0; }
+  .giro b { background:none !important; }
+  @media (max-width:899px) {
+    .bloque { padding:44px 0 42px; }
+    .claro { padding:46px 0 40px; }
+    .sin-arriba { padding-top:0; }
+    .cierre { min-height:0; padding:44px 0 36px; }
+    #ciencia .pilares { display:grid; }
+  }
+  /* Pilares, certificaciones y cifras: filas limpias, sin cajas con borde. */
+  .pilares { gap:0; margin-top:22px; }
+  .pil, .pil-base { background:none; border:0; border-radius:0; padding:16px 0; }
+  .pil + .pil { border-top:1px solid rgba(255,255,255,.12); }
+  .pil-base .pil-t { color:var(--ama); }
+  .certs2 .cert { background:none; border:0; border-radius:0; padding:12px 0; }
+  .certs2 .cert + .cert { border-top:1px solid rgba(255,255,255,.12); }
+  .cert .brillo { display:none; }
+  .cifras p { background:none; border:0; padding:0; }
+  .cifras b { font-size:30px; }
 </style>
 </head>
 <body>
@@ -737,26 +779,20 @@
 
 <main id="contenido">
 
-<section class="cuatro" id="portada" aria-label="Entrena con Método">
-  <article class="carta c-entreno">
-    <div class="in"><p class="sobre">Coaching online · entrenamiento y nutrición</p><h1><span><span>Entrena</span></span><span><span>con</span></span><span class="m"><span><i>método.</i></span></span></h1><p class="l"><span class="e-chips"><span class="e-chip">Entrenamiento</span><span class="e-chip">Alimentación</span><span class="e-chip">Aprendizaje</span></span><b>Más fuerza, menos grasa y un plan que puedes sostener.</b></p><p class="l2">Método estructurado y basado en ciencia de primer nivel.</p></div>
-    <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
-  </article>
-  <article class="carta c-comida">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
-    <div class="zona"><img class="ob" src="img/v4/aguacate.webp" alt="" width="900" height="1219"></div>
-  </article>
-  <article class="carta c-app">
-    <div class="in"><p class="sobre">Coaching online</p><h2><span>Sabes</span><span>qué toca</span><span><i>hoy.</i></span></h2><p class="l">Tu entrenamiento y tu alimentación del día, definidos.</p></div>
-    <div class="zona"><figure class="ob"><img src="img/v2/dash.webp" alt="" width="640" height="1385"></figure></div>
-  </article>
-  <i class="snap" style="--n:0"></i><i class="snap" style="--n:1"></i><i class="snap" style="--n:2"></i>
+<section class="heroN" id="portada" aria-label="Entrena con Método">
+  <div class="hN-in">
+    <p class="hN-marca">Entrena con Método</p>
+    <h1>Baja grasa y gana fuerza <i>sin vivir a dieta.</i></h1>
+    <p class="hN-sub">Coaching online de entrenamiento y nutrición. Tu plan vive en una app y lo ajusto con tus datos.</p>
+    <a class="cta cta-oscuro" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Escríbeme por Instagram</span></a>
+    <p class="hN-quien"><img src="img/v4/coach.jpg" alt="" width="44" height="44"><span><b>Con Mauro Morón</b>8 años · certificado ISSA · menos de $7.000 al día</span></p>
+  </div>
+  <figure class="hN-tel"><img src="img/v2/dash.webp" alt="La app: tu día de entrenamiento y comida" width="640" height="1385" fetchpriority="high"></figure>
 </section>
 
 <div class="resto">
 <section class="claro" id="dolor"><div class="w dos">
   <div>
-    <p class="sobre rev">¿Es para ti?</p>
     <h2 class="rev h-m">Lo intentas,<br><i>pero no avanzas.</i></h2>
   </div>
   <div>
@@ -773,7 +809,6 @@
 
 <section class="claro sin-arriba" id="resultados"><div class="w dos">
   <div>
-    <p class="sobre rev">Lo que logras</p>
     <h2 class="rev h-m">El progreso llega<br><i>en capas.</i></h2>
     <p class="txt rev">Los cambios reales ocurren en orden.</p>
   </div>
@@ -790,19 +825,10 @@
 <section class="bloque b-grafito" id="ciencia">
   <div class="w dos">
     <div>
-      <p class="sobre rev" style="color:var(--ama);opacity:1">Basado en ciencia</p>
       <h2 class="rev">Nada al<br><i>azar.</i></h2>
       <p class="txt rev">Tu resultado se sostiene sobre tres pilares, y sobre el conocimiento para manejarlos con criterio. Cada decisión tiene respaldo científico.</p>
     </div>
-    <div class="templo" data-mov role="img" aria-label="Tu resultado se apoya en alimentación, entrenamiento y hábitos, sobre una base de conocimiento">
-      <div class="t-techo"><span>Tu resultado</span></div>
-      <div class="t-cols">
-        <div class="t-col"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg><b>Alimentación</b></div>
-        <div class="t-col"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg><b>Entrenamiento</b></div>
-        <div class="t-col"><svg class="ic" aria-hidden="true"><use href="#i-habito"/></svg><b>Hábitos</b></div>
-      </div>
-      <div class="t-base"><svg class="ic" aria-hidden="true"><use href="#i-mente"/></svg><p><b>Conocimiento</b>criterio para manejar cada pilar</p></div>
-    </div>
+    
   </div>
   <div class="w"><div class="pilares">
     <article class="pil rev"><p class="pil-t"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Alimentación</p><p>Calorías y proteína para tu objetivo, sin dietas de pocas semanas.</p></article>
@@ -814,7 +840,6 @@
 
 <section class="claro" id="incluye"><div class="w dos">
   <div>
-    <p class="sobre rev">Qué incluye</p>
     <h2 class="rev h-m">Todo en tu teléfono.<br><i>En tiempo real.</i></h2>
     <p class="txt rev">Nada de Excel ni PDF: tu plan, tus registros y tus avances se actualizan al momento.</p>
     <div class="tour rev" data-tour>
@@ -850,7 +875,6 @@
 
 <section class="bloque b-grafito" id="coach"><div class="w dos">
   <div>
-    <p class="sobre rev" style="color:var(--ama);opacity:1">Tu coach</p>
     <h2 class="rev h-m">Trabajo con<br><i>método y ciencia.</i></h2>
     <p class="quien2 rev"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v4/coach.jpg" alt="Mauro Morón" width="64" height="64"><span><b>Mauro Morón</b>Coach de entrenamiento y nutrición</span></p>
     <p class="bio rev">Llevo años aplicando ciencia del ejercicio en contextos reales: composición corporal, rendimiento, retorno después de una lesión y salud metabólica. Traduzco fisiología, biomecánica y nutrición en un proceso que tu cuerpo pueda sostener.</p>
@@ -871,7 +895,6 @@
 
 <section class="bloque b-ama" id="precio"><div class="w dos">
   <div>
-    <p class="sobre rev">La inversión</p>
     <h2 class="rev">Un plan.<br><i>Todo incluido.</i></h2>
     <p class="dia rev">Menos de <b>$7.000 COP al día</b> por tu entrenamiento, tu alimentación y tu acompañamiento profesional.</p>
   </div>
@@ -886,7 +909,6 @@
 
 <section class="claro" id="preguntas"><div class="w dos">
   <div>
-    <p class="sobre rev">Preguntas</p>
     <h2 class="rev">Antes de<br><i>empezar.</i></h2>
   </div>
   <div class="faq rev">
@@ -905,7 +927,6 @@
 
 <section class="bloque b-grafito cierre cierre2" id="cierre">
   <div class="w">
-    <p class="sobre" style="color:var(--ama);opacity:1">Empieza hoy</p>
     <h2>Empieza<br>tu <i>proceso</i><span style="color:var(--ama)">.</span></h2>
     <ol class="despues">
       <li><span><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><p><b>Me escribes por Instagram</b> con tu objetivo.</p></li>
@@ -1209,7 +1230,7 @@
         if (!e.isIntersecting) return; var k = e.target.getAttribute('data-med'); ultima = k;
         if (!vistas[k]) { vistas[k] = 1; if (k !== 'portada') anotar('seccion', k); }
       }); }, { rootMargin: '-45% 0px -45% 0px' });
-      var cartas = document.querySelectorAll('.carta'); ['portada', 'carta2', 'carta3'].forEach(function (k, i) { if (cartas[i]) { cartas[i].setAttribute('data-med', k); io.observe(cartas[i]); } });
+      var cartas = [document.getElementById('portada')]; ['portada', 'carta2', 'carta3'].forEach(function (k, i) { if (cartas[i]) { cartas[i].setAttribute('data-med', k); io.observe(cartas[i]); } });
       ['dolor', 'resultados', 'ciencia', 'incluye', 'app', 'coach', 'precio', 'preguntas', 'cierre'].forEach(function (id) { var el = document.getElementById(id); if (el) { el.setAttribute('data-med', id); io.observe(el); } });
     }
     document.querySelectorAll('a[data-ig]').forEach(function (a) { a.addEventListener('click', function () { anotar('clic', ultima, true); }); });
