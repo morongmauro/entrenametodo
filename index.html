@@ -771,6 +771,20 @@
     .c-entreno .ob { height:clamp(260px, 44vh, 420px); bottom:-6%; --kx:30%; }
     .c-entreno .cta-vidrio { margin:0 22px 22px; width:auto; }
   }
+
+  /* ══ 25 nov (2) · la kettlebell y el teléfono como el aguacate: entero a la
+     vista, arrancando junto al texto y con la misma sombra suave hacia abajo.
+     El teléfono sube para que se vea más pantalla. ══ */
+  .c-entreno .ob { filter:drop-shadow(0 30px 34px rgba(60,40,0,.36)); }
+  .c-entreno .ob, .js .c-entreno .ob { transform:translateX(var(--kx)) rotate(-10deg); }
+  @keyframes eKb { 0% { opacity:0; transform:translateX(120%) rotate(-26deg); } 40% { opacity:1; } 100% { opacity:1; transform:translateX(var(--kx)) rotate(-10deg); } }
+  .c-app .ob { box-shadow:none; filter:drop-shadow(0 30px 34px rgba(4,20,70,.42)); }
+  @media (max-width:899px) {
+    .c-entreno .ob { height:clamp(270px, 37 * var(--u, 1svh), 350px); bottom:58px; --kx:9%; }
+    .c-app .zona { height:210px; }
+    .c-app .ob { height:clamp(400px, 56 * var(--u, 1svh), 500px); bottom:-30%; }
+  }
+  @media (min-width:900px) { .c-entreno .ob { height:clamp(240px, 36vh, 340px); bottom:2%; --kx:12%; } }
 </style>
 </head>
 <body>
@@ -822,7 +836,7 @@
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
     <div class="in"><h1 class="h1-largo"><span><span>Más fuerza</span></span><span><span>y movilidad.</span></span><span><span>Mejor</span></span><span><span>composición</span></span><span class="m"><span><i>corporal.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición.</b></p><p class="l2">Entrena con Método · Mauro Morón</p></div>
-    <div class="zona"><img class="ob" src="img/v4/kettlebell.webp" alt="" width="900" height="1381" fetchpriority="high"></div>
+    <div class="zona"><img class="ob" src="img/v4/pesa-rusa.webp" alt="" width="900" height="1311" fetchpriority="high"></div>
     <a class="cta cta-vidrio" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Escríbeme por Instagram</span></a>
   </article>
   <article class="carta c-comida">
@@ -860,22 +874,22 @@
 <section class="claro" id="incluye"><div class="w dos">
   <div>
     <h2 class="rev h-m">Todo en tu teléfono.<br><i>En tiempo real.</i></h2>
-    <p class="txt rev">Nada de Excel ni PDF: tu plan, tus registros y tus avances se actualizan al momento.</p>
+    <p class="txt rev">Una sola app, con módulos de entrenamiento, alimentación y aprendizaje. Tu plan, tus registros y tus avances se actualizan al momento, sin Excel ni PDF.</p>
     <div class="tour rev" data-tour>
-    <div class="tour-barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="tel tour-tel"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/comida.webp" alt="Tu día de comida, en vivo" width="640" height="1385" class="on"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/chat-1.webp" alt="Lo escribes y la app hace la cuenta" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/receta.webp" alt="Recetas en la porción que te toca" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/entreno-calendario.webp" alt="Tu mes de entrenamiento, organizado" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/composicion.webp" alt="Tu grasa y tu músculo, medidos" width="640" height="1385"></div>
-    <p class="tour-t" aria-live="polite">Tu día de comida, en vivo</p>
+    <div class="tour-barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="tel tour-tel"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/dash.webp" alt="Tu día, de un vistazo" width="640" height="1385" class="on"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/rutina-series.webp" alt="Tu entrenamiento de hoy, guiado" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/comida.webp" alt="Tu día de comida, en vivo" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/chat-1.webp" alt="Lo escribes y la app hace la cuenta" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/receta.webp" alt="Recetas en la porción que te toca" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/entreno-calendario.webp" alt="Tu mes de entrenamiento, organizado" width="640" height="1385"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="img/v2/composicion.webp" alt="Tu grasa y tu músculo, medidos" width="640" height="1385"></div>
+    <p class="tour-t" aria-live="polite">Tu día, de un vistazo</p>
     <p class="tour-n">Toca el teléfono para pasar a la siguiente</p>
   </div>
   </div>
   <div class="lista-in">
     <article class="li a-verde rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>App de alimentación</p>
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-olla"/></svg>Módulo de alimentación</p>
       <h3>Hace los cálculos <i>por ti.</i></h3>
       <p class="gr-p">Escribes lo que comiste y hace la cuenta. <b>Recetas</b> en tu porción.</p>
     </article>
     <article class="li a-ama rev">
-      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>App de entrenamiento</p>
+      <p class="gr-k"><svg class="ic" aria-hidden="true"><use href="#i-barra"/></svg>Módulo de entrenamiento</p>
       <h3>Tu entrenamiento, <i>guiado.</i></h3>
       <p class="gr-p"><b>Video</b> de cada ejercicio, tu <b>historial</b> y cuánto subir.</p>
     </article>
@@ -934,7 +948,7 @@
   </div>
   <div class="rev">
     <p class="precio"><span class="cifra" data-cifra="200000">$200.000</span><small>COP · suscripción mensual <span class="usd">≈ $65 USD</span></small></p>
-    <p class="resumen rev">Incluye: <b>app de alimentación, app de entrenamiento, seguimiento basado en datos y acompañamiento directo.</b></p>
+    <p class="resumen rev">Incluye: <b>la app con sus módulos de entrenamiento, alimentación y aprendizaje, seguimiento basado en datos y acompañamiento directo.</b></p>
     <p class="garantia rev"><svg class="ic" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Sin permanencia.</b> Suscripción mensual, cancelable en cualquier momento.</span></p>
     <a class="cta cta-oscuro" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Quiero empezar</span></a>
     <p class="cta-n">Se abre el chat de Instagram. Después agendamos una videollamada sin costo para definir cómo empezar.</p>
