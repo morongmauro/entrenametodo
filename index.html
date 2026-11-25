@@ -709,6 +709,30 @@
   .cert .brillo { display:none; }
   .cifras p { background:none; border:0; padding:0; }
   .cifras b { font-size:30px; }
+
+  /* ══ 25 nov: sin espacios muertos entre secciones ══
+     Menos aire arriba y abajo de cada sección en el teléfono; donde dos
+     secciones claras quedan seguidas, una línea fina las separa (en vez de
+     un hueco). */
+  @media (max-width:899px) {
+    .claro { padding:34px 0 30px; }
+    .bloque { padding:40px 0 36px; }
+    .sin-arriba { padding-top:0; }
+    .giro { margin-top:22px; }
+    .claro + .claro > .w { border-top:1px solid #E2DED4; padding-top:30px; }
+  }
+  /* El recorrido de la app: carrusel que se desliza con el dedo. */
+  .tour-pista { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:4px calc(50% - min(27vw, 115px)) 6px; margin:0 -22px; }
+  .tour-pista::-webkit-scrollbar { display:none; }
+  .tour-slide { flex:none; width:min(54vw, 230px); margin:0; scroll-snap-align:center; text-align:center; }
+  .tour-slide .tel img { display:block; }
+  .tour-slide .tour-t { margin-top:12px; min-height:0; font-size:15px; font-weight:800; letter-spacing:-.02em; line-height:1.25; }
+  .tour-puntos { display:flex; justify-content:center; gap:6px; margin:0 0 12px; }
+  .tour-puntos i { width:7px; height:7px; border-radius:99px; background:rgba(31,31,31,.2); cursor:pointer; transition:width .25s, background .25s; }
+  .tour-puntos i.on { width:20px; background:var(--ink); }
+  section#incluye .tour, #incluye .tour { width:auto !important; text-align:center; }
+  #incluye .tour-n { margin-top:10px; }
+  @media (min-width:900px) { #incluye .tour { width:auto; max-width:520px; } .tour-pista { margin:0; padding:4px 0 6px; } .tour-slide { width:230px; } }
 </style>
 </head>
 <body>
@@ -1137,24 +1161,38 @@
 })();
 </script>
 <script>
-// Recorrido de la app: las pantallas pasan solas (como historias) mientras se
-// ve; un toque pasa a la siguiente. Con «reducir movimiento» solo pasa al tocar.
+// Recorrido de la app: se pasa DESLIZANDO, como un carrusel de Instagram.
+// Antes las pantallas pasaban solas cada 3 s y había que esperar (o tocar):
+// la gente prefiere moverlas con el dedo, a su ritmo. Cada pantalla lleva su
+// frase debajo; la siguiente asoma a la derecha para que se vea que hay más,
+// y los puntos de arriba dicen en cuál vas (también se tocan).
 (function () {
   var t = document.querySelector('[data-tour]'); if (!t) return;
-  var imgs = t.querySelectorAll('.tour-tel img'), barras = t.querySelectorAll('.tour-barras i'), txt = t.querySelector('.tour-t');
-  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches, DUR = 2800, i = 0, reloj = null, visible = false;
-  function pon(n) {
-    i = (n + imgs.length) % imgs.length;
-    imgs.forEach(function (im, k) { im.classList.toggle('on', k === i); });
-    barras.forEach(function (b, k) { b.classList.remove('va'); b.classList.toggle('hecha', k < i); });
-    txt.textContent = imgs[i].alt;
-    clearTimeout(reloj);
-    if (visible && !quieto) { void barras[i].offsetWidth; barras[i].style.setProperty('--dur', DUR + 'ms'); barras[i].classList.add('va'); reloj = setTimeout(function () { pon(i + 1); }, DUR); }
-    else if (quieto) barras[i].classList.add('hecha');
-  }
-  t.querySelector('.tour-tel').addEventListener('click', function () { pon(i + 1); });
-  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; pon(i); }, { threshold: 0.35 }).observe(t);
-  else { visible = true; pon(0); }
+  var tel = t.querySelector('.tour-tel'), barras = t.querySelector('.tour-barras'), viejoT = t.querySelector('.tour-t'), nota = t.querySelector('.tour-n');
+  var imgs = [].slice.call(tel.querySelectorAll('img'));
+  var pista = document.createElement('div'); pista.className = 'tour-pista'; pista.setAttribute('data-tour-pista', '');
+  imgs.forEach(function (im, k) {
+    im.classList.remove('on'); im.removeAttribute('style');
+    var sl = document.createElement('figure'); sl.className = 'tour-slide';
+    var marco = document.createElement('div'); marco.className = 'tel'; marco.appendChild(im);
+    var cap = document.createElement('figcaption'); cap.className = 'tour-t'; cap.textContent = im.alt;
+    sl.appendChild(marco); sl.appendChild(cap); pista.appendChild(sl);
+  });
+  tel.replaceWith(pista); if (viejoT) viejoT.remove();
+  if (nota) nota.textContent = 'Desliza para ver más';
+  barras.innerHTML = imgs.map(function (_, k) { return '<i data-punto="' + k + '"></i>'; }).join('');
+  barras.removeAttribute('aria-hidden'); barras.className = 'tour-puntos';
+  var puntos = [].slice.call(barras.querySelectorAll('i'));
+  var actual = function () {
+    var c = pista.scrollLeft + pista.clientWidth / 2, mejor = 0, d = 1e9;
+    [].forEach.call(pista.children, function (sl, k) { var m = sl.offsetLeft + sl.offsetWidth / 2, x = Math.abs(m - c); if (x < d) { d = x; mejor = k; } });
+    return mejor;
+  };
+  var pinta = function () { var a = actual(); puntos.forEach(function (p, k) { p.classList.toggle('on', k === a); }); };
+  var pend = false;
+  pista.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(function () { pend = false; pinta(); }); } }, { passive: true });
+  puntos.forEach(function (p, k) { p.addEventListener('click', function () { var sl = pista.children[k]; pista.scrollTo({ left: sl.offsetLeft - (pista.clientWidth - sl.offsetWidth) / 2, behavior: 'smooth' }); }); });
+  pinta();
 })();
 </script>
 <script>
