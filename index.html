@@ -733,6 +733,44 @@
   section#incluye .tour, #incluye .tour { width:auto !important; text-align:center; }
   #incluye .tour-n { margin-top:10px; }
   @media (min-width:900px) { #incluye .tour { width:auto; max-width:520px; } .tour-pista { margin:0; padding:4px 0 6px; } .tour-slide { width:230px; } }
+
+  /* ══ 25 nov · portada: secciones de color que se bajan normal (sin cartas
+     que se apilan), la kettlebell como el aguacate y el teléfono, cada objeto
+     pegado a su texto (sin aire muerto) y botones y tarjetas con brillo de
+     vidrio. ══ */
+  .c-entreno::before { display:none; }
+  .c-entreno .ob { filter:drop-shadow(-14px 30px 24px rgba(60,40,0,.34)); }
+  @keyframes eKb { 0% { opacity:0; transform:translateX(120%) rotate(-30deg); } 40% { opacity:1; } 100% { opacity:1; transform:translateX(var(--kx)) rotate(-14deg); } }
+  .c-entreno { --kx:24%; }
+  .c-entreno .ob, .js .c-entreno .ob { transform:translateX(var(--kx)) rotate(-14deg); }
+  .js .c-entreno.v .ob { animation:eKb 1.1s cubic-bezier(.16,.84,.24,1) .25s both; }
+  .cta-vidrio { position:relative; z-index:3; flex:none; background:rgba(31,31,31,.66); color:#fff; -webkit-backdrop-filter:blur(18px) saturate(1.6); backdrop-filter:blur(18px) saturate(1.6); }
+  .cta, .fab { border:1px solid rgba(255,255,255,.24); box-shadow:inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.18), 0 14px 30px -14px rgba(0,0,0,.45); }
+  .cta-ama { border-color:rgba(255,255,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.7), inset 0 -8px 16px -10px rgba(150,100,0,.35), 0 14px 30px -14px rgba(0,0,0,.45); }
+  .fab { transition:transform .25s var(--suave), opacity .25s; } .fab.tapado { opacity:0; pointer-events:none; }
+  .li { position:relative; isolation:isolate; border:1px solid rgba(255,255,255,.55); box-shadow:inset 0 1px 0 rgba(255,255,255,.65), inset 0 -10px 24px -14px rgba(0,0,0,.22), 0 18px 34px -22px rgba(31,31,31,.45); }
+  .li::before { content:''; position:absolute; inset:0; border-radius:inherit; z-index:-1; pointer-events:none; background:linear-gradient(160deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.08) 34%, rgba(255,255,255,0) 55%), radial-gradient(90% 60% at 100% 100%, rgba(255,255,255,.16), transparent 70%); }
+  .li > * { position:relative; }
+  @media (max-width:899px) {
+    .cuatro { padding:0; }
+    .carta, .carta:nth-child(n) { position:relative; top:auto; height:auto; margin:0 !important; border-radius:0; box-shadow:none; }
+    .carta .in { padding:26px 22px 0; }
+    /* El objeto arranca a la altura del título (al lado de las líneas cortas) y
+       la carta termina poco después del texto. */
+    .zona { flex:none; height:150px; position:static; -webkit-mask-image:none; mask-image:none; }
+    .carta .ob { top:auto; bottom:-6%; }
+    .c-entreno { padding-bottom:18px; }
+    .c-entreno .zona { height:clamp(190px, 26 * var(--u, 1svh), 260px); }
+    .c-entreno .ob { height:clamp(290px, 40 * var(--u, 1svh), 380px); bottom:52px; --kx:22%; }
+    .c-entreno .cta-vidrio { margin:-8px 16px 0; width:auto; }
+    .c-comida .ob { height:clamp(300px, 44 * var(--u, 1svh), 400px); bottom:-10%; }
+    .c-app .zona { height:190px; }
+    .c-app .ob { height:clamp(380px, 54 * var(--u, 1svh), 480px); bottom:-42%; }
+  }
+  @media (min-width:900px) {
+    .c-entreno .ob { height:clamp(260px, 44vh, 420px); bottom:-6%; --kx:30%; }
+    .c-entreno .cta-vidrio { margin:0 22px 22px; width:auto; }
+  }
 </style>
 </head>
 <body>
@@ -784,7 +822,8 @@
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
     <div class="in"><h1 class="h1-largo"><span><span>Más fuerza</span></span><span><span>y movilidad.</span></span><span><span>Mejor</span></span><span><span>composición</span></span><span class="m"><span><i>corporal.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición.</b></p><p class="l2">Entrena con Método · Mauro Morón</p></div>
-    <div class="zona"><img class="ob" src="img/v4/pesa.webp" alt="" width="1100" height="1119" fetchpriority="high"></div>
+    <div class="zona"><img class="ob" src="img/v4/kettlebell.webp" alt="" width="900" height="1381" fetchpriority="high"></div>
+    <a class="cta cta-vidrio" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Escríbeme por Instagram</span></a>
   </article>
   <article class="carta c-comida">
     <div class="in"><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
@@ -1258,6 +1297,11 @@
   var todas = function () { setTimeout(function () { imgs.forEach(carga); }, 3500); };
   if (document.readyState === 'complete') todas(); else window.addEventListener('load', todas);
 })();
+
+  // El botón flotante se esconde mientras se ve el de la portada (no dos a la vez).
+  (function () { var f = document.getElementById('fijo'), b = document.querySelector('.cta-vidrio');
+    if (!f || !b || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) { f.classList.toggle('tapado', es[0].isIntersecting); }).observe(b); })();
 </script>
 </body>
 </html>
