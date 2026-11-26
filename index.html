@@ -848,6 +848,18 @@
      tiza suave. Sin el botón largo en la portada: el único es el flotante
      «Escríbeme», siempre del mismo tamaño. ══ */
   @media (max-width:899px) { .c-entreno .ob { bottom:calc(16px - var(--kw) * .394); } }
+
+  /* ══ 26 nov (4) · La kettlebell como el aguacate: arranca junto al texto (a
+     la altura de la firma), a la derecha y un poco cortada por el borde; la
+     sección termina poco después de ella. Imagen lisa y en alta resolución. ══ */
+  .c-entreno { --kw:min(78vw, 330px); }
+  .c-entreno .ob, .js .c-entreno .ob { width:var(--kw); top:-46px; bottom:auto !important; transform:translateX(10%); }
+  @keyframes eKb2 { 0% { opacity:0; transform:translateX(120%); } 40% { opacity:1; } 100% { opacity:1; transform:translateX(10%); } }
+  @media (max-width:899px) {
+    .c-entreno { padding-bottom:0; }
+    .c-entreno .zona { position:relative; height:calc(var(--kw) * .868 - 46px + 26px); }
+  }
+  @media (min-width:900px) { .c-entreno { --kw:min(24vw, 330px); } .c-entreno .ob, .js .c-entreno .ob { top:0; } }
 </style>
 </head>
 <body>
@@ -899,7 +911,7 @@
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
     <div class="in"><h1 class="h1-largo"><span><span>Más fuerza</span></span><span><span>y movilidad.</span></span><span><span>Mejor</span></span><span><span>composición</span></span><span class="m"><span><i>corporal.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición.</b></p><p class="firma"><img src="img/v4/coach.jpg" alt="" width="42" height="42"><span><b>Mauro Morón</b>Coach · Entrena con Método</span></p></div>
-    <div class="zona"><img class="ob" src="img/v4/pesa-rusa-arriba-hd.webp" alt="" width="1400" height="1621" fetchpriority="high"></div>
+    <div class="zona"><img class="ob" src="img/v4/pesa-rusa-lisa.webp" alt="" width="1400" height="1842" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
     <div class="in"><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
