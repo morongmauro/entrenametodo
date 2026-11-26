@@ -860,6 +860,15 @@
     .c-entreno .zona { position:relative; height:calc(var(--kw) * .868 - 46px + 26px); }
   }
   @media (min-width:900px) { .c-entreno { --kw:min(24vw, 330px); } .c-entreno .ob, .js .c-entreno .ob { top:0; } }
+
+  .hoja-ig-sub { margin-top:6px; font-size:16px; line-height:1.35; color:#4A4A4A; }
+  .hoja-ig-campo { display:flex; align-items:center; gap:4px; margin-top:16px; height:56px; padding:0 18px; border-radius:18px; background:rgba(31,31,31,.06); font-size:18px; font-weight:800; }
+  .hoja-ig-campo span { color:#8A8A8A; }
+  .hoja-ig-campo:focus-within { box-shadow:0 0 0 2px #3C7BD6; }
+  .hoja-ig-campo input:focus, .hoja-ig-campo input:focus-visible { outline:0 !important; box-shadow:none !important; }
+  .hoja-ig-campo input { flex:1; min-width:0; border:0; outline:0; background:transparent; font:inherit; font-size:18px; font-weight:700; color:var(--ink); }
+  .hoja-ig-error { margin-top:8px; font-size:14px; font-weight:700; color:#C9672B; }
+  .hoja-ig-wa { display:block; width:100%; min-height:54px; margin-top:14px; border:0; border-radius:999px; background:#46965A; color:#fff; font:inherit; font-size:17px; font-weight:800; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -1091,6 +1100,35 @@
   const MENSAJE_PLANTILLA = "Hola Mauro! Escribo porque vi tu página de Entrena con Método, me interesa el coaching online. Mi nombre es: ";
 
 
+
+  // La hoja «¿Cuál es tu Instagram?» (solo dentro del navegador de Instagram).
+  function pedirArroba() {
+    let h = document.getElementById('hojaArroba');
+    if (!h) {
+      h = document.createElement('div'); h.id = 'hojaArroba'; h.className = 'hoja-ig'; h.setAttribute('role', 'dialog'); h.setAttribute('aria-modal', 'true'); h.setAttribute('aria-label', 'Escríbeme');
+      h.innerHTML = '<div class="hoja-ig-fondo" data-cerrar></div><form class="hoja-ig-caja" novalidate>'
+        + '<p class="hoja-ig-t">Escríbeme</p>'
+        + '<p class="hoja-ig-sub">Déjame tu Instagram y seguimos por WhatsApp.</p>'
+        + '<label class="hoja-ig-campo"><span>@</span><input name="ig" type="text" inputmode="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="tu_usuario" aria-label="Tu usuario de Instagram"></label>'
+        + '<p class="hoja-ig-error" hidden>Escribe tu usuario de Instagram.</p>'
+        + '<button type="submit" class="hoja-ig-wa">Continuar en WhatsApp</button>'
+        + '<button type="button" class="hoja-ig-listo" data-cerrar>Ahora no</button></form>';
+      document.body.appendChild(h);
+      h.addEventListener('click', (e) => { if (e.target.closest('[data-cerrar]')) h.classList.remove('abierta'); });
+      h.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const v = h.querySelector('input').value.trim().replace(/^@+/, '').replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?].*$/, '');
+        const err = h.querySelector('.hoja-ig-error');
+        if (!/^[A-Za-z0-9._]{2,30}$/.test(v)) { err.hidden = false; h.querySelector('input').focus(); return; }
+        err.hidden = true;
+        try { localStorage.setItem('ecm:ig', v); } catch (er) { /* sin almacenamiento */ }
+        location.href = "https://wa.me/" + WHATSAPP_NUMERO + "?text=" + encodeURIComponent(WHATSAPP_MENSAJE + " Mi Instagram: @" + v);
+      });
+      try { const g = localStorage.getItem('ecm:ig'); if (g) h.querySelector('input').value = g; } catch (er) { /* nada */ }
+      h.querySelector('input').addEventListener('input', (e) => { const t = e.target; if (/^@/.test(t.value)) t.value = t.value.replace(/^@+/, ''); h.querySelector('.hoja-ig-error').hidden = true; });
+    }
+    requestAnimationFrame(() => { h.classList.add('abierta'); setTimeout(() => h.querySelector('input').focus(), 320); });
+  }
   // ─── Instagram: enlaza los botones y copia la plantilla al pulsar ───────
   (function(){
     const u = (INSTAGRAM_USUARIO || "").trim().replace(/^@/, "");
@@ -1134,6 +1172,9 @@
         a.querySelectorAll('span').forEach(sp => { sp.textContent = sp.textContent.replace('por Instagram', 'por WhatsApp'); });
       });
       document.querySelectorAll('.cta-n').forEach(n => { n.textContent = n.textContent.replace('Se abre el chat de Instagram', 'Se abre el chat de WhatsApp'); });
+      // Antes de WhatsApp, un solo campo: su Instagram. Así el mensaje llega
+      // con el @ y se puede mirar el perfil antes de responder (prefiltro).
+      enlaces.forEach(a => a.addEventListener('click', (e) => { e.preventDefault(); pedirArroba(); }));
       return;
     }
     if (esIOS || esAndroid) {
