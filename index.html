@@ -1065,6 +1065,10 @@
 
 <script>
   // CONTACTO — el único lugar para cambiar a dónde escriben (solo Instagram).
+  // WhatsApp para quien llega desde dentro de Instagram (ahí Instagram no
+  // deja abrir su propio chat). Mismo número que el botón de la app.
+  const WHATSAPP_NUMERO = "573008527043";
+  const WHATSAPP_MENSAJE = "Hola Mauro, vi tu página de Entrena con Método y quiero empezar.";
   const INSTAGRAM_USUARIO = "mauromoronm";
 
   // A dónde lleva el botón:
@@ -1087,25 +1091,6 @@
   const MENSAJE_PLANTILLA = "Hola Mauro! Escribo porque vi tu página de Entrena con Método, me interesa el coaching online. Mi nombre es: ";
 
 
-  // La hoja «Escríbeme en Instagram» para quien está dentro del navegador de Instagram.
-  function hojaInstagram(u) {
-    let h = document.getElementById('hojaIG');
-    if (!h) {
-      h = document.createElement('div'); h.id = 'hojaIG'; h.className = 'hoja-ig'; h.setAttribute('role', 'dialog'); h.setAttribute('aria-modal', 'true'); h.setAttribute('aria-label', 'Escríbeme en Instagram');
-      h.innerHTML = '<div class="hoja-ig-fondo" data-cerrar></div><div class="hoja-ig-caja">'
-        + '<p class="hoja-ig-t">Escríbeme en Instagram</p>'
-        + '<ol class="hoja-ig-pasos"><li><b>Cierra esta página</b> con la ✕ de arriba: vuelves a mi perfil.</li><li>Toca <b>Mensaje</b> y escríbeme «Quiero empezar».</li></ol>'
-        + '<button type="button" class="hoja-ig-copiar">Copiar mi usuario @' + u + '</button>'
-        + '<button type="button" class="hoja-ig-listo" data-cerrar>Entendido</button></div>';
-      document.body.appendChild(h);
-      h.addEventListener('click', (e) => { if (e.target.closest('[data-cerrar]')) h.classList.remove('abierta'); });
-      h.querySelector('.hoja-ig-copiar').addEventListener('click', async (e) => {
-        const b = e.currentTarget;
-        try { await navigator.clipboard.writeText('@' + u); b.textContent = 'Copiado: @' + u; } catch (er) { b.textContent = '@' + u; }
-      });
-    }
-    requestAnimationFrame(() => h.classList.add('abierta'));
-  }
   // ─── Instagram: enlaza los botones y copia la plantilla al pulsar ───────
   (function(){
     const u = (INSTAGRAM_USUARIO || "").trim().replace(/^@/, "");
@@ -1130,19 +1115,25 @@
     // navegador de Instagram no lo deja, aparece una hoja que explica cómo
     // escribir en dos toques (cerrar la página = volver a mi perfil → Mensaje).
     // Nunca se manda a Instagram web.
+    // Dentro del navegador de Instagram (la gente llega desde el link de la
+    // bio), Instagram no deja que una página abra su propia app: ig.me carga
+    // Instagram web, que pide iniciar sesión, y el contacto se pierde (Meta lo
+    // dice: los enlaces ig.me no funcionan en Instagram web). WhatsApp sí abre,
+    // porque es otra app. Ahí los botones van a WhatsApp, con el mensaje ya
+    // escrito, y llevan el ícono de WhatsApp para que lo que promete el botón
+    // sea lo que pasa. Fuera de Instagram (Safari, Chrome, computador) siguen
+    // abriendo el chat de Instagram.
     const enInstagram = /Instagram|FBAN|FBAV/i.test(ua);
-    if (enInstagram) {
-      const app = esAndroid
-        ? "intent://ig.me/m/" + u + "#Intent;scheme=https;package=com.instagram.android;end"
-        : "instagram://user?username=" + u;
-      enlaces.forEach(a => a.addEventListener("click", (e) => {
-        e.preventDefault();
-        let salio = false;
-        const ver = () => { if (document.hidden) salio = true; };
-        document.addEventListener("visibilitychange", ver);
-        setTimeout(() => { document.removeEventListener("visibilitychange", ver); if (!salio && !document.hidden) hojaInstagram(u); }, 1200);
-        try { location.href = app; } catch (er) { hojaInstagram(u); }
-      }));
+    if (enInstagram && WHATSAPP_NUMERO) {
+      const wa = "https://wa.me/" + WHATSAPP_NUMERO + "?text=" + encodeURIComponent(WHATSAPP_MENSAJE);
+      const icoWA = '<svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91A9.85 9.85 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.2 8.2 0 0 1 8.23 8.24c0 4.54-3.7 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.22-.08-.39-.12-.55.13-.16.25-.63.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42h-.47c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.29z"/></svg>';
+      enlaces.forEach(a => {
+        a.href = wa; a.removeAttribute('target');
+        const ico = a.querySelector('svg.ig-ico'); if (ico) ico.outerHTML = icoWA;
+        if (a.getAttribute('aria-label')) a.setAttribute('aria-label', 'Escríbeme por WhatsApp');
+        a.querySelectorAll('span').forEach(sp => { sp.textContent = sp.textContent.replace('por Instagram', 'por WhatsApp'); });
+      });
+      document.querySelectorAll('.cta-n').forEach(n => { n.textContent = n.textContent.replace('Se abre el chat de Instagram', 'Se abre el chat de WhatsApp'); });
       return;
     }
     if (esIOS || esAndroid) {
