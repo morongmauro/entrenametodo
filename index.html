@@ -869,6 +869,8 @@
   .hoja-ig-campo input { flex:1; min-width:0; border:0; outline:0; background:transparent; font:inherit; font-size:18px; font-weight:700; color:var(--ink); }
   .hoja-ig-error { margin-top:8px; font-size:14px; font-weight:700; color:#C9672B; }
   .hoja-ig-wa { display:block; width:100%; min-height:54px; margin-top:14px; border:0; border-radius:999px; background:#46965A; color:#fff; font:inherit; font-size:17px; font-weight:800; cursor:pointer; }
+
+  .fab.baja { transition:bottom .3s var(--suave), opacity .25s, transform .25s var(--suave); }
 </style>
 </head>
 <body>
@@ -1463,6 +1465,23 @@
   (function () { var f = document.getElementById('fijo'), b = document.querySelector('.cta-vidrio');
     if (!f || !b || !('IntersectionObserver' in window)) return;
     new IntersectionObserver(function (es) { f.classList.toggle('tapado', es[0].isIntersecting); }).observe(b); })();
+
+  // En el teléfono, al abrir, «Escríbeme» va sobre lo azul (pegado al borde de
+  // abajo de la portada); al bajar, pasa a su lugar de siempre, abajo.
+  (function () {
+    var f = document.getElementById('fijo'), h = document.querySelector('.c-entreno'); if (!f || !h) return;
+    var mq = window.matchMedia('(max-width:899px)'), enAzul = null, pend = false;
+    function pon() {
+      pend = false;
+      if (!mq.matches) { f.style.bottom = ''; f.classList.remove('en-azul'); return; }
+      var b = h.getBoundingClientRect().bottom, vh = innerHeight, sube = b > vh * 0.6 && b < vh + 1;
+      if (sube) { f.style.bottom = 'calc(' + Math.max(14, Math.round(vh - b + 18)) + 'px + env(safe-area-inset-bottom, 0px))'; }
+      else f.style.bottom = '';
+      if (sube !== enAzul) { enAzul = sube; f.classList.toggle('en-azul', sube); f.classList.add('baja'); setTimeout(function () { f.classList.remove('baja'); }, 320); }
+    }
+    function pide() { if (!pend) { pend = true; requestAnimationFrame(pon); } }
+    addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide); addEventListener('load', pon); pon();
+  })();
 </script>
 </body>
 </html>
