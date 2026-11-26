@@ -1466,21 +1466,19 @@
     if (!f || !b || !('IntersectionObserver' in window)) return;
     new IntersectionObserver(function (es) { f.classList.toggle('tapado', es[0].isIntersecting); }).observe(b); })();
 
-  // En el teléfono, al abrir, «Escríbeme» va sobre lo azul (pegado al borde de
-  // abajo de la portada); al bajar, pasa a su lugar de siempre, abajo.
+  // En el teléfono «Escríbeme» empieza sobre lo azul (a la altura del borde de
+  // abajo de la portada) y se queda ahí mismo en la pantalla mientras se baja:
+  // siempre visible, siempre en el mismo lugar.
   (function () {
     var f = document.getElementById('fijo'), h = document.querySelector('.c-entreno'); if (!f || !h) return;
-    var mq = window.matchMedia('(max-width:899px)'), enAzul = null, pend = false;
+    var mq = window.matchMedia('(max-width:899px)'), w = 0;
     function pon() {
-      pend = false;
-      if (!mq.matches) { f.style.bottom = ''; f.classList.remove('en-azul'); return; }
-      var b = h.getBoundingClientRect().bottom, vh = innerHeight, sube = b > vh * 0.6 && b < vh + 1;
-      if (sube) { f.style.bottom = 'calc(' + Math.max(14, Math.round(vh - b + 18)) + 'px + env(safe-area-inset-bottom, 0px))'; }
-      else f.style.bottom = '';
-      if (sube !== enAzul) { enAzul = sube; f.classList.toggle('en-azul', sube); f.classList.add('baja'); setTimeout(function () { f.classList.remove('baja'); }, 320); }
+      if (!mq.matches) { f.style.bottom = ''; return; }
+      if (innerWidth === w && f.style.bottom) return; w = innerWidth;
+      var fin = h.getBoundingClientRect().bottom + scrollY, vh = innerHeight;
+      f.style.bottom = 'calc(' + Math.max(14, Math.round(vh - fin + 18)) + 'px + env(safe-area-inset-bottom, 0px))';
     }
-    function pide() { if (!pend) { pend = true; requestAnimationFrame(pon); } }
-    addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide); addEventListener('load', pon); pon();
+    addEventListener('resize', pon); addEventListener('load', function () { w = 0; f.style.bottom = ''; pon(); }); pon();
   })();
 </script>
 </body>
