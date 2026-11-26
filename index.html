@@ -837,11 +837,25 @@
      con un poco de tiza en el asa y su sombra larga dentro de la imagen. El
      objeto ocupa el 62 % del ancho de la imagen: se mide por el ancho. ══ */
   .c-entreno { --kw:min(72vw, 300px); }
-  @keyframes eKb2 { 0% { opacity:0; transform:translateX(120%); } 40% { opacity:1; } 100% { opacity:1; transform:translateX(6%); } }
-  .c-entreno .ob, .js .c-entreno .ob { height:auto !important; width:var(--kw); transform:translateX(6%); filter:drop-shadow(0 8px 10px rgba(4,20,70,.22)); }
+  @keyframes eKb2 { 0% { opacity:0; transform:translateX(120%); } 40% { opacity:1; } 100% { opacity:1; transform:translateX(-4%); } }
+  .c-entreno .ob, .js .c-entreno .ob { height:auto !important; width:var(--kw); transform:translateX(-4%); filter:drop-shadow(0 8px 10px rgba(4,20,70,.22)); }
   .js .c-entreno.v .ob { animation:eKb2 1.1s cubic-bezier(.16,.84,.24,1) .25s both; }
   @media (max-width:899px) { .c-entreno .ob { bottom:calc(60px - var(--kw) * .394); } }
   @media (min-width:900px) { .c-entreno { --kw:min(22vw, 300px); } .c-entreno .ob { bottom:calc(-6px - var(--kw) * .394); } }
+
+  /* ══ 26 nov (3) · La kettlebell en alta resolución (sin pixelado). Sin el
+     botón largo en la portada: el único es el flotante «Escríbeme», siempre del
+     mismo tamaño. La portada deja ver el borde de la sección verde abajo: así
+     se entiende que hay más para bajar, sin carteles. ══ */
+  .c-entreno { --kw:min(88vw, 370px, calc(44 * var(--u, 1svh))); }
+  .c-entreno .ob, .js .c-entreno .ob { width:var(--kw); filter:drop-shadow(0 8px 10px rgba(4,20,70,.2)); }
+  @media (max-width:899px) {
+    .cuatro .c-entreno.carta { height:calc(100 * var(--u, 1svh) - 64px); max-height:820px; min-height:560px; padding-bottom:0; }
+    .c-entreno .zona { flex:1; height:auto; min-height:120px; }
+    .c-entreno .ob { bottom:calc(14px - var(--kw) * .288); }
+  }
+  @media (max-width:899px) { .c-entreno { --kw:min(118vw, 470px, calc(50 * var(--u, 1svh))); } }
+  @media (min-width:900px) { .c-entreno { --kw:min(27vw, 380px); } .c-entreno .ob { bottom:calc(24px - var(--kw) * .288); } }
 </style>
 </head>
 <body>
@@ -893,8 +907,7 @@
 <section class="cuatro" id="portada" aria-label="Entrena con Método">
   <article class="carta c-entreno">
     <div class="in"><h1 class="h1-largo"><span><span>Más fuerza</span></span><span><span>y movilidad.</span></span><span><span>Mejor</span></span><span><span>composición</span></span><span class="m"><span><i>corporal.</i></span></span></h1><p class="l"><b>Coaching online de entrenamiento y nutrición.</b></p><p class="firma"><img src="img/v4/coach.jpg" alt="" width="42" height="42"><span><b>Mauro Morón</b>Coach · Entrena con Método</span></p></div>
-    <div class="zona"><img class="ob" src="img/v4/pesa-rusa-arriba.webp" alt="" width="900" height="1043" fetchpriority="high"></div>
-    <a class="cta cta-vidrio" data-ig href="https://ig.me/m/mauromoronm" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.26.07 1.64.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg><span>Escríbeme por Instagram</span></a>
+    <div class="zona"><img class="ob" src="img/v4/pesa-rusa-hd.webp" alt="" width="1400" height="1185" fetchpriority="high"></div>
   </article>
   <article class="carta c-comida">
     <div class="in"><h2><span>Come</span><span>sin</span><span><i>adivinar.</i></span></h2><p class="l">Sabes cuánto comer para tu objetivo, con recetas ricas en tu porción.</p></div>
